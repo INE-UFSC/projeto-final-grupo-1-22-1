@@ -11,5 +11,5 @@ class Vida():
       True,
       (255,255,255)
     )
-
-    superficie.blit(self.__vida_text, (100,100))
+    
+    superficie.blit(self.__vida_text, (10,3))

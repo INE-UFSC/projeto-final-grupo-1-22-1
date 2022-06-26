@@ -2,7 +2,7 @@ from Models.Jogador import Jogador
 from Models.Inimigo import Inimigo
 from Models.LeitorColisao import LeitorColisao
 import pygame as pg
-
+import sys
 
 class Controlador():
   def __init__(self, jogador: Jogador, inimigo: Inimigo, grupo_jogador, grupo_obstaculos, grupo_inimigos):
@@ -80,5 +80,9 @@ class Controlador():
     if (self.__leitor_colisao.checar_colisao_inimigo(self.__jogador.sprite)):
       self.__jogador.sprite.rect.x = 200
       self.__jogador.sprite.rect.y = 200
-
+      self.__jogador.diminuir_vida()
+    
+    if (self.__jogador.vida == 0):
+      pg.quit()
+      sys.exit()
 

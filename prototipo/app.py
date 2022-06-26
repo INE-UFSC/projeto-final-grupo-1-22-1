@@ -118,4 +118,6 @@ while True:
 
     draw_cenario(wall_size, width, high)
 
+    vida.atualizar_vida(jogador.vida, window)
+
     pg.display.flip() #Precisa estar no final do algoritmo
