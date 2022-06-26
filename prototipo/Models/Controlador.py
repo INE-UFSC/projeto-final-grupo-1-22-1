@@ -80,5 +80,3 @@ class Controlador():
     if (self.__leitor_colisao.checar_colisao_inimigo(self.__jogador.sprite)):
       self.__jogador.sprite.rect.x = 200
       self.__jogador.sprite.rect.y = 200
-
-
