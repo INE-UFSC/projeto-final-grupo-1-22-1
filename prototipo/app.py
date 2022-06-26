@@ -18,7 +18,7 @@ from Models.Vida import Vida
 
 font.init()
 
-fonte = font.SysFont('Fonts/alagard.ttf', 50)
+fonte = font.SysFont('comicsans', 50)
 
 wall_size = 30
 
