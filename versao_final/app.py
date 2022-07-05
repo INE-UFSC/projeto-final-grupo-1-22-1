@@ -18,6 +18,7 @@ from Models.Vida import Vida
 
 from Models.Window import Window
 from Models.TelaCreditos import TelaCreditos
+from Models.TelaMenu import TelaMenu
 
 
 font.init()
@@ -66,27 +67,36 @@ def draw_text(text, fonte, color, surface, x, y):
  
 click = False
 
+menu_principal = TelaMenu(leitor_eventos, window, fonte)
+
 def main_menu():
     while True:
-        window_surface.fill((54,107,95))
-        draw_text('main menu', fonte, (255, 255, 255), window_surface, (width/2)-100, 20)
+        escolha = menu_principal.renderizar_tela()
+        # window_surface.fill((54,107,95))
+        # draw_text('main menu', fonte, (255, 255, 255), window_surface, (width/2)-100, 20)
  
-        mx, my = pg.mouse.get_pos()
+        # mx, my = pg.mouse.get_pos()
  
-        button_1 = pg.Rect((width/2)-100, 100, 200, 50)
-        button_2 = pg.Rect((width/2)-100, 200, 200, 50)
-        if button_1.collidepoint((mx, my)):
-            if click:
-                #Chamada do jogo
-                game()
-        if button_2.collidepoint((mx, my)):
-            if click:
-                #chamada da segunda tela
-                tela_creditos = TelaCreditos(leitor_eventos, window, fonte)
-                tela_creditos.renderizar_tela()
-        pg.draw.rect(window_surface, (137, 199, 185), button_1)
-        pg.draw.rect(window_surface, (137, 199, 185), button_2)
- 
+        # button_1 = pg.Rect((width/2)-100, 100, 200, 50)
+        # button_2 = pg.Rect((width/2)-100, 200, 200, 50)
+        # if button_1.collidepoint((mx, my)):
+        #     if click:
+        #         #Chamada do jogo
+        #         game()
+        # if button_2.collidepoint((mx, my)):
+        #     if click:
+        #         #chamada da segunda tela
+        #         tela_creditos = TelaCreditos(leitor_eventos, window, fonte)
+        #         tela_creditos.renderizar_tela()
+        # pg.draw.rect(window_surface, (137, 199, 185), button_1)
+        # pg.draw.rect(window_surface, (137, 199, 185), button_2)
+
+        if escolha == 'OPCAO1':
+            game()
+        elif escolha == 'OPCAO2':
+            tela_creditos = TelaCreditos(leitor_eventos, window, fonte)
+            tela_creditos.renderizar_tela()
+        
         click = False
         for event in pg.event.get():
             if event.type == QUIT:

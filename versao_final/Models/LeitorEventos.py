@@ -1,11 +1,11 @@
-import pygame
+import pygame as pg
 from pygame import event
-from pygame.locals import QUIT, KEYUP, K_SPACE, K_ESCAPE
+from pygame.locals import QUIT, KEYUP, K_SPACE, K_ESCAPE, MOUSEBUTTONDOWN
 
 class LeitorEventos():
   def __init__(self):
     pass
-  
+
   def ler_evento(self):
     for evento in event.get(): #Retorna uma lista de events
       if evento.type ==  QUIT:
@@ -16,14 +16,20 @@ class LeitorEventos():
           return ("ESPACO")
         if evento.key == K_ESCAPE:
           return ('ESCAPE')
+    
+      if evento.type == MOUSEBUTTONDOWN:
+        print('clique')
+        return ('CLIQUE')
 
-
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
+    keys = pg.key.get_pressed()
+    if keys[pg.K_LEFT]:
       return('ESQUERDA')
-    elif keys[pygame.K_RIGHT]:
+    elif keys[pg.K_RIGHT]:
       return('DIREITA')
-    elif keys[pygame.K_UP]:
+    elif keys[pg.K_UP]:
       return('CIMA')
-    elif keys[pygame.K_DOWN]:
+    elif keys[pg.K_DOWN]:
       return('BAIXO')
+
+  def posicao_mouse(self):
+    return pg.mouse.get_pos()

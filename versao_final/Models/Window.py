@@ -16,6 +16,10 @@ class Window:
     pg.display.set_caption(caption)
 
   @property
+  def size(self):
+    return self.__size
+
+  @property
   def surface(self):
     return self.__surface
   
