@@ -16,54 +16,47 @@ from Models.SpriteImage import SpriteImage
 from Models.SpriteObstaculo import SpriteObstaculo
 from Models.Vida import Vida
 
-font.init()
+from Models.Window import Window
+from Models.TelaCreditos import TelaCreditos
 
+
+font.init()
 fonte = font.SysFont('comicsans', 50)
+
 
 wall_size = 30
 
 timer = pg.time.Clock()
 
 width = 640
-high = 480
+height = 480
 
 pg.init()
-
-#Setando tamanho da tela
-
-window = pg.display.set_mode(
-    size=(width, high),
-    flags=0,
-    depth=0,
-    display=0,
-    vsync=0 #tira sincronização do tipo raster
-)
-
-pg.display.set_caption('Cooper Temple - Alfa')
 
 vida = Vida()
 jogador = Jogador()
 inimigo = Inimigo()
 
 grupo_jogador = GroupSingle(jogador.sprite)
-grupo_obstaculos = Group(SpriteObstaculo(width/4, high/4),
-                         SpriteObstaculo(width*3/4, high/4),
-                         SpriteObstaculo(width/4, high*3/4),
-                         SpriteObstaculo(width*3/4, high*3/4))
+grupo_obstaculos = Group(SpriteObstaculo(width/4, height/4),
+                         SpriteObstaculo(width*3/4, height/4),
+                         SpriteObstaculo(width/4, height*3/4),
+                         SpriteObstaculo(width*3/4, height*3/4))
 
 grupo_inimigos = GroupSingle(inimigo.sprite)
 
+window = Window((width, height), "Cooper Temple - Alfa")
+window_surface = window.surface
 
 leitor_eventos = LeitorEventos()
 controlador = Controlador(jogador, inimigo, grupo_jogador, grupo_obstaculos, grupo_inimigos)
 
+
 #Na entrega final, essa lógica estará implementada usando OO
 
-
-
 def draw_luz():
-    points = [(width*7/15, high*10/12), (width*8/15, high*10/12), (width*5/8,30), (width*3/8,30)]
-    pg.draw.polygon(window, (174, 207, 136), points)
+    points = [(width*7/15, height*10/12), (width*8/15, height*10/12), (width*5/8,30), (width*3/8,30)]
+    pg.draw.polygon(window_surface, (174, 207, 136), points)
 
 def draw_text(text, fonte, color, surface, x, y):
     textobj = fonte.render(text, 1, color)
@@ -75,8 +68,8 @@ click = False
 
 def main_menu():
     while True:
-        window.fill((54,107,95))
-        draw_text('main menu', fonte, (255, 255, 255), window, (width/2)-100, 20)
+        window_surface.fill((54,107,95))
+        draw_text('main menu', fonte, (255, 255, 255), window_surface, (width/2)-100, 20)
  
         mx, my = pg.mouse.get_pos()
  
@@ -89,19 +82,18 @@ def main_menu():
         if button_2.collidepoint((mx, my)):
             if click:
                 #chamada da segunda tela
-                creditos()
-        pg.draw.rect(window, (137, 199, 185), button_1)
-        pg.draw.rect(window, (137, 199, 185), button_2)
+                tela_creditos = TelaCreditos(leitor_eventos, window, fonte)
+                tela_creditos.renderizar_tela()
+        pg.draw.rect(window_surface, (137, 199, 185), button_1)
+        pg.draw.rect(window_surface, (137, 199, 185), button_2)
  
         click = False
         for event in pg.event.get():
             if event.type == QUIT:
-                pg.quit()
-                sys.exit()
+                window.fechar()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
-                    pg.quit()
-                    sys.exit()
+                    window.fechar()
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:
                     click = True
@@ -109,36 +101,19 @@ def main_menu():
         pg.display.update()
         timer.tick(30)
     
-def creditos():
-    running = True
-    while running:
-        window.fill((0,0,0))
- 
-        draw_text('creditos', fonte, (255, 255, 255), window, 20, 20)
-        for event in pg.event.get():
-            if event.type == QUIT:
-                pg.quit()
-                sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    running = False
 
-        pg.display.update()
-        timer.tick(30)
-
-
-def draw_cenario(size, width, high):
+def draw_cenario(size, width, height):
         door = 40
         #Desenho de retangulos, que recebe "window" = tela em que vai ser desenhado, (45,84,60) = Cor em RGB, [] = coordenadas dos pontos da diagonal principal, 0 = Tamanho da borda do retangulo
-        pg.draw.rect(window, (45, 84, 60),[0, 0, width-size, size], 0)
-        pg.draw.rect(window, (45, 84, 60),[width-size, 0, width, high/5], 0)
-        pg.draw.rect(window, (45, 84, 60),[width-size, (high/5)+door , width, (high*(4/5))-(door+size)], 0)
-        pg.draw.rect(window, (45, 84, 60),[size, high-size, width, high], 0)
-        pg.draw.rect(window, (45, 84, 60),[0, size, size, high-size], 0)
+        pg.draw.rect(window_surface, (45, 84, 60),[0, 0, width-size, size], 0)
+        pg.draw.rect(window_surface, (45, 84, 60),[width-size, 0, width, height/5], 0)
+        pg.draw.rect(window_surface, (45, 84, 60),[width-size, (height/5)+door , width, (height*(4/5))-(door+size)], 0)
+        pg.draw.rect(window_surface, (45, 84, 60),[size, height-size, width, height], 0)
+        pg.draw.rect(window_surface, (45, 84, 60),[0, size, size, height-size], 0)
 
 def game():
     x = width*3/4
-    y = high/2
+    y = height/2
     speed = 5
     preto = (20,20,20)
     vermelho = (168, 101, 34)
@@ -161,7 +136,7 @@ def game():
 
     #Chamada dos desenhos
         #Define a cor da tela no padrão RGB
-        window.fill((54,107,95))
+        window_surface.fill((54,107,95))
 
         luz = draw_luz()
 
@@ -180,9 +155,9 @@ def game():
         #     x += speed
 
         #Desenhando os grupos a cada ciclo de clock
-        grupo_jogador.draw(window)
-        grupo_obstaculos.draw(window)
-        grupo_inimigos.draw(window)
+        grupo_jogador.draw(window_surface)
+        grupo_obstaculos.draw(window_surface)
+        grupo_inimigos.draw(window_surface)
 
         evento = leitor_eventos.ler_evento()
         controlador.mover_personagem(evento, jogador)
@@ -191,9 +166,9 @@ def game():
         grupo_jogador.update()
         grupo_obstaculos.update()
 
-        draw_cenario(30,width, high)
+        draw_cenario(30,width, height)
 
-        vida.atualizar_vida(jogador.vida, window)
+        vida.atualizar_vida(jogador.vida, window_surface)
 
         pg.display.flip() #Precisa estar no final do algoritmo
 

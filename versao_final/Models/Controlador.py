@@ -9,12 +9,10 @@ class Controlador():
     self.__jogador = jogador
     self.__inimigo = inimigo
     self.__leitor_colisao = LeitorColisao(grupo_jogador, grupo_obstaculos, grupo_inimigos)
-    self.__ultimo_movimento = ''
     self.__coordenada_inimigo = (0,0)
 
   def checar_limites_mapa(self):
     if self.__jogador.sprite.rect.x == 580:
-      print('lim-x-dir')
       return('lim-dir')
     elif self.__jogador.sprite.rect.x == 30:
       return('lim-esq')
@@ -28,33 +26,34 @@ class Controlador():
   def mover_personagem(self, evento, personagem):
     if not self.__leitor_colisao.checar_colisao_obstaculo(self.__jogador.sprite):
       limite = self.checar_limites_mapa()
-      if evento == "fechar":
+      if evento == 'FECHAR':
         pg.quit()
-      elif evento == "mover-dir" and not limite == "lim-dir":
-        personagem.mover_dir()
-        self.__ultimo_movimento = "mover-dir"
-      elif evento == "mover-esq" and not limite == "lim-esq":
-        self.__ultimo_movimento = "mover-esq"
-        personagem.mover_esq()
-      elif evento == "mover-up" and not limite == "lim-cima":
-        personagem.mover_cim()
-        self.__ultimo_movimento = "mover-up"
-      elif evento == 'mover-down' and not limite == "lim-baixo":
-        personagem.mover_bai()
-        self.__ultimo_movimento = "mover-down"
+        sys.exit()
+      elif evento == 'DIREITA' and not limite == 'lim-dir':
+        personagem.mover_direita()
+        self.__ultimo_movimento = 'DIREITA'
+      elif evento == 'ESQUERDA' and not limite == 'lim-esq':
+        self.__ultimo_movimento = 'ESQUERDA'
+        personagem.mover_esquerda()
+      elif evento == 'CIMA' and not limite == 'lim-cima':
+        personagem.mover_cima()
+        self.__ultimo_movimento = 'CIMA'
+      elif evento == 'BAIXO' and not limite == 'lim-baixo':
+        personagem.mover_baixo()
+        self.__ultimo_movimento = 'BAIXO'
     else:
-      if evento == "mover-dir" and self.__ultimo_movimento != 'mover-dir':
-        personagem.mover_dir()
-        self.__ultimo_movimento = "mover-dir" 
-      elif evento == "mover-esq" and self.__ultimo_movimento != 'mover-esq':
-        self.__ultimo_movimento = "mover-esq" 
-        personagem.mover_esq()
-      elif evento == "mover-up" and self.__ultimo_movimento != 'mover-up':
-        personagem.mover_cim()
-        self.__ultimo_movimento = "mover-up"
-      elif evento == 'mover-down' and self.__ultimo_movimento != 'mover-down':
-        personagem.mover_bai()
-        self.__ultimo_movimento = "mover-down"
+      if evento == 'DIREITA' and self.__ultimo_movimento != 'DIREITA':
+        personagem.mover_direita()
+        self.__ultimo_movimento = 'DIREITA' 
+      elif evento == 'ESQUERDA' and self.__ultimo_movimento != 'ESQUERDA':
+        self.__ultimo_movimento = 'ESQUERDA' 
+        personagem.mover_esquerda()
+      elif evento == 'CIMA' and self.__ultimo_movimento != 'CIMA':
+        personagem.mover_cima()
+        self.__ultimo_movimento = 'CIMA'
+      elif evento == 'BAIXO' and self.__ultimo_movimento != 'BAIXO':
+        personagem.mover_baixo()
+        self.__ultimo_movimento = 'BAIXO'
 
   def gerar_coordenada(self):
     self.__coordenada_inimigo = (self.__jogador.sprite.rect.x, self.__jogador.sprite.rect.y)

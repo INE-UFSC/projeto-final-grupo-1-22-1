@@ -10,16 +10,16 @@ class Jogador(Desenhavel):
   def vida(self):
     return self.__vida
 
-  def mover_dir(self):
+  def mover_direita(self):
     self.sprite.rect.x += self.__velocidade
 
-  def mover_esq(self):
+  def mover_esquerda(self):
     self.sprite.rect.x -= self.__velocidade
 
-  def mover_cim(self):
+  def mover_cima(self):
     self.sprite.rect.y -= self.__velocidade
   
-  def mover_bai(self):
+  def mover_baixo(self):
     self.sprite.rect.y += self.__velocidade
 
   def diminuir_vida(self):
