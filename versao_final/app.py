@@ -20,10 +20,11 @@ from Models.Window import Window
 from Models.TelaCreditos import TelaCreditos
 from Models.TelaMenu import TelaMenu
 
+from Models.Configuracoes import Configuracoes
 
-font.init()
-fonte = font.SysFont('comicsans', 50)
+configuracoes = Configuracoes()
 
+fonte = configuracoes.fonte
 
 wall_size = 30
 
