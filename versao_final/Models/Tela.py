@@ -4,8 +4,11 @@ from pygame import font
 from Models.LeitorEventos import LeitorEventos
 from Models.Window import Window
 
-font.init()
-fonte = font.SysFont('comicsans', 50)
+from Models.Configuracoes import Configuracoes
+
+configuracoes = Configuracoes()
+
+fonte = configuracoes.fonte
 
 class Tela(ABC):
   def __init__(self, leitor_eventos: LeitorEventos, window: Window, fonte = fonte) -> None:
