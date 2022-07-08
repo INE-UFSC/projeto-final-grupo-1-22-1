@@ -7,3 +7,7 @@ class Desenhavel:
   @property
   def sprite(self):
     return self.__sprite
+
+  @sprite.setter
+  def sprite(self, sprite):
+    self.__sprite = sprite

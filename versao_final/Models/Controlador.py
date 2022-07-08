@@ -76,7 +76,7 @@ class Controlador():
           self.__inimigo.sprite.rect.y -= 1
 
   def morte_jogador(self):
-    if (self.__leitor_colisao.checar_colisao_inimigo(self.__jogador.sprite)):
+    if (self.__leitor_colisao.checar_colisao_inimigo2(self.__jogador.sprite)):
       self.__jogador.sprite.rect.x = 200
       self.__jogador.sprite.rect.y = 200
       self.__jogador.diminuir_vida()
