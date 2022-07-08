@@ -1,6 +1,10 @@
 from Models.Jogador import Jogador
 from Models.Inimigo import Inimigo
 from Models.LeitorColisao import LeitorColisao
+
+from Models.Persistencia.JogoDAO import JogoDAO
+from Models.Persistencia.Pontuacao import Pontuacao
+
 import pygame as pg
 import sys
 
@@ -10,6 +14,7 @@ class Controlador():
     self.__inimigo = inimigo
     self.__leitor_colisao = LeitorColisao(grupo_jogador, grupo_obstaculos, grupo_inimigos)
     self.__coordenada_inimigo = (0,0)
+    self.__jogo_dao = JogoDAO()
 
   def checar_limites_mapa(self):
     if self.__jogador.rect.x == 580:
@@ -66,5 +71,6 @@ class Controlador():
       self.__jogador.diminuir_vida()
     
     if (self.__jogador.vida == 0):
+      self.__jogo_dao.add(Pontuacao(self.__jogador.vida, 10))
       pg.quit()
       sys.exit()
