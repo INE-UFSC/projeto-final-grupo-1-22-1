@@ -17,7 +17,7 @@ class LeitorColisao():
 
   def checar_colisao_inimigo2(self, sprite_jogador):
     if spritecollide(sprite_jogador, self.__grupo_inimigos, False, collide_mask):
+      sprite_jogador.image.fill('red')
       return True
-
 
   

@@ -35,7 +35,7 @@ height = 480
 pg.init()
 
 vida = Vida()
-jogador = Jogador(5)
+jogador = Jogador(2)
 inimigo = Inimigo(1)
 
 grupo_jogador = GroupSingle(jogador)
@@ -132,9 +132,7 @@ def game():
     while True:
         timer.tick(30)
 
-        controlador.mover_inimigo()
-        controlador.morte_jogador()
-
+        
         # for event in pg.event.get():
         #     if event.type == QUIT:
         #         pg.quit()
@@ -165,12 +163,15 @@ def game():
         grupo_obstaculos.draw(window_surface)
         grupo_inimigos.draw(window_surface)
 
+        controlador.mover_inimigo()
+
         evento = leitor_eventos.ler_evento()
         controlador.mover_personagem(evento, jogador)
 
+        # grupo_jogador.update()
+        # grupo_obstaculos.update()
 
-        grupo_jogador.update()
-        grupo_obstaculos.update()
+        controlador.morte_jogador()
 
         draw_cenario(30,width, height)
 

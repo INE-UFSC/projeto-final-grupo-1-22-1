@@ -1,3 +1,4 @@
+from multiprocessing import set_forkserver_preload
 from Models.Jogador import Jogador
 from Models.Inimigo import Inimigo
 from Models.LeitorColisao import LeitorColisao
@@ -56,7 +57,7 @@ class Controlador():
         self.__ultimo_movimento = 'BAIXO'
 
   def mover_inimigo(self):
-    print(self.__jogador.get_coordenadas())
+    print(self.__jogador.get_coordenadas(), self.__inimigo.get_coordenadas())
     self.__inimigo.ir_para(self.__jogador.get_coordenadas())
 
   def morte_jogador(self):

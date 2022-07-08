@@ -21,22 +21,25 @@ class Personagem(Desenhavel, ABC):
             self.image = pg.transform.rotate(self.image, self.__get_angulo_rotacao(sentido_final))
         self.__sentido_imagem = sentido_final
 
-
     def mover_direita(self) -> None:
-        self.rect.x += self.__velocidade
-        self.__girar_imagem('direita')
+        self.rect.centerx += self.velocidade
+        # self.__girar_imagem('direita')
 
     def mover_esquerda(self) -> None:
-        self.rect.x -= self.__velocidade
-        self.__girar_imagem('esquerda')
+        self.rect.centerx -= self.velocidade
+        # self.__girar_imagem('esquerda')
 
     def mover_cima(self) -> None:
-        self.rect.y -= self.__velocidade
-        self.__girar_imagem('cima')
+        self.rect.centery -= self.velocidade
+        # self.__girar_imagem('cima')
 
     def mover_baixo(self) -> None:
-        self.rect.y += self.__velocidade
-        self.__girar_imagem('baixo')
+        self.rect.centery += self.velocidade
+        # self.__girar_imagem('baixo')
 
     def get_coordenadas(self) -> tuple:
-        return self.rect.center
+      return (self.rect.centerx, self.rect.centery, self.rect.center, self.rect.size)
+
+    @property
+    def velocidade(self):
+        return self.__velocidade
