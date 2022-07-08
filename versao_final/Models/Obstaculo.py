@@ -1,5 +1,4 @@
 from Models.Desenhavel import Desenhavel
-from Models.SpriteImage import SpriteImage
 from pygame.transform import scale
 
 class Obstaculo(Desenhavel):

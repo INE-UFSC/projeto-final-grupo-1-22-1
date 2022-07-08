@@ -12,7 +12,6 @@ from Models.LeitorEventos import LeitorEventos
 from Models.Controlador import Controlador
 from Models.Obstaculo import Obstaculo
 from Models.Inimigo import Inimigo
-from Models.SpriteImage import SpriteImage
 from Models.SpriteObstaculo import SpriteObstaculo
 from Models.Vida import Vida
 
@@ -36,16 +35,16 @@ height = 480
 pg.init()
 
 vida = Vida()
-jogador = Jogador()
-inimigo = Inimigo()
+jogador = Jogador(5)
+inimigo = Inimigo(1)
 
-grupo_jogador = GroupSingle(jogador.sprite)
+grupo_jogador = GroupSingle(jogador)
 grupo_obstaculos = Group(SpriteObstaculo(width/4, height/4),
                          SpriteObstaculo(width*3/4, height/4),
                          SpriteObstaculo(width/4, height*3/4),
                          SpriteObstaculo(width*3/4, height*3/4))
 
-grupo_inimigos = GroupSingle(inimigo.sprite)
+grupo_inimigos = GroupSingle(inimigo)
 
 window = Window((width, height), "Cooper Temple - Alfa")
 window_surface = window.surface
@@ -132,10 +131,6 @@ def game():
     counter = 0
     while True:
         timer.tick(30)
-
-        counter += 1
-        if counter % 120 == 0:
-            controlador.gerar_coordenada()
 
         controlador.mover_inimigo()
         controlador.morte_jogador()
