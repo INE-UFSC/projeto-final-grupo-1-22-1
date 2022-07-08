@@ -1,4 +1,4 @@
-from pygame.sprite import groupcollide, collide_circle, spritecollide
+from pygame.sprite import groupcollide, collide_circle, spritecollide, collide_mask
 
 
 class LeitorColisao():
@@ -13,6 +13,10 @@ class LeitorColisao():
 
   def checar_colisao_inimigo(self, sprite_jogador):
     if spritecollide(sprite_jogador, self.__grupo_inimigos, False, collide_circle):
+      return True
+
+  def checar_colisao_inimigo2(self, sprite_jogador):
+    if spritecollide(sprite_jogador, self.__grupo_inimigos, False, collide_mask):
       return True
 
 

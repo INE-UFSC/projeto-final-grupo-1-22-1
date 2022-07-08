@@ -1,3 +1,4 @@
+
 import pygame as pg
 from pygame.locals import *
 from sys import exit
