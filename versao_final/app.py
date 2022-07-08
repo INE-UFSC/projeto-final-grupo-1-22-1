@@ -35,7 +35,7 @@ height = 480
 pg.init()
 
 vida = Vida()
-jogador = Jogador(2)
+jogador = Jogador(3)
 inimigo = Inimigo(1)
 
 grupo_jogador = GroupSingle(jogador)

@@ -23,19 +23,19 @@ class Personagem(Desenhavel, ABC):
 
     def mover_direita(self) -> None:
         self.rect.centerx += self.velocidade
-        # self.__girar_imagem('direita')
+        self.__girar_imagem('direita')
 
     def mover_esquerda(self) -> None:
         self.rect.centerx -= self.velocidade
-        # self.__girar_imagem('esquerda')
+        self.__girar_imagem('esquerda')
 
     def mover_cima(self) -> None:
         self.rect.centery -= self.velocidade
-        # self.__girar_imagem('cima')
+        self.__girar_imagem('cima')
 
     def mover_baixo(self) -> None:
         self.rect.centery += self.velocidade
-        # self.__girar_imagem('baixo')
+        self.__girar_imagem('baixo')
 
     def get_coordenadas(self) -> tuple:
       return (self.rect.centerx, self.rect.centery, self.rect.center, self.rect.size)
