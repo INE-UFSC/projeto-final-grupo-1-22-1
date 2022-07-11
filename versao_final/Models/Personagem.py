@@ -4,8 +4,8 @@ import pygame as pg
  
 class Personagem(Desenhavel, ABC):
     @abstractmethod
-    def __init__(self, image_path: str, velocidade: int = 1, x_position: int = 0, y_position: int = 0):
-        super().__init__(image_path, x_position, y_position)
+    def __init__(self, image_path: str, velocidade: int = 1, position : tuple = (0,0)):
+        super().__init__(image_path, position)
         self.__sentido_imagem = 'cima'
         self.__velocidade = velocidade
 

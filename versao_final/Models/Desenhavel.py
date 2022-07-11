@@ -5,10 +5,10 @@ from pygame.image import load
 
 class Desenhavel(Sprite, ABC):
   @abstractmethod
-  def __init__(self, image_path: str, x_position: int = 0, y_position: int = 0):
+  def __init__(self, image_path: str, position : tuple = (0,0)):
     super().__init__()
     self.__image = load(image_path)
-    self.__rect = self.__image.get_rect(center=(x_position, y_position))
+    self.__rect = self.__image.get_rect(center=position)
     self.__mask = pg.mask.from_surface(self.image)
 
   @property
