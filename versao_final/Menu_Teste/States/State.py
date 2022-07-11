@@ -30,11 +30,8 @@ class Context:
     The Context delegates part of its behavior to the current State object.
     """
 
-    def renderizar(self):
-        self.__state.renderizar()
-
-    def transicionar(self):
-        self.__state.transicionar()
+    def renderizar(self, next_state):
+        self.__state.renderizar(next_state)
 
 
 class State(ABC):
@@ -44,7 +41,6 @@ class State(ABC):
     associated with the State. This backreference can be used by States to
     transition the Context to another State.
     """
-
     @property
     def context(self) -> Context:
         return self.__context
@@ -55,8 +51,4 @@ class State(ABC):
 
     @abstractmethod
     def renderizar(self) -> None:
-        pass
-
-    @abstractmethod
-    def transicionar(self) -> None:
         pass
