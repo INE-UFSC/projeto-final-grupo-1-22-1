@@ -20,25 +20,27 @@ from Models.TelaCreditos import TelaCreditos
 from Models.TelaMenu import TelaMenu
 
 from Models.Configuracoes import Configuracoes
-
+from Models.Mapa.Mapa import Mapa
 configuracoes = Configuracoes()
-
 fonte = configuracoes.fonte
-
+width = configuracoes.largura_tela
+height = configuracoes.altura_tela
+window = Window((width, height), "Cooper Temple - Alfa")
+window_surface = window.surface
 wall_size = 30
 
 timer = pg.time.Clock()
 
-width = 640
-height = 480
+
 
 pg.init()
 
-vida = Vida()
-jogador = Jogador(5)
-inimigo = Inimigo(1)
 
-grupo_jogador = GroupSingle(jogador)
+
+inimigo = Inimigo()
+mapa = Mapa(configuracoes.mapa, window_surface)
+
+
 grupo_obstaculos = Group(SpriteObstaculo(width/4, height/4),
                          SpriteObstaculo(width*3/4, height/4),
                          SpriteObstaculo(width/4, height*3/4),
@@ -46,11 +48,10 @@ grupo_obstaculos = Group(SpriteObstaculo(width/4, height/4),
 
 grupo_inimigos = GroupSingle(inimigo)
 
-window = Window((width, height), "Cooper Temple - Alfa")
-window_surface = window.surface
+
 
 leitor_eventos = LeitorEventos()
-controlador = Controlador(jogador, inimigo, grupo_jogador, grupo_obstaculos, grupo_inimigos)
+controlador = Controlador(mapa, inimigo, grupo_obstaculos, grupo_inimigos)
 
 
 #Na entrega final, essa lógica estará implementada usando OO
@@ -122,13 +123,7 @@ def draw_cenario(size, width, height):
         pg.draw.rect(window_surface, (45, 84, 60),[0, size, size, height-size], 0)
 
 def game():
-    x = width*3/4
-    y = height/2
-    speed = 5
-    preto = (20,20,20)
-    vermelho = (168, 101, 34)
-    cor = preto
-    counter = 0
+
     while True:
         timer.tick(30)
 
@@ -143,38 +138,22 @@ def game():
     #Chamada dos desenhos
         #Define a cor da tela no padrão RGB
         window_surface.fill((54,107,95))
+        mapa.run()
 
         luz = draw_luz()
 
-        #Detecta tecla pressionada
-        # keys = pg.key.get_pressed()
-
-        # #Se a tecla for pressionada, então:
-        # if keys[pg.K_DOWN]:
-        #     #Se a tecla de seta para baixo for pressionada, acrescenta o valor de speed na variavel y
-        #     y += speed
-        # if keys[pg.K_UP]:
-        #     y -= speed
-        # if keys[pg.K_LEFT]:
-        #     x -= speed
-        # if keys[pg.K_RIGHT]:
-        #     x += speed
-
         #Desenhando os grupos a cada ciclo de clock
-        grupo_jogador.draw(window_surface)
         grupo_obstaculos.draw(window_surface)
         grupo_inimigos.draw(window_surface)
 
-        evento = leitor_eventos.ler_evento()
-        controlador.mover_personagem(evento, jogador)
 
+        controlador.mover_jogador()
 
-        grupo_jogador.update()
         grupo_obstaculos.update()
 
         draw_cenario(30,width, height)
 
-        vida.atualizar_vida(jogador.vida, window_surface)
+        controlador.atualizar_vida(window_surface)
 
         pg.display.flip() #Precisa estar no final do algoritmo
 

@@ -3,8 +3,8 @@ from Models.Personagem import Personagem
 from random import randint
 
 class Inimigo(Personagem):
-  def __init__(self, velocidade: int = 1):
-    super().__init__('Images/Lanterninha.png', velocidade, 640, randint(20,580))
+  def __init__(self):
+    super().__init__('Images/Lanterninha.png', 1, (640, randint(20,580)))
 
   def ir_para(self, coordenada: tuple):
     x_atual = self.rect.x
