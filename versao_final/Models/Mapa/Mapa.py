@@ -8,9 +8,8 @@ from Models.Configuracoes import Configuracoes
 from Models.GerenciadorColisao import GerenciadorColisao
 
 class Mapa:
-    def __init__(self, layout_mapa: list, surface, gerenciador_colisao: GerenciadorColisao) -> None:
+    def __init__(self, layout_mapa: list, surface) -> None:
         self.__surface_janela = surface
-        self.__gerenciador_colisao = gerenciador_colisao
         self.__configuracoes = Configuracoes()
         self.preparar_mapa(layout_mapa)
         self.__deslocamento = 0

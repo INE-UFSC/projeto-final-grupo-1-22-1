@@ -141,15 +141,10 @@ def game():
         luz = draw_luz()
 
         #Desenhando os grupos a cada ciclo de clock
-        grupo_obstaculos.draw(window_surface)
         grupo_inimigos.draw(window_surface)
 
 
         controlador.mover_jogador()
-
-        grupo_obstaculos.update()
-
-        draw_cenario(30,width, height)
 
         controlador.atualizar_vida(window_surface)
 
