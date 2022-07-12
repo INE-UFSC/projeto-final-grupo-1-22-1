@@ -8,9 +8,9 @@ from Models.Configuracoes import Configuracoes
 from Models.GerenciadorColisao import GerenciadorColisao
 
 class Mapa:
-    def __init__(self, layout_mapa, surface, leitor_eventos) -> None:
-        self.__leitor_eventos = leitor_eventos
+    def __init__(self, layout_mapa: list, surface, gerenciador_colisao: GerenciadorColisao) -> None:
         self.__surface_janela = surface
+        self.__gerenciador_colisao = gerenciador_colisao
         self.__configuracoes = Configuracoes()
         self.preparar_mapa(layout_mapa)
         self.__deslocamento = 0
@@ -47,22 +47,23 @@ class Mapa:
         x_jogador = jogador.rect.centerx
         direcao_x = jogador.direcao.x
         largura_tela = self.__configuracoes.largura_tela
-        evento = self.__leitor_eventos.ler_evento()
         
-        if x_jogador < (largura_tela / 4) and direcao_x < 0 and evento == 'ESQUERDA':
-            self.__deslocamento = 8
+        if x_jogador < (largura_tela / 4) and direcao_x < 0:
+            self.__deslocamento = 3
             jogador.velocidade = 0
-        elif x_jogador > largura_tela - (largura_tela / 4) and direcao_x > 0 and evento == 'DIREITA':
-            self.__deslocamento = -(8)
+        elif x_jogador > largura_tela - (largura_tela / 4) and direcao_x > 0:
+            self.__deslocamento = -(3)
             jogador.velocidade = 0
         else:
             self.__deslocamento = 0
-            jogador.velocidade = 8
+            jogador.velocidade = 3
 
     def horizontal_mov_col(self):
         jogador = self.__jogador
         jogador.rect.x += jogador.direcao.x * jogador.velocidade
         
+
+        #COLOCAR TESTE DE COLISÃO ABAIXO DENTRO DO GERENCIADOR DE COLISÃO
         for tile_sprite in self.__tiles.sprites():
             if tile_sprite.rect.colliderect(jogador.rect) and tile_sprite != jogador:
                 tile_sprite.image.fill('red')
@@ -75,6 +76,7 @@ class Mapa:
         #         print(jogador.get_coordenadas())
         #         # print('colisao', jogador.direcao.x)
         #         # print(jogador.direcao.x)
+         
 
 
     def run(self) -> None:

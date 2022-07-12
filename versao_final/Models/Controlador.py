@@ -13,10 +13,10 @@ import sys
 
 
 class Controlador():
-  def __init__(self, mapa: Mapa, inimigo: Inimigo, grupo_obstaculos, grupo_inimigos):
+  def __init__(self, mapa: Mapa, inimigo: Inimigo, grupo_inimigos):
     self.__jogador = mapa.jogador
     self.__inimigo = inimigo
-    self.__gerenciador_colisao = GerenciadorColisao(mapa.tiles, mapa.grupo_jogador, grupo_obstaculos, grupo_inimigos)
+    self.__gerenciador_colisao = GerenciadorColisao(mapa.tiles, mapa.grupo_jogador, grupo_inimigos)
     self.__leitor_eventos = LeitorEventos()
     self.__vida = Vida()
     self.__coordenada_inimigo = (0,0)
@@ -46,7 +46,7 @@ class Controlador():
     elif evento == 'BAIXO':
       self.__jogador.mover_baixo()
     else:
-      self.__jogador.zerar_direcao()
+      self.__jogador.parar()
 
   def mover_inimigo(self):
     self.__inimigo.ir_para(self.__jogador.get_coordenadas())

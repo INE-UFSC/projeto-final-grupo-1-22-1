@@ -3,11 +3,10 @@ from pygame import Rect
 
 
 class GerenciadorColisao():
-  def __init__(self, tiles_list, grupo_jogador, grupo_obstaculos, grupo_inimigos):
+  def __init__(self, tiles_list, grupo_jogador, grupo_inimigos):
     self.__tiles_list = tiles_list
     self.__grupo_inimigos = grupo_inimigos
     self.__grupo_jogador = grupo_jogador
-    self.__grupo_obstaculos = grupo_obstaculos
 
   def checar_colisao_obstaculo(self, rect_personagem):
     for tile_sprite in self.__tiles_list:

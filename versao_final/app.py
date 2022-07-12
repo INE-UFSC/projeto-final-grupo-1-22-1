@@ -6,13 +6,10 @@ from pygame import font
 
 from pygame.sprite import Group, GroupSingle
 
-from Models.Desenhavel import Desenhavel
 from Models.LeitorEventos import LeitorEventos
 from Models.Controlador import Controlador
-from Models.Obstaculo import Obstaculo
 from Models.Inimigo import Inimigo
 from Models.SpriteObstaculo import SpriteObstaculo
-from Models.Vida import Vida
 
 from Models.Window import Window
 from Models.TelaCreditos import TelaCreditos
@@ -20,6 +17,7 @@ from Models.TelaMenu import TelaMenu
 
 from Models.Configuracoes import Configuracoes
 from Models.Mapa.Mapa import Mapa
+
 configuracoes = Configuracoes()
 fonte = configuracoes.fonte
 width = configuracoes.largura_tela
@@ -40,18 +38,18 @@ inimigo = Inimigo()
 
 
 
-grupo_obstaculos = Group(SpriteObstaculo(width/4, height/4),
-                         SpriteObstaculo(width*3/4, height/4),
-                         SpriteObstaculo(width/4, height*3/4),
-                         SpriteObstaculo(width*3/4, height*3/4))
+# grupo_obstaculos = Group(SpriteObstaculo(width/4, height/4),
+#                          SpriteObstaculo(width*3/4, height/4),
+#                          SpriteObstaculo(width/4, height*3/4),
+#                          SpriteObstaculo(width*3/4, height*3/4))
 
 grupo_inimigos = GroupSingle(inimigo)
 
 
 
 leitor_eventos = LeitorEventos()
-mapa = Mapa(configuracoes.mapa, window_surface, leitor_eventos)
-controlador = Controlador(mapa, inimigo, grupo_obstaculos, grupo_inimigos)
+mapa = Mapa(configuracoes.mapa, window_surface)
+controlador = Controlador(mapa, inimigo, grupo_inimigos)
 
 
 #Na entrega final, essa lógica estará implementada usando OO
@@ -113,14 +111,14 @@ def main_menu():
         timer.tick(60)
     
 
-def draw_cenario(size, width, height):
-        door = 40
-        #Desenho de retangulos, que recebe "window" = tela em que vai ser desenhado, (45,84,60) = Cor em RGB, [] = coordenadas dos pontos da diagonal principal, 0 = Tamanho da borda do retangulo
-        pg.draw.rect(window_surface, (45, 84, 60),[0, 0, width-size, size], 0)
-        pg.draw.rect(window_surface, (45, 84, 60),[width-size, 0, width, height/5], 0)
-        pg.draw.rect(window_surface, (45, 84, 60),[width-size, (height/5)+door , width, (height*(4/5))-(door+size)], 0)
-        pg.draw.rect(window_surface, (45, 84, 60),[size, height-size, width, height], 0)
-        pg.draw.rect(window_surface, (45, 84, 60),[0, size, size, height-size], 0)
+# def draw_cenario(size, width, height):
+#         door = 40
+#         #Desenho de retangulos, que recebe "window" = tela em que vai ser desenhado, (45,84,60) = Cor em RGB, [] = coordenadas dos pontos da diagonal principal, 0 = Tamanho da borda do retangulo
+#         pg.draw.rect(window_surface, (45, 84, 60),[0, 0, width-size, size], 0)
+#         pg.draw.rect(window_surface, (45, 84, 60),[width-size, 0, width, height/5], 0)
+#         pg.draw.rect(window_surface, (45, 84, 60),[width-size, (height/5)+door , width, (height*(4/5))-(door+size)], 0)
+#         pg.draw.rect(window_surface, (45, 84, 60),[size, height-size, width, height], 0)
+#         pg.draw.rect(window_surface, (45, 84, 60),[0, size, size, height-size], 0)
 
 def game():
 
