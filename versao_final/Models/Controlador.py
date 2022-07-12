@@ -1,6 +1,6 @@
 from Models.Jogador import Jogador
 from Models.Inimigo import Inimigo
-from Models.LeitorColisao import LeitorColisao
+from Models.GerenciadorColisao import GerenciadorColisao
 from Models.Mapa.Mapa import Mapa
 from Models.Persistencia.JogoDAO import JogoDAO
 from Models.LeitorEventos import LeitorEventos
@@ -16,7 +16,7 @@ class Controlador():
   def __init__(self, mapa: Mapa, inimigo: Inimigo, grupo_obstaculos, grupo_inimigos):
     self.__jogador = mapa.jogador
     self.__inimigo = inimigo
-    self.__leitor_colisao = LeitorColisao(mapa.grupo_jogador, grupo_obstaculos, grupo_inimigos)
+    self.__gerenciador_colisao = GerenciadorColisao(mapa.tiles, mapa.grupo_jogador, grupo_obstaculos, grupo_inimigos)
     self.__leitor_eventos = LeitorEventos()
     self.__vida = Vida()
     self.__coordenada_inimigo = (0,0)
@@ -30,48 +30,29 @@ class Controlador():
     elif self.__jogador.rect.y == 30:
       return('lim-cima')
     elif self.__jogador.rect.y == 430:
-      print('lim-y')
       return('lim-baixo')
       
-
   def mover_jogador(self):
     evento = self.__leitor_eventos.ler_evento()
-    if not self.__leitor_colisao.checar_colisao_obstaculo(self.__jogador):
-      limite = self.checar_limites_mapa()
-      if evento == 'FECHAR':
-        pg.quit()
-        sys.exit()
-      elif evento == 'DIREITA' and not limite == 'lim-dir':
-        self.__jogador.mover_direita()
-        self.__ultimo_movimento = 'DIREITA'
-      elif evento == 'ESQUERDA' and not limite == 'lim-esq':
-        self.__ultimo_movimento = 'ESQUERDA'
-        self.__jogador.mover_esquerda()
-      elif evento == 'CIMA' and not limite == 'lim-cima':
-        self.__jogador.mover_cima()
-        self.__ultimo_movimento = 'CIMA'
-      elif evento == 'BAIXO' and not limite == 'lim-baixo':
-        self.__jogador.mover_baixo()
-        self.__ultimo_movimento = 'BAIXO'
+    if evento == 'FECHAR':
+      pg.quit()
+      sys.exit()
+    elif evento == 'DIREITA':
+      self.__jogador.mover_direita()
+    elif evento == 'ESQUERDA':
+      self.__jogador.mover_esquerda()
+    elif evento == 'CIMA':
+      self.__jogador.mover_cima()
+    elif evento == 'BAIXO':
+      self.__jogador.mover_baixo()
     else:
-      if evento == 'DIREITA' and self.__ultimo_movimento != 'DIREITA':
-        self.__jogador.mover_direita()
-        self.__ultimo_movimento = 'DIREITA' 
-      elif evento == 'ESQUERDA' and self.__ultimo_movimento != 'ESQUERDA':
-        self.__ultimo_movimento = 'ESQUERDA' 
-        self.__jogador.mover_esquerda()
-      elif evento == 'CIMA' and self.__ultimo_movimento != 'CIMA':
-        self.__jogador.mover_cima()
-        self.__ultimo_movimento = 'CIMA'
-      elif evento == 'BAIXO' and self.__ultimo_movimento != 'BAIXO':
-        self.__jogador.mover_baixo()
-        self.__ultimo_movimento = 'BAIXO'
+      self.__jogador.zerar_direcao()
 
   def mover_inimigo(self):
     self.__inimigo.ir_para(self.__jogador.get_coordenadas())
 
   def morte_jogador(self):
-    if (self.__leitor_colisao.checar_colisao_inimigo2(self.__jogador)):
+    if (self.__gerenciador_colisao.checar_colisao_inimigo2(self.__jogador)):
       self.__jogador.rect.x = 200
       self.__jogador.rect.y = 200
       self.__jogador.diminuir_vida()

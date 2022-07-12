@@ -9,6 +9,14 @@ class Personagem(Desenhavel, ABC):
         self.__sentido_imagem = 'cima'
         self.__velocidade = velocidade
 
+    @property
+    def velocidade(self):
+        return self.__velocidade
+    
+    @velocidade.setter
+    def velocidade(self, velocidade):
+        self.__velocidade = velocidade
+
     def __get_angulo_rotacao(self, sentido_final: str) -> int:
         sentidos = {'cima' : 90,
                     'direita': 0,
@@ -38,5 +46,11 @@ class Personagem(Desenhavel, ABC):
         self.rect.y += self.__velocidade
         self.__girar_imagem('baixo')
 
+    def get_x(self) -> int:
+        return self.rect.centerx
+
+    def get_y(self) -> int:
+        return self.rect.centery
+    
     def get_coordenadas(self) -> tuple:
         return self.rect.center

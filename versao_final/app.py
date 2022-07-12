@@ -6,7 +6,6 @@ from pygame import font
 
 from pygame.sprite import Group, GroupSingle
 
-from Models.Jogador import Jogador
 from Models.Desenhavel import Desenhavel
 from Models.LeitorEventos import LeitorEventos
 from Models.Controlador import Controlador
@@ -38,7 +37,7 @@ pg.init()
 
 
 inimigo = Inimigo()
-mapa = Mapa(configuracoes.mapa, window_surface)
+
 
 
 grupo_obstaculos = Group(SpriteObstaculo(width/4, height/4),
@@ -51,6 +50,7 @@ grupo_inimigos = GroupSingle(inimigo)
 
 
 leitor_eventos = LeitorEventos()
+mapa = Mapa(configuracoes.mapa, window_surface, leitor_eventos)
 controlador = Controlador(mapa, inimigo, grupo_obstaculos, grupo_inimigos)
 
 
@@ -110,7 +110,7 @@ def main_menu():
                     click = True
  
         pg.display.update()
-        timer.tick(30)
+        timer.tick(60)
     
 
 def draw_cenario(size, width, height):
@@ -125,7 +125,7 @@ def draw_cenario(size, width, height):
 def game():
 
     while True:
-        timer.tick(30)
+        timer.tick(60)
 
         controlador.mover_inimigo()
         controlador.morte_jogador()
