@@ -1,5 +1,5 @@
 import pygame as pg
-
+from Models.Mapa import Mapa
 
 class Jogo:
     def __init__(self, window, controlador) -> None:
@@ -15,5 +15,6 @@ class Jogo:
         self.__window.blit(img, (x, y))
 
     def renderizar(self, next_state):
+        mapa = Mapa()
         self.context.transition_to(next_state(
             self.__window, self.__controlador))
