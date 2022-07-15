@@ -48,8 +48,8 @@ grupo_inimigos = GroupSingle(inimigo)
 
 
 leitor_eventos = LeitorEventos()
-mapa = Mapa(configuracoes.mapa, window_surface)
-controlador = Controlador(mapa, inimigo, grupo_inimigos)
+
+# controlador = Controlador(mapa, inimigo, grupo_inimigos)
 
 
 #Na entrega final, essa lógica estará implementada usando OO
@@ -120,13 +120,16 @@ def main_menu():
 #         pg.draw.rect(window_surface, (45, 84, 60),[size, height-size, width, height], 0)
 #         pg.draw.rect(window_surface, (45, 84, 60),[0, size, size, height-size], 0)
 
+mapa = Mapa(configuracoes.mapa, window_surface)
 def game():
 
     while True:
         timer.tick(60)
 
-        controlador.mover_inimigo()
-        controlador.morte_jogador()
+        
+
+        # controlador.mover_inimigo()
+        # controlador.morte_jogador()
 
         # for event in pg.event.get():
         #     if event.type == QUIT:
@@ -136,18 +139,20 @@ def game():
     #Chamada dos desenhos
         #Define a cor da tela no padrão RGB
         window_surface.fill((54,107,95))
-        mapa.run()
 
-        luz = draw_luz()
+        mapa.run()
+        
+
+        # luz = draw_luz()
 
         #Desenhando os grupos a cada ciclo de clock
         grupo_inimigos.draw(window_surface)
 
 
-        controlador.mover_jogador()
+        # controlador.mover_jogador()
 
-        controlador.atualizar_vida(window_surface)
-
+        # controlador.atualizar_vida(window_surface)
+        pg.display.update()
         pg.display.flip() #Precisa estar no final do algoritmo
 
 main_menu()

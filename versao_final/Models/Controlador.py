@@ -13,8 +13,8 @@ import sys
 
 
 class Controlador():
-  def __init__(self, mapa: Mapa, inimigo: Inimigo, grupo_inimigos):
-    self.__jogador = mapa.jogador
+  def __init__(self, jogador, grupo_obstaculos, inimigo: Inimigo, grupo_inimigos):
+    self.__jogador = jogador
     self.__inimigo = inimigo
     self.__gerenciador_colisao = GerenciadorColisao(mapa.tiles, mapa.grupo_jogador, grupo_inimigos)
     self.__leitor_eventos = LeitorEventos()
@@ -22,15 +22,6 @@ class Controlador():
     self.__coordenada_inimigo = (0,0)
     self.__jogo_dao = JogoDAO()
 
-  def checar_limites_mapa(self):
-    if self.__jogador.rect.x == 580:
-      return('lim-dir')
-    elif self.__jogador.rect.x == 30:
-      return('lim-esq')
-    elif self.__jogador.rect.y == 30:
-      return('lim-cima')
-    elif self.__jogador.rect.y == 430:
-      return('lim-baixo')
       
   def mover_jogador(self):
     evento = self.__leitor_eventos.ler_evento()

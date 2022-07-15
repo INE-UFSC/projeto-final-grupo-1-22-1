@@ -23,6 +23,14 @@ class Desenhavel(Sprite, ABC):
   def rect(self):
     return self.__rect 
   
+  def set_rect_left(self, valor): self.__rect.left = valor
+  
+  def set_rect_right(self, valor): self.__rect.right = valor
+
+  def set_rect_top(self, valor): self.__rect.top = valor
+
+  def set_rect_bottom(self, valor): self.__rect.bottom = valor
+
   @image.setter
   def image(self, image):
     self.__image = image
