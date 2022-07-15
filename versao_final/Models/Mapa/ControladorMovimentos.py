@@ -31,7 +31,6 @@ class ControladorMovimentos:
                 jogador.set_rect_top(obstaculo_colidido.get_rect_bottom())
             elif direcao_jogador.y == 1:
                 jogador.set_rect_bottom(obstaculo_colidido.get_rect_top())
-
         else:
             evento = self.__leitor_eventos.ler_evento()
             if evento == 'FECHAR':
@@ -47,8 +46,6 @@ class ControladorMovimentos:
                 jogador.mover_baixo()
             else:
                 jogador.parar()
-
-
 
     def mover_inimigo(self):
         pass

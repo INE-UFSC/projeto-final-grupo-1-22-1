@@ -14,6 +14,7 @@ class Mapa:
         self.__configuracoes = Configuracoes()
         self.preparar_mapa(layout_mapa)
         self.__deslocamento = 0
+        self.__deslocado = 0
     
     def preparar_mapa(self, layout_mapa: list) -> None:
         self.__tiles = Group()
@@ -52,13 +53,17 @@ class Mapa:
         
         if x_jogador < (largura_tela / 4) and direcao_x < 0:
             self.__deslocamento = 3
+            self.__deslocado += 3
             jogador.velocidade = 0
         elif x_jogador > largura_tela - (largura_tela / 4) and direcao_x > 0:
             self.__deslocamento = -(3)
+            self.__deslocado -= 3
             jogador.velocidade = 0
         else:
             self.__deslocamento = 0
             jogador.velocidade = 3
+
+        print('deslocado', self.__deslocado)
 
     # def horizontal_mov_col(self):
         # jogador = self.__jogador
