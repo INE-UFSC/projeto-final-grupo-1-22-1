@@ -16,6 +16,18 @@ class Tile(Sprite):
   @property
   def image(self):
     return self.__image
+  
+  def get_rect_left(self):
+    return self.rect.left
+
+  def get_rect_right(self):
+    return self.rect.right
+
+  def get_rect_top(self):
+    return self.rect.top
+
+  def get_rect_bottom(self):
+    return self.rect.bottom
 
   def update(self, deslocamento_x):
     self.__rect.x += deslocamento_x
