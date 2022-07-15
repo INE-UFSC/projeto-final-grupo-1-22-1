@@ -1,13 +1,12 @@
 from States.State import State
 import pygame as pg
-from States.Creditos import Creditos
 from button import Button
 
 
 class MenuPrincipal(State):
-    def __init__(self, window, controlador):
+    def __init__(self, window, transition_to):
+        super().__init__(transition_to)
         self.__window = window
-        self.__controlador = controlador
         self.__menu_bg_img = pg.image.load("images/MainMenu.png")
         self.__title = pg.image.load("images/Titulo.png")
         play_off_img = pg.image.load("images/PlayOff.png").convert_alpha()
@@ -35,14 +34,10 @@ class MenuPrincipal(State):
 
         self.__window.blit(self.__title, (280, 235))
         if self.__play_button.draw(self.__window):
-            self.__controlador.state = "jogo"
+            self.transicionar("Jogo")
         if self.__ranking_button.draw(self.__window):
-            self.__controlador.state = "ranking"
+            self.transicionar("Ranking")
         if self.__options_button.draw(self.__window):
-            self.__controlador.state = "options"
+            self.transicionar("Options")
         if self.__credits_button.draw(self.__window):
-            self.__controlador.state = "credits"
-
-    def renderizar(self, next_state):
-        self.context.transition_to(next_state(
-            self.__window, self.__controlador))
+            self.transicionar("Creditos")

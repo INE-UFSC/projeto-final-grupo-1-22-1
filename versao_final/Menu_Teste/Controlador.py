@@ -1,5 +1,4 @@
 import pygame as pg
-from States.State import Context
 from States.MenuPrincipal import MenuPrincipal
 from States.Jogo import Jogo
 from States.Creditos import Creditos
@@ -7,11 +6,11 @@ from States.Options import Options
 from States.Ranking import Ranking
 
 STATES = {
-    "main": MenuPrincipal,
-    "jogo": Jogo,
-    "credits": Creditos,
-    "options": Options,
-    "ranking": Ranking
+    "MenuPrincipal": MenuPrincipal,
+    "Jogo": Jogo,
+    "Creditos": Creditos,
+    "Options": Options,
+    "Ranking": Ranking
 }
 
 
@@ -25,39 +24,30 @@ class Controlador():
         self.__window = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pg.display.set_caption("Copper Temple - Menus")
 
-        # self.__game_paused = True
-        self.__state = "main"
+        self.__state = "MenuPrincipal"
 
         icon_img = pg.image.load("images/Icon.png")
 
         pg.display.set_icon(icon_img)
 
-    @property
-    def state(self):
-        return self.__state
-
-    @state.setter
-    def state(self, state) -> None:
-        self.__state = state
+    def transition_to(self, new_state):
+        if self.__state != new_state:
+            print(f"Context: Transition to {new_state}")
+            self.__state = new_state
 
     def run(self):
         run = True
 
-        tela = Context(MenuPrincipal(self.__window, self))
-
         while run:
             if self.__state in STATES:
-                tela.renderizar(STATES[self.__state])
-
-            # else:
-            #   self.draw_text("Press SPACE to pause", self.__font, self.__TEXT_COLLOR, 160, 250)
+                tela = STATES[self.__state](self.__window, self.transition_to)
+            else:
+                tela = MenuPrincipal(self.__window, self.transition_to)
 
             for event in pg.event.get():
                 if event.type == pg.KEYDOWN:
-                    # if event.key == pg.K_SPACE:
-                    #     self.__game_paused = True
                     if event.key == pg.K_ESCAPE:
-                        self.__state = "main"
+                        tela.transicionar("MenuPrincipal")
                 if event.type == pg.QUIT:
                     run = False
 
