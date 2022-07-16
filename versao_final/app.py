@@ -64,7 +64,7 @@ def draw_text(text, fonte, color, surface, x, y):
     textobj = fonte.render(text, 1, color)
     textrect = textobj.get_rect()
     textrect.topleft = (x, y)
-    surface.blit(textobj, textrect)
+    window_surface.blit(textobj, textrect)
  
 click = False
 
@@ -108,7 +108,7 @@ def main_menu():
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:
                     click = True
- 
+
         pg.display.update()
         timer.tick(30)
     
@@ -125,8 +125,8 @@ def draw_cenario(size, width, height):
 def game():
 
     while True:
-        timer.tick(30)
-
+        timer.tick(120)
+        
         controlador.mover_inimigo()
         controlador.morte_jogador()
 
@@ -134,27 +134,28 @@ def game():
         #     if event.type == QUIT:
         #         pg.quit()
         #         exit()
-
     #Chamada dos desenhos
+
         #Define a cor da tela no padrão RGB
+
         window_surface.fill((54,107,95))
+
         mapa.run()
 
         luz = draw_luz()
-
+        
         #Desenhando os grupos a cada ciclo de clock
         grupo_obstaculos.draw(window_surface)
-        grupo_inimigos.draw(window_surface)
-
+        #grupo_inimigos.draw(window_surface)
 
         controlador.mover_jogador()
-
-        grupo_obstaculos.update()
-
+        
         draw_cenario(30,width, height)
 
+        grupo_obstaculos.update()
         controlador.atualizar_vida(window_surface)
-
+        window_surface.blit(inimigo.get_imagem(), (inimigo.get_coordenadas()[0] - int(inimigo.get_imagem().get_width()) / 2, inimigo.get_coordenadas()[1] - int(inimigo.get_imagem().get_height()) / 2))
+        
         pg.display.flip() #Precisa estar no final do algoritmo
 
 main_menu()

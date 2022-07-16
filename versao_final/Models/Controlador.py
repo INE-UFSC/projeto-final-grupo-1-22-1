@@ -22,6 +22,7 @@ class Controlador():
     self.__coordenada_inimigo = (0,0)
     self.__jogo_dao = JogoDAO()
 
+
   def checar_limites_mapa(self):
     if self.__jogador.rect.x == 580:
       return('lim-dir')
@@ -30,10 +31,9 @@ class Controlador():
     elif self.__jogador.rect.y == 30:
       return('lim-cima')
     elif self.__jogador.rect.y == 430:
-      print('lim-y')
       return('lim-baixo')
       
-
+      
   def mover_jogador(self):
     evento = self.__leitor_eventos.ler_evento()
     if not self.__leitor_colisao.checar_colisao_obstaculo(self.__jogador):
@@ -83,4 +83,8 @@ class Controlador():
 
   def atualizar_vida(self, window_surface):
     self.__vida.atualizar_vida(self.__jogador.vida, window_surface)
+
+  @property
+  def jogador_coordenadas(self):
+    return self.__jogador.get_coordenadas()
     

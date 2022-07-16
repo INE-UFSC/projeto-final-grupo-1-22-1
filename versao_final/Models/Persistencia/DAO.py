@@ -24,7 +24,6 @@ class DAO(ABC):
     def add(self, obj):
         self.__cache.append(obj)
         self.dump()
-        print(self.__cache)
 
     def get_all(self):
         return self.__cache

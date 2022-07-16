@@ -4,7 +4,7 @@ from pygame.math import Vector2
 
 class Jogador(Personagem):
   def __init__(self, position: tuple = (0,0)) -> None:
-    super().__init__('Images/Sombra.png', 3, position)
+    super().__init__('Images/Sombra.png', 2, position)
     self.__vida = 3
     # self.__direcao = Vector2(0,0)
     

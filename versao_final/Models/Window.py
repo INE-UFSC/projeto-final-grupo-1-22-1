@@ -34,7 +34,6 @@ class Window:
     pg.quit()
     sys.exit()
 
-  def update(self):
+  def update(self, dados):
     pg.display.update()
-
   

@@ -26,3 +26,4 @@ class Desenhavel(Sprite, ABC):
   @image.setter
   def image(self, image):
     self.__image = image
+    
