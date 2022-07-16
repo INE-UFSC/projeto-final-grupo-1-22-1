@@ -44,6 +44,8 @@ class Personagem(Desenhavel, ABC):
             self.image = pg.transform.rotate(self.image, self.__get_angulo_rotacao(sentido_final))
         self.__sentido_imagem = sentido_final
 
+    
+
     def __mover_x(self) -> None:
         self.rect.x += self.__direcao.x * self.__velocidade
         self.__direcao.y = 0

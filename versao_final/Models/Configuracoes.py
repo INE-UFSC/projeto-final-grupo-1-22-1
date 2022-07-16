@@ -7,22 +7,23 @@ class Configuracoes(Singleton):
     def init(self):
         font.init()
         self.__mapa = ['XXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-                       'X                          X',
-                       'X                           ',
+                       'X              I          IX',
+                       'X   P                       ',
                        'X X    XXX            X    X',
-                       'X X                        X',
-                       'X XXX    P    XX         XXX',
+                       'X X         I              X',
+                       'X XXX         XX         XXX',
                        'X XXX       XX             X',
                        'X X    X  XXXX    XX  XX   X',
                        'X      X  XXXX    XX  XXX  X',
                        'X   XXXX  XXXXXX  XX  XXXX X',
                        'XXXXXXXXXXXXXXXXXXXXXXXXXXXX']
         self.__velocidade_jogador = 3
+        self.__velocidade_inimigo = 1
         self.__tamanho_tile = 64
         self.__largura_mapa = len(self.__mapa[0]) * self.tamanho_tile
         self.__altura_mapa = len(self.__mapa) * self.tamanho_tile
         self.__largura_tela = 640
-        self.__altura_tela = 480
+        self.__altura_tela = len(self.__mapa) * self.__tamanho_tile
         self.__fonte = font.SysFont('comicsans', 50)
 
     @property
@@ -56,3 +57,7 @@ class Configuracoes(Singleton):
     @property
     def velocidade_jogador(self):
         return self.__velocidade_jogador
+
+    @property
+    def velocidade_inimigo(self):
+        return self.__velocidade_inimigo
