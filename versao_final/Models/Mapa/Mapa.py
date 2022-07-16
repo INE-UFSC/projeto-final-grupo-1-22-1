@@ -13,8 +13,10 @@ class Mapa:
         self.__surface_janela = surface
         self.__configuracoes = Configuracoes()
         self.preparar_mapa(layout_mapa)
-        self.__deslocamento = 0
-        self.__deslocado = 0
+        self.__deslocamento_x = 0
+        self.__deslocado_x = 0
+        self.__deslocamento_y = 0
+        self.__deslocado_y = 0
     
     def preparar_mapa(self, layout_mapa: list) -> None:
         self.__tiles = Group()
@@ -27,11 +29,10 @@ class Mapa:
                     tile = Tile((x,y), self.__configuracoes.tamanho_tile)
                     self.__tiles.add(tile)
                 if coluna == 'P':
-                    self.__jogador = Jogador((x,y))
+                    self.__jogador = Jogador(self.__configuracoes.velocidade_jogador, (x,y))
                     self.__grupo_jogador.add(self.__jogador)
                     # self.__tiles.add(self.__jogador)
-        self.__controlador_movimentos = ControladorMovimentos(self.__grupo_jogador, self.__tiles)
-        print(len(self.__tiles))
+        self.__controlador_movimentos = ControladorMovimentos(self.__grupo_jogador, self.__tiles, self.__configuracoes)
 
     @property
     def tiles(self) -> list:
@@ -49,40 +50,50 @@ class Mapa:
         jogador = self.__jogador
         x_jogador = jogador.get_centerx()
         direcao_x = jogador.get_dirx()
+        direcao_y = jogador.get_diry()
         largura_tela = self.__configuracoes.largura_tela
+        y_jogador = jogador.get_centery()
+        altura_tela = self.__configuracoes.altura_tela
         
-        if x_jogador < (largura_tela / 4) and direcao_x < 0:
-            self.__deslocamento = 3
-            self.__deslocado += 3
+        # if direcao_x != 0:
+        print('andando em x')
+        if x_jogador < (largura_tela / 4) and direcao_x < 0 and self.__deslocado_x < 0:
+            self.__deslocamento_x = 3
+            self.__deslocado_x += 3
             jogador.velocidade = 0
-        elif x_jogador > largura_tela - (largura_tela / 4) and direcao_x > 0:
-            self.__deslocamento = -(3)
-            self.__deslocado -= 3
+        elif x_jogador > largura_tela - (largura_tela / 4) and direcao_x > 0 and -(self.__deslocado_x) < self.__configuracoes.largura_mapa - largura_tela:
+            self.__deslocamento_x = -(3)
+            self.__deslocado_x -= 3
             jogador.velocidade = 0
         else:
-            self.__deslocamento = 0
-            jogador.velocidade = 3
+            self.__deslocamento_x = 0
+            jogador.velocidade = self.__configuracoes.velocidade_jogador
+        # elif direcao_y != 0:
+        #     print('andando em y')
+        #     if y_jogador < (altura_tela / 4) and direcao_y < 0 and self.__deslocado_y < 0:
+        #         self.__deslocamento_y += 3
+        #         self.__deslocado_y += 3
+        #         jogador.velocidade = 0
+        #     elif y_jogador > altura_tela - (altura_tela / 4) and direcao_y > 0 and -(self.__deslocado_y) < self.__configuracoes.altura_mapa - altura_tela:
+        #         self.__deslocamento_y = -(3)
+        #         self.__deslocado_y -= 3
+        #         jogador.velocidade = 0
+        #     else:
+        #         self.__deslocamento_y = 0
+        #         jogador.velocidade = self.__configuracoes.velocidade_jogador
 
-        print('deslocado', self.__deslocado)
-
-    # def horizontal_mov_col(self):
-        # jogador = self.__jogador
-        # jogador.mover_x()
+        print('deslocado', self.__deslocado_x)
+    
+    # def scroll_y(self):
+    #     jogador = self.__jogador
         
-        #TODO: COLOCAR TESTE DE COLISÃO ABAIXO DENTRO DO GERENCIADOR DE COLISÃO
-
-        # for tile_sprite in self.__tiles.sprites():
-        #     if tile_sprite.rect.colliderect(jogador.rect):
-        #         tile_sprite.image.fill('red')
-                # if jogador.direcao.x > 0:
-                #     print('oi')
-                #     jogador.rect.right = tile_sprite.rect.left
-         
+        
+    #     print('deslocado-y', self.__deslocado_y)
 
 
     def run(self) -> None:
         #Mapa
-        self.__tiles.update(self.__deslocamento)
+        self.__tiles.update(self.__deslocamento_x, self.__deslocamento_y)
         self.__tiles.draw(self.__surface_janela)
         self.scroll_x()
 

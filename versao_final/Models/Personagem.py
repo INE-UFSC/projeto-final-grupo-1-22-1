@@ -14,6 +14,10 @@ class Personagem(Desenhavel, ABC):
     @property
     def velocidade(self):
         return self.__velocidade
+    
+    @velocidade.setter
+    def velocidade(self, velocidade):
+        self.__velocidade = velocidade
 
     @property 
     def direcao(self):
@@ -28,10 +32,6 @@ class Personagem(Desenhavel, ABC):
     def get_dir(self):
         return self.__direcao
     
-    @velocidade.setter
-    def velocidade(self, velocidade):
-        self.__velocidade = velocidade
-
     def __get_angulo_rotacao(self, sentido_final: str) -> int:
         sentidos = {'cima' : 90,
                     'direita': 0,

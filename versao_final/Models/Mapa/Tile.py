@@ -29,5 +29,7 @@ class Tile(Sprite):
   def get_rect_bottom(self):
     return self.rect.bottom
 
-  def update(self, deslocamento_x):
+  def update(self, deslocamento_x, deslocamento_y):
     self.__rect.x += deslocamento_x
+    self.__rect.y += deslocamento_y
+

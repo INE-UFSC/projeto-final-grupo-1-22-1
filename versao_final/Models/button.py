@@ -2,12 +2,12 @@ import pygame as pg
 
 
 class Button():
-    def __init__(self, x, y, image1, image2, scale):
-        self.image1 = image1
-        self.image2 = image2
-        self.image = image1
-        width = self.image1.get_width()
-        height = self.image1.get_height()
+    def __init__(self, x, y, image_off, image_on, scale):
+        self.image_off = image_off
+        self.image_on = image_on
+        self.image = image_off
+        width = self.image_off.get_width()
+        height = self.image_off.get_height()
         self.image = pg.transform.scale(
             self.image, (int(width * scale), int(height * scale)))
         self.rect = self.image.get_rect()
@@ -23,7 +23,7 @@ class Button():
         pos = pg.mouse.get_pos()
 
         if self.rect.collidepoint(pos):
-            self.image = self.image2
+            self.image = self.image_on
             # TODO: remover imagem por baixo
             self.draw(surface)
             if pg.mouse.get_pressed()[0] == 1 and self.clicked == False:
@@ -32,6 +32,5 @@ class Button():
 
         if pg.mouse.get_pressed()[0] == 0:
             self.clicked = False
-
 
         return action

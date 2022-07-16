@@ -16,8 +16,6 @@ STATES = {
     "OptionsState": OptionsState,
     "RankingState": RankingState
 }
-
-
 class Jogo():
     def __init__(self):
         self.__configuracoes = Configuracoes()
@@ -51,5 +49,6 @@ class Jogo():
                     run = False
 
             pg.display.update()
+            pg.display.flip()
 
         pg.quit()

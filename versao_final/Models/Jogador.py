@@ -2,10 +2,10 @@ from Models.Personagem import Personagem
 import pygame as pg
 
 class Jogador(Personagem):
-  def __init__(self, position: tuple = (0,0)) -> None:
-    super().__init__('Images/Sombra.png', 3, position)
+  def __init__(self, velocidade : int, position: tuple = (0,0) ) -> None:
+    super().__init__('Images/Sombra.png', velocidade, position)
     self.__vida = 3
-    
+
   @property
   def vida(self):
     return self.__vida

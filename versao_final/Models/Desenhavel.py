@@ -20,8 +20,7 @@ class Desenhavel(Sprite, ABC):
     return self.__mask
 
   @property
-  def rect(self):
-    return self.__rect 
+  def rect(self): return self.__rect 
   
   def set_rect_left(self, valor): self.__rect.left = valor
   
