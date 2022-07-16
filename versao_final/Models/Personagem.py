@@ -72,18 +72,18 @@ class Personagem(Desenhavel, ABC):
 
             if self.__precisa_rotar < self.__rotacao%360 + 180:
 
-                self.__rotacao += 2
+                self.__rotacao += 3
             else:
 
-                self.__rotacao -= 2
+                self.__rotacao -= 3
 
         elif self.__precisa_rotar < self.__rotacao%360:
 
             if self.__precisa_rotar > self.__rotacao%360 - 180:
 
-                self.__rotacao -= 2
+                self.__rotacao -= 3
             else:
-                self.__rotacao += 2
+                self.__rotacao += 3
 
         
         """
@@ -120,7 +120,7 @@ class Personagem(Desenhavel, ABC):
         self.__girar_imagem('baixo')
     
     def mover_inim(self, c_p, c_i, x, y) -> None:
-        if 0 <= self.__precisa_rotar - (self.__rotacao % 360) <= 2 :
+        if 0 <= self.__precisa_rotar - (self.__rotacao % 360) <= 3 :
             self.rect.x += x
             self.rect.y += y
         self.__girar_imagem_inim(c_p, c_i)
