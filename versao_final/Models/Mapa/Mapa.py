@@ -24,6 +24,7 @@ class Mapa:
     
     def preparar_mapa(self, layout_mapa: list) -> None:
         self.__tiles = Group()
+        self.__armaduras = Group()
         self.__grupo_jogador = GroupSingle()
         self.__grupo_inimigo = Group()
         for indice_linha,linha in enumerate(layout_mapa):
@@ -41,6 +42,9 @@ class Mapa:
                     print(x, y)
                     self.__inimigo = Inimigo(self.__configuracoes.velocidade_inimigo, (x, y))
                     self.__grupo_inimigo.add(self.__inimigo)
+                elif coluna == 'A':
+                    tile = Tile((x,y), self.__configuracoes.tamanho_tile, 'blue')
+                    self.__armaduras.add(tile)
     
         self.__controlador_movimentos = ControladorMovimentos(self.__grupo_jogador, self.__grupo_inimigo, self.__tiles, self.__configuracoes)
 
@@ -105,6 +109,9 @@ class Mapa:
         #Mapa
         self.__tiles.update(self.__deslocamento_x, self.__deslocamento_y)
         self.__tiles.draw(self.__surface_janela)
+        #Armaduras
+        self.__armaduras.update(self.__deslocamento)
+        self.__armaduras.draw(self.__surface_janela)
         self.scroll_x()
 
 

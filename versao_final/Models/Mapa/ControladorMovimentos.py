@@ -17,6 +17,7 @@ class ControladorMovimentos:
         self.__grupo_inimigos = grupo_inimigos
         self.__grupo_obstaculos = grupo_obstaculos
         self.__configuracoes = configuracoes
+        # self.__grupo_armaduras = grupo_armaduras
 
     def mover_jogador(self):
         '''checa a colisão com obstáculos e 
@@ -25,6 +26,10 @@ class ControladorMovimentos:
         jogador = self.__grupo_jogador.sprite
         direcao_jogador = jogador.get_dir()
         obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(self.__grupo_jogador)
+        # armadura_colidida = self.__gerenciador_colisao.checar_colisao_armadura(self.__grupo_jogador)
+        # if armadura_colidida:
+        #     jogador.armadura = armadura_colidida
+        #     print("Jogador ganha armadura: ", armadura_colidida)
         if obstaculo_colidido:
             if direcao_jogador.x == -1:
                 jogador.set_rect_left(obstaculo_colidido.get_rect_right()) 
