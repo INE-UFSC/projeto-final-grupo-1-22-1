@@ -1,18 +1,37 @@
 import pygame as pg
 from Models.States.State import State
+from Models.button import Button
+from Models.Configuracoes import Configuracoes
 
 
 class CreditosState(State):
-    def __init__(self, window, transition_to) -> None:
+    def __init__(self, window, transition_to):
         super().__init__(transition_to)
-        self.__surface = window.surface
+        self.__window = window
+        self.__configuracoes = Configuracoes()
+        self.__largura_tela = self.__configuracoes.largura_tela
+        self.__altura_tela = self.__configuracoes.altura_tela
+        self.__surface = self.__window.surface
+        self.__credits_bg_img = pg.transform.scale(
+            pg.image.load("Images/CreditsBG.png"), (self.__largura_tela, self.__altura_tela))
+        
+        back_off_img = pg.image.load("Images/BackOff.png").convert_alpha()
+        back_on_img = pg.image.load("Images/BackOn.png").convert_alpha()
 
-    def draw_text(self, text, font, text_col, x, y):
-        img = font.render(text, True, text_col)
-        self.__surface.blit(img, (x, y))
+        BUTTONS_SCALE = 1
+        SPACE_BEFORE = 20
+        SPACE_LEFT = self.__largura_tela / 50
+        self.__back_button = Button(
+            SPACE_LEFT, SPACE_BEFORE, back_off_img, back_on_img, BUTTONS_SCALE)
+
+    def checar_eventos(self):
+        self.__back_button.read_events()
+
+        if self.__back_button.clicked:
+            self.transicionar("MenuState")
 
     def renderizar(self):
-        self.__surface.fill((52, 78, 91))
+        self.__surface.blit(self.__credits_bg_img, (0, 0))
 
-        self.draw_text("Credits menu", pg.font.SysFont("arialblack", 40),
-                       (255, 255, 255), 160, 250)
+        self.checar_eventos()
+        self.__back_button.draw(self.__surface)

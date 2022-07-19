@@ -5,8 +5,10 @@ from pygame.sprite import Sprite
 class Tile(Sprite):
   def __init__(self, position, size):
     super().__init__()
-    self.__image = Surface((size, size))
-    self.__image.fill('grey')
+    # self.__image = Surface((size, size))
+    # self.__image.fill('grey')
+    self.__image = pg.transform.scale(
+            pg.image.load("Images/Tijolo.png"), (size, size))
     self.__rect = self.__image.get_rect(topleft = position)
 
   @property
