@@ -3,11 +3,12 @@ from pygame.sprite import Sprite, Group, GroupSingle, spritecollide, collide_rec
 import pygame
 from pygame import Rect
 from Models.Mapa.Tile import Tile
+from Models.Mapa.Armadura import Armadura
 from Models.Jogador import Jogador
 from Models.Configuracoes import Configuracoes
 from Models.GerenciadorColisao import GerenciadorColisao
 from Models.Mapa.ControladorMovimentos import ControladorMovimentos
-from Models.Inimigo import Inimigo
+from Models.Mapa.Inimigo import Inimigo
 
 class Mapa:
     def __init__(self, layout_mapa: list, surface, largura_mapa, altura_mapa, tamanho_tile) -> None:
@@ -42,9 +43,9 @@ class Mapa:
                     print(x, y)
                     self.__inimigo = Inimigo(self.__configuracoes.velocidade_inimigo, (x, y))
                     self.__grupo_inimigo.add(self.__inimigo)
-                elif coluna == 'A':
-                    tile = Tile((x,y), self.__configuracoes.tamanho_tile, 'blue')
-                    self.__armaduras.add(tile)
+                # elif coluna == 'A':
+                #     armadura = armadura((x,y), self.__configuracoes.tamanho_armadura, 'blue')
+                #     self.__armaduras.add(armadura)
     
         self.__controlador_movimentos = ControladorMovimentos(self.__grupo_jogador, self.__grupo_inimigo, self.__tiles, self.__configuracoes)
 
@@ -110,8 +111,11 @@ class Mapa:
         self.__tiles.update(self.__deslocamento_x, self.__deslocamento_y)
         self.__tiles.draw(self.__surface_janela)
         #Armaduras
-        self.__armaduras.update(self.__deslocamento)
-        self.__armaduras.draw(self.__surface_janela)
+        # self.__armaduras.update(self.__deslocamento)
+        # self.__armaduras.draw(self.__surface_janela)
+        #Inimigos
+        # self.__grupo_inimigos.update(self.__deslocamento)
+        # self.__grupo_inimigos.draw(self.__surface_janela)
         self.scroll_x()
 
 

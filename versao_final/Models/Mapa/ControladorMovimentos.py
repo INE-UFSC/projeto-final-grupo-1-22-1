@@ -27,8 +27,17 @@ class ControladorMovimentos:
         direcao_jogador = jogador.get_dir()
         obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(self.__grupo_jogador)
         # armadura_colidida = self.__gerenciador_colisao.checar_colisao_armadura(self.__grupo_jogador)
+        # inimigo_colidido = self.__gerenciador_colisao.checar_colisao_inimigo(self.__grupo_jogador)
+        # if inimigo_colidido:
+        #     if jogador.armadura:
+        #         jogador.armadura = None
+        #         inimigo_colidido.kill()
+        #     else:
+        #         jogador.diminuir_vida()
+        #         print(jogador.vida)
         # if armadura_colidida:
         #     jogador.armadura = armadura_colidida
+        #     armadura_colidida.kill()
         #     print("Jogador ganha armadura: ", armadura_colidida)
         if obstaculo_colidido:
             if direcao_jogador.x == -1:
