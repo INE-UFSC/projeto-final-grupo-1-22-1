@@ -8,13 +8,15 @@ from Models.States.MenuState import MenuState
 from Models.States.CreditosState import CreditosState
 from Models.States.OptionsState import OptionsState
 from Models.States.RankingState import RankingState
+from Models.States.GameOverState import GameOverState
 
 STATES = {
     "MenuState": MenuState,
     "JogoState": JogoState,
     "CreditosState": CreditosState,
     "OptionsState": OptionsState,
-    "RankingState": RankingState
+    "RankingState": RankingState,
+    "GameOverState": GameOverState
 }
 class Jogo():
     def __init__(self):
@@ -37,6 +39,7 @@ class Jogo():
             if self.__state in STATES:
                 tela = STATES[self.__state](self.__window, self.transition_to)
                 tela.renderizar()
+                print('oi')
             else:
                 tela.transicionar("MenuState")
                 tela = MenuState(self.__window, self.transition_to)
