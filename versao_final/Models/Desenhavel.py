@@ -10,18 +10,22 @@ class Desenhavel(Sprite, ABC):
     self.__image = load(image_path)
     self.__rect = self.__image.get_rect(center=position)
     self.__mask = pg.mask.from_surface(self.image)
+    self.__position = position
 
   @property
   def image(self):
     return self.__image
 
   @property
+  def position(self):
+    return self.__position
+
+  @property
   def mask(self):
     return self.__mask
 
   @property
-  def rect(self):
-    return self.__rect 
+  def rect(self): return self.__rect 
   
   def set_rect_left(self, valor): self.__rect.left = valor
   

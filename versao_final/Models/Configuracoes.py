@@ -6,19 +6,23 @@ from Models.Singleton import Singleton
 class Configuracoes(Singleton):
     def init(self):
         font.init()
-        self.__mapa = ['                            ',
-                       '                            ',
-                       '                            ',
-                       ' XX    XXX            X     ',
-                       ' XX                         ',
-                       ' XXXX    P    XX         XX ',
-                       ' XXXX       XX              ',
-                       ' XX    X  XXXX    XX  XX    ',
-                       '       X  XXXX    XX  XXX   ',
-                       '    XXXX  XXXXXX  XX  XXXX  ',
-                       'XXXXXXXX  XXXXXX  XX  XXXX  ']
+        self.__mapa = ['XXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+                       'X              I          IX',
+                       'X   P                       ',
+                       'X X    XXX            X    X',
+                       'X X         I              X',
+                       'X XXX         XX         XXX',
+                       'X XXX       XX             X',
+                       'X X    X  XXXX    XX  XX   X',
+                       'X      X  XXXX    XX  XXX  X',
+                       'X   XXXX  XXXXXX  XX  XXXX X',
+                       'XXXXXXXXXXXXXXXXXXXXXXXXXXXX']
+        self.__velocidade_jogador = 3
+        self.__velocidade_inimigo = 1
         self.__tamanho_tile = 64
-        self.__largura_tela = 1200
+        self.__largura_mapa = len(self.__mapa[0]) * self.tamanho_tile
+        self.__altura_mapa = len(self.__mapa) * self.tamanho_tile
+        self.__largura_tela = 640
         self.__altura_tela = len(self.__mapa) * self.__tamanho_tile
         self.__fonte = font.SysFont('comicsans', 50)
 
@@ -41,3 +45,19 @@ class Configuracoes(Singleton):
     @property
     def tamanho_tile(self):
         return self.__tamanho_tile
+
+    @property
+    def largura_mapa(self):
+        return self.__largura_mapa
+
+    @property
+    def altura_mapa(self):
+        return self.__altura_mapa
+
+    @property
+    def velocidade_jogador(self):
+        return self.__velocidade_jogador
+
+    @property
+    def velocidade_inimigo(self):
+        return self.__velocidade_inimigo

@@ -1,3 +1,4 @@
+from pygame import Vector2
 from pygame.sprite import GroupSingle
 from Models.Mapa.Tile import Tile
 from Models.Personagem import Personagem
@@ -14,4 +15,3 @@ class GerenciadorColisao:
         for obstaculo in self.__grupo_obstaculos:
             if obstaculo.rect.colliderect(personagem.sprite.rect):
                 return obstaculo
-    

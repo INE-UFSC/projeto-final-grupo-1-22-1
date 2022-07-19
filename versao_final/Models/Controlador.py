@@ -22,23 +22,6 @@ class Controlador():
     self.__coordenada_inimigo = (0,0)
     self.__jogo_dao = JogoDAO()
 
-      
-  def mover_jogador(self):
-    evento = self.__leitor_eventos.ler_evento()
-    if evento == 'FECHAR':
-      pg.quit()
-      sys.exit()
-    elif evento == 'DIREITA':
-      self.__jogador.mover_direita()
-    elif evento == 'ESQUERDA':
-      self.__jogador.mover_esquerda()
-    elif evento == 'CIMA':
-      self.__jogador.mover_cima()
-    elif evento == 'BAIXO':
-      self.__jogador.mover_baixo()
-    else:
-      self.__jogador.parar()
-
   def mover_inimigo(self):
     self.__inimigo.ir_para(self.__jogador.get_coordenadas())
 

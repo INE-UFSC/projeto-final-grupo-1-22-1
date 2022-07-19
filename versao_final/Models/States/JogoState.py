@@ -13,8 +13,6 @@ class JogoState(State):
         self.__window = window
         self.__window_surface = self.__window.surface
         self.__timer = pg.time.Clock()
-        self.__inimigo = Inimigo()
-        self.__grupo_inimigos = GroupSingle(self.__inimigo)
         self.__mapa = Mapa(self.__configuracoes.mapa, self.__window_surface)
 
     def renderizar(self):
@@ -24,8 +22,6 @@ class JogoState(State):
             self.__window_surface.fill((54, 107, 95))
 
             self.__mapa.run()
-
-            self.__grupo_inimigos.draw(self.__window_surface)
 
             pg.display.update()
             pg.display.flip()
