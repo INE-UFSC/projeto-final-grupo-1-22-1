@@ -12,7 +12,7 @@ class ControladorMovimentos:
     # self.__grupo_inimigos = grupo_inimigos
     def __init__(self, grupo_jogador: GroupSingle, grupo_inimigos: Group, grupo_obstaculos: Group, configuracoes: Configuracoes) -> None: 
         self.__leitor_eventos = LeitorEventos()
-        self.__gerenciador_colisao = GerenciadorColisao(grupo_jogador, grupo_obstaculos)
+        self.__gerenciador_colisao = GerenciadorColisao(grupo_jogador, grupo_inimigos, grupo_obstaculos)
         self.__grupo_jogador = grupo_jogador
         self.__grupo_inimigos = grupo_inimigos
         self.__grupo_obstaculos = grupo_obstaculos
@@ -63,4 +63,11 @@ class ControladorMovimentos:
             if distancia <= 150:
                 inimigo.seguir_jogador(jogador.get_coordenadas(), janela)
             else:
-                inimigo.pegar_tesouro((128,128))    
+                inimigo.pegar_tesouro((128,128))
+
+    def atualizar_vida_jogador(self):
+        jogador = self.__grupo_jogador.sprite
+        if self.__gerenciador_colisao.checar_colisao_inimigo():
+            jogador.renascer(jogador.posicao_inicial)
+            jogador.diminuir_vida()
+
