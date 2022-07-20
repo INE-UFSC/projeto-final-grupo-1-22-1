@@ -20,7 +20,7 @@ class RankingState(State):
 
         BUTTONS_SCALE = 1
         SPACE_BEFORE = 20
-        SPACE_LEFT = self.__largura_tela / 50
+        SPACE_LEFT = self.__largura_tela * 0.75
         self.__back_button = Button(
             SPACE_LEFT, SPACE_BEFORE, back_off_img, back_on_img, BUTTONS_SCALE)
 
