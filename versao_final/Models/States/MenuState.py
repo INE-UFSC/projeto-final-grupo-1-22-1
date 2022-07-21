@@ -29,7 +29,7 @@ class MenuState(State):
             "Images/CreditsOff.png").convert_alpha()
         credits_on_img = pg.image.load("Images/CreditsOn.png").convert_alpha()
 
-        BUTTONS_SCALE = 1.75
+        BUTTONS_SCALE = 1.25
         SPACE_BEFORE = 35
         SPACE_LEFT = self.__largura_tela / 16
         row = (self.__altura_tela - SPACE_BEFORE * 2) / 4
