@@ -12,10 +12,10 @@ from Models.Inimigo import Inimigo
 class Mapa:
     def __init__(self, layout_mapa: list, surface, largura_mapa, altura_mapa, tamanho_tile) -> None:
         self.__surface_janela = surface
-        self.__configuracoes = Configuracoes()
         self.__largura_mapa = largura_mapa
         self.__altura_mapa = altura_mapa
         self.__tamanho_tile = tamanho_tile
+        self.__configuracoes = Configuracoes()
         self.preparar_mapa(layout_mapa)
         self.__deslocamento_x = 0
         self.__deslocado_x = 0
@@ -30,14 +30,14 @@ class Mapa:
             for indice_coluna, coluna in enumerate(linha):
                 x = indice_coluna * self.__tamanho_tile
                 y = indice_linha * self.__tamanho_tile
-                if coluna == 'X':
+                if coluna == 'parede' or coluna == 'obstaculo':
                     tile = Tile((x,y), self.__tamanho_tile)
                     self.__tiles.add(tile)
-                elif coluna == 'P':
+                elif coluna == 'jogador':
                     self.__jogador = Jogador(self.__configuracoes.velocidade_jogador, (x,y))
                     self.__grupo_jogador.add(self.__jogador)
                     # self.__tiles.add(self.__jogador)
-                elif coluna == 'I':
+                elif coluna == 'inimigo':
                     print(x, y)
                     self.__inimigo = Inimigo(self.__configuracoes.velocidade_inimigo, (x, y))
                     self.__grupo_inimigo.add(self.__inimigo)

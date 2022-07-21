@@ -1,0 +1,10 @@
+parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede
+parede,,,,,,,,,,,,,,,,,,,,,,,,,parede
+parede,,jogador,,,,,,,,,,,obstaculo,,,,,,,obstaculo,,,,,parede
+parede,,,,,,,,,,,,,,,,inimigo,,obstaculo,,,,,,,parede
+parede,,,,obstaculo,,,,,obstaculo,,,,,,,,,,,,,,,,parede
+parede,,,obstaculo,obstaculo,,,,,,,,,,,,,,,,,,,obstaculo,,parede
+parede,,,,,,,,,,,obstaculo,,,,obstaculo,,,,,,,,,,parede
+parede,,,,,,,,,,,,,,,,,,,,inimigo,,,,,parede
+parede,,,,,,,,,,,,,,,,,,,,,,,,,parede
+parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede
