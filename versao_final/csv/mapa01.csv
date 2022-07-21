@@ -1,10 +1,10 @@
 parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede
-parede,,,,,,,,,,,,,,,,,,,,,,,,,parede
+parede,,,,,,,,,,,,armadura,,,,,,,,,,,,,parede
 parede,,jogador,,,,,,,,,,,obstaculo,,,,,,,obstaculo,,,,,parede
-parede,,,,,,,,,,,,,,,,inimigo,,obstaculo,,,,,,,parede
+parede,,,,,,,,,,,,,,,,inimigo,,obstaculo,,,,armadura,,,parede
 parede,,,,obstaculo,,,,,obstaculo,,,,,,,,,,,,,,,,parede
 parede,,,obstaculo,obstaculo,,,,,,,,,,,,,,,,,,,obstaculo,,parede
 parede,,,,,,,,,,,obstaculo,,,,obstaculo,,,,,,,,,,parede
-parede,,,,,,,,,,,,,,,,,,,,inimigo,,,,,parede
+parede,,armadura,,,,,,,,,,,,,,,,,,inimigo,,,,,parede
 parede,,,,,,,,,,,,,,,,,,,,,,,,,parede
 parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede

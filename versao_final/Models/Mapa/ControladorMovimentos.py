@@ -8,15 +8,14 @@ from Models.Configuracoes import Configuracoes
 
 
 class ControladorMovimentos:
-    #TODO: INSERIR grupo_inimigos: Group
-    # self.__grupo_inimigos = grupo_inimigos
-    def __init__(self, grupo_jogador: GroupSingle, grupo_inimigos: Group, grupo_obstaculos: Group, configuracoes: Configuracoes) -> None: 
+    def __init__(self, grupo_jogador: GroupSingle, grupo_inimigos: Group, grupo_obstaculos: Group, grupo_armaduras: Group) -> None: 
         self.__leitor_eventos = LeitorEventos()
-        self.__gerenciador_colisao = GerenciadorColisao(grupo_jogador, grupo_inimigos, grupo_obstaculos)
+        self.__gerenciador_colisao = GerenciadorColisao(grupo_jogador, grupo_inimigos, grupo_obstaculos, grupo_armaduras)
         self.__grupo_jogador = grupo_jogador
         self.__grupo_inimigos = grupo_inimigos
         self.__grupo_obstaculos = grupo_obstaculos
-        self.__configuracoes = configuracoes
+        self.__configuracoes = Configuracoes()
+        self.__grupo_armaduras = grupo_armaduras
 
     def mover_jogador(self):
         '''checa a colisão com obstáculos e 
@@ -24,6 +23,13 @@ class ControladorMovimentos:
         evento = self.__leitor_eventos.ler_evento()
         jogador = self.__grupo_jogador.sprite
         direcao_jogador = jogador.get_dir()
+        self.__gerenciador_colisao.checar_colisao_inimigo()
+        armadura_colidida = self.__gerenciador_colisao.checar_colisao_armadura()
+        if armadura_colidida:
+            jogador.armadura = True
+            jogador.atualizar_imagem()
+            armadura_colidida.kill()
+            print("Jogador ganha armadura: ", armadura_colidida)
         obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(self.__grupo_jogador)
         if obstaculo_colidido:
             if direcao_jogador.x == -1:
@@ -64,10 +70,4 @@ class ControladorMovimentos:
                 inimigo.seguir_jogador(jogador.get_coordenadas(), janela)
             else:
                 inimigo.pegar_tesouro((128,128))
-
-    def atualizar_vida_jogador(self):
-        jogador = self.__grupo_jogador.sprite
-        if self.__gerenciador_colisao.checar_colisao_inimigo():
-            jogador.renascer(jogador.posicao_inicial)
-            jogador.diminuir_vida()
 

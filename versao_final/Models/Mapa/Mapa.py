@@ -3,11 +3,12 @@ from pygame.sprite import Sprite, Group, GroupSingle, spritecollide, collide_rec
 import pygame
 from pygame import Rect
 from Models.Mapa.Tile import Tile
+from Models.Mapa.Armadura import Armadura
 from Models.Jogador import Jogador
 from Models.Configuracoes import Configuracoes
 from Models.GerenciadorColisao import GerenciadorColisao
 from Models.Mapa.ControladorMovimentos import ControladorMovimentos
-from Models.Inimigo import Inimigo
+from Models.Mapa.Inimigo import Inimigo
 
 class Mapa:
     def __init__(self, layout_mapa: list, surface, largura_mapa, altura_mapa, tamanho_tile) -> None:
@@ -24,6 +25,7 @@ class Mapa:
     
     def preparar_mapa(self, layout_mapa: list) -> None:
         self.__tiles = Group()
+        self.__grupo_armaduras = Group()
         self.__grupo_jogador = GroupSingle()
         self.__grupo_inimigo = Group()
         for indice_linha,linha in enumerate(layout_mapa):
@@ -41,8 +43,12 @@ class Mapa:
                     print(x, y)
                     self.__inimigo = Inimigo(self.__configuracoes.velocidade_inimigo, (x, y))
                     self.__grupo_inimigo.add(self.__inimigo)
+                elif coluna == 'armadura':
+                    armadura = Armadura((x,y))
+                    self.__grupo_armaduras.add(armadura)
+                    # TODO: Ativar e desativar armaduras de tempos em tempos
     
-        self.__controlador_movimentos = ControladorMovimentos(self.__grupo_jogador, self.__grupo_inimigo, self.__tiles, self.__configuracoes)
+        self.__controlador_movimentos = ControladorMovimentos(self.__grupo_jogador, self.__grupo_inimigo, self.__tiles, self.__grupo_armaduras)
 
     @property
     def tiles(self) -> list:
@@ -105,12 +111,14 @@ class Mapa:
         #Mapa
         self.__tiles.update(self.__deslocamento_x, self.__deslocamento_y)
         self.__tiles.draw(self.__surface_janela)
+        #Armadura
+        self.__grupo_armaduras.update(self.__deslocamento_x, self.__deslocamento_y)
+        self.__grupo_armaduras.draw(self.__surface_janela)
         self.scroll_x()
-
+        
 
         #Jogador
         self.__controlador_movimentos.mover_jogador()
-        self.__controlador_movimentos.atualizar_vida_jogador()
         self.__grupo_jogador.draw(self.__surface_janela)
         self.__grupo_jogador.update(self.__deslocamento_x, self.__deslocamento_y)
         # self.horizontal_mov_col()
@@ -119,9 +127,3 @@ class Mapa:
         #self.__controlador_movimentos.mover_inimigo(self.__surface_janela)
         self.__grupo_inimigo.draw(self.__surface_janela)
         self.__grupo_inimigo.update(self.__deslocamento_x, self.__deslocamento_y)
-
-        # for inimigo in self.__grupo_inimigo.sprites():
-        #     inimigo.draw(self.__surface_janela)
-        #  self.__surface_janela.blit(inimigo.get_imagem(), (inimigo.get_coordenadas()[0] - int(inimigo.get_imagem().get_width()) / 2, inimigo.get_coordenadas()[1] - int(inimigo.get_imagem().get_height()) / 2))
-        #self.__window_surface.blit(inimigo.get_imagem(), (inimigo.get_coordenadas()[0] - int(inimigo.get_imagem().get_width()) / 2, inimigo.get_coordenadas()[1] - int(inimigo.get_imagem().get_height()) / 2))
-
