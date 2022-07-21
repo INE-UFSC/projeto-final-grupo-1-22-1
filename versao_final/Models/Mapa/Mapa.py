@@ -25,7 +25,7 @@ class Mapa:
     
     def preparar_mapa(self, layout_mapa: list) -> None:
         self.__tiles = Group()
-        self.__armaduras = Group()
+        self.__grupo_armaduras = Group()
         self.__grupo_jogador = GroupSingle()
         self.__grupo_inimigo = Group()
         for indice_linha,linha in enumerate(layout_mapa):
@@ -43,11 +43,12 @@ class Mapa:
                     print(x, y)
                     self.__inimigo = Inimigo(self.__configuracoes.velocidade_inimigo, (x, y))
                     self.__grupo_inimigo.add(self.__inimigo)
-                # elif coluna == 'A':
-                #     armadura = armadura((x,y), self.__configuracoes.tamanho_armadura, 'blue')
-                #     self.__armaduras.add(armadura)
+                elif coluna == 'armadura':
+                    armadura = Armadura((x,y))
+                    self.__grupo_armaduras.add(armadura)
+                    # TODO: Ativar e desativar armaduras de tempos em tempos
     
-        self.__controlador_movimentos = ControladorMovimentos(self.__grupo_jogador, self.__grupo_inimigo, self.__tiles, self.__configuracoes)
+        self.__controlador_movimentos = ControladorMovimentos(self.__grupo_jogador, self.__grupo_inimigo, self.__tiles, self.__grupo_armaduras)
 
     @property
     def tiles(self) -> list:
@@ -110,20 +111,15 @@ class Mapa:
         #Mapa
         self.__tiles.update(self.__deslocamento_x, self.__deslocamento_y)
         self.__tiles.draw(self.__surface_janela)
-        #Armaduras
-        # self.__armaduras.update(self.__deslocamento)
-        # self.__armaduras.draw(self.__surface_janela)
-        #Inimigos
-        # self.__grupo_inimigos.update(self.__deslocamento)
-        # self.__grupo_inimigos.draw(self.__surface_janela)
         self.scroll_x()
 
 
         #Jogador
         self.__controlador_movimentos.mover_jogador()
-        self.__controlador_movimentos.atualizar_vida_jogador()
         self.__grupo_jogador.draw(self.__surface_janela)
         self.__grupo_jogador.update(self.__deslocamento_x, self.__deslocamento_y)
+        # TODO: Corrigir direcao da imagem do jogador ao atualizar imagem
+        self.__grupo_jogador.sprite.atualizar_imagem()
         # self.horizontal_mov_col()
         
         #Inimigo

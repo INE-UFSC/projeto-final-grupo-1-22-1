@@ -1,12 +1,10 @@
-import pygame as pg
-from pygame import Surface
+from pygame.image import load
 from pygame.sprite import Sprite
 
 class Armadura(Sprite):
-  def __init__(self, position, size):
+  def __init__(self, position):
     super().__init__()
-    self.__image = Surface((size, size))
-    self.__image.fill('black')
+    self.__image = load("Images/ArmaduraOff.png")
     self.__rect = self.__image.get_rect(topleft = position)
 
   @property
@@ -29,5 +27,7 @@ class Armadura(Sprite):
   def get_rect_bottom(self):
     return self.rect.bottom
 
-  def update(self, deslocamento_x):
+  def update(self, deslocamento_x, deslocamento_y):
     self.__rect.x += deslocamento_x
+    self.__rect.y += deslocamento_y
+

@@ -1,5 +1,6 @@
 from Models.Personagem import Personagem
 import pygame as pg
+from pygame.image import load
 
 class Jogador(Personagem):
   def __init__(self, velocidade : int, position: tuple = (0,0) ) -> None:
@@ -30,8 +31,11 @@ class Jogador(Personagem):
     self.__coordenada_tile = (self.__coordenada_tile[0] + deslocamento_x, self.__coordenada_tile[1] + deslocamento_y)
 
   @armadura.setter
-  def armadura(self, nova_armadura):
-    self.__armadura = nova_armadura
+  def armadura(self, novo_estado):
+    self.__armadura = novo_estado
+    
+  def atualizar_imagem(self):
+    self.image = load(f'Images/{"ArmaduraOn" if self.__armadura else "Sombra"}.png')
 
   def diminuir_vida(self):
     if self.__vida > 0:
