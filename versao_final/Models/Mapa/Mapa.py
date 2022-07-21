@@ -111,24 +111,19 @@ class Mapa:
         #Mapa
         self.__tiles.update(self.__deslocamento_x, self.__deslocamento_y)
         self.__tiles.draw(self.__surface_janela)
+        #Armadura
+        self.__grupo_armaduras.update(self.__deslocamento_x, self.__deslocamento_y)
+        self.__grupo_armaduras.draw(self.__surface_janela)
         self.scroll_x()
-
+        
 
         #Jogador
         self.__controlador_movimentos.mover_jogador()
         self.__grupo_jogador.draw(self.__surface_janela)
         self.__grupo_jogador.update(self.__deslocamento_x, self.__deslocamento_y)
-        # TODO: Corrigir direcao da imagem do jogador ao atualizar imagem
-        self.__grupo_jogador.sprite.atualizar_imagem()
         # self.horizontal_mov_col()
         
         #Inimigo
         #self.__controlador_movimentos.mover_inimigo(self.__surface_janela)
         self.__grupo_inimigo.draw(self.__surface_janela)
         self.__grupo_inimigo.update(self.__deslocamento_x, self.__deslocamento_y)
-
-        # for inimigo in self.__grupo_inimigo.sprites():
-        #     inimigo.draw(self.__surface_janela)
-        #  self.__surface_janela.blit(inimigo.get_imagem(), (inimigo.get_coordenadas()[0] - int(inimigo.get_imagem().get_width()) / 2, inimigo.get_coordenadas()[1] - int(inimigo.get_imagem().get_height()) / 2))
-        #self.__window_surface.blit(inimigo.get_imagem(), (inimigo.get_coordenadas()[0] - int(inimigo.get_imagem().get_width()) / 2, inimigo.get_coordenadas()[1] - int(inimigo.get_imagem().get_height()) / 2))
-

@@ -23,6 +23,7 @@ class GerenciadorColisao:
         if inimigos_colididos:
             if jogador.armadura:
                 jogador.armadura = None
+                jogador.atualizar_imagem()
                 inimigos_colididos[0].kill()
             else:
                 jogador.renascer(jogador.posicao_inicial)

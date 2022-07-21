@@ -39,7 +39,7 @@ class Personagem(Desenhavel, ABC):
                     'esquerda': 180}
         return sentidos[sentido_final] - sentidos[self.__sentido_imagem]
     
-    def __girar_imagem(self, sentido_final: str) -> None:
+    def girar_imagem(self, sentido_final: str) -> None:
         if self.__sentido_imagem != sentido_final:
             self.image = pg.transform.rotate(self.image, self.__get_angulo_rotacao(sentido_final))
         self.__sentido_imagem = sentido_final
@@ -57,22 +57,22 @@ class Personagem(Desenhavel, ABC):
     def mover_direita(self) -> None:
         self.__direcao.x = 1
         self.__mover_x()
-        self.__girar_imagem('direita')
+        self.girar_imagem('direita')
 
     def mover_esquerda(self) -> None:
         self.__direcao.x = -1
         self.__mover_x()
-        self.__girar_imagem('esquerda')
+        self.girar_imagem('esquerda')
 
     def mover_cima(self) -> None:
         self.__direcao.y = -1
         self.__mover_y()
-        self.__girar_imagem('cima')
+        self.girar_imagem('cima')
 
     def mover_baixo(self) -> None:
         self.__direcao.y = 1
         self.__mover_y()
-        self.__girar_imagem('baixo')
+        self.girar_imagem('baixo')
 
     def parar(self) -> None:
         self.__direcao.x = 0

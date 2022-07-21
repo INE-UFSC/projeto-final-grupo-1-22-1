@@ -27,6 +27,7 @@ class ControladorMovimentos:
         armadura_colidida = self.__gerenciador_colisao.checar_colisao_armadura()
         if armadura_colidida:
             jogador.armadura = True
+            jogador.atualizar_imagem()
             armadura_colidida.kill()
             print("Jogador ganha armadura: ", armadura_colidida)
         obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(self.__grupo_jogador)
