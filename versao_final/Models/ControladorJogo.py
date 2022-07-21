@@ -9,7 +9,7 @@ class ControladorJogo:
   def __init__(self, window_surface: Surface) -> None:
     self.__configuracoes = Configuracoes()
     self.__gerenciador_mapas = GerenciadorMapas(window_surface, self.__configuracoes)
-    self.__mapa = self.__gerenciador_mapas.get_mapa(0)
+    self.__mapa = self.__gerenciador_mapas.gerar_mapa(0)
     self.__placar = Placar(window_surface, self.__configuracoes.fonte) 
 
   def iniciar(self):
