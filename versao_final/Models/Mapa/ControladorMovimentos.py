@@ -4,18 +4,21 @@ from sys import exit
 from pygame.sprite import Group, GroupSingle
 from Models.LeitorEventos import LeitorEventos
 from Models.Mapa.GerenciadorColisao import GerenciadorColisao
-from Models.Configuracoes import Configuracoes
 
 
 class ControladorMovimentos:
-    def __init__(self, grupo_jogador: GroupSingle, grupo_inimigos: Group, grupo_obstaculos: Group, grupo_armaduras: Group) -> None: 
+    def __init__(self, mapa, adicionar_baus_no_placar, incrementar_mortes_inimigo_no_placar) -> None: 
+        self.__mapa = mapa
+        self.__adicionar_baus_no_placar = adicionar_baus_no_placar
+        self.__incrementar_mortes_inimigo_no_placar = incrementar_mortes_inimigo_no_placar
         self.__leitor_eventos = LeitorEventos()
-        self.__gerenciador_colisao = GerenciadorColisao(grupo_jogador, grupo_inimigos, grupo_obstaculos, grupo_armaduras)
-        self.__grupo_jogador = grupo_jogador
-        self.__grupo_inimigos = grupo_inimigos
-        self.__grupo_obstaculos = grupo_obstaculos
-        self.__configuracoes = Configuracoes()
-        self.__grupo_armaduras = grupo_armaduras
+        self.__gerenciador_colisao = GerenciadorColisao(mapa.grupo_jogador, mapa.grupo_inimigo, mapa.tiles, mapa.grupo_armaduras, mapa.grupo_baus, mapa.grupo_portais)
+        self.__grupo_jogador = mapa.grupo_jogador
+        self.__grupo_inimigos = mapa.grupo_inimigo
+        # self.__grupo_obstaculos = grupo_obstaculos
+        # self.__configuracoes = Configuracoes()
+        # self.__grupo_armaduras = grupo_armaduras
+        # self.__grupo_armaduras = grupo_armaduras
 
     def mover_jogador(self):
         '''checa a colisão com obstáculos e 
@@ -23,13 +26,22 @@ class ControladorMovimentos:
         evento = self.__leitor_eventos.ler_evento()
         jogador = self.__grupo_jogador.sprite
         direcao_jogador = jogador.get_dir()
-        self.__gerenciador_colisao.checar_colisao_inimigo()
+        self.__gerenciador_colisao.checar_colisao_inimigo(self.__incrementar_mortes_inimigo_no_placar)
+        portal_colidido = self.__gerenciador_colisao.checar_colisao_portal()
+        if portal_colidido and jogador.baus > 0:
+            self.__adicionar_baus_no_placar(jogador.baus)
+            jogador.baus = 0
+            # TODO: Atualizar a imagem
+        bau_colidido = self.__gerenciador_colisao.checar_colisao_bau()
+        if bau_colidido:
+            jogador.baus += 1
+            # TODO: Atualizar a imagem
+            bau_colidido.kill()
         armadura_colidida = self.__gerenciador_colisao.checar_colisao_armadura()
         if armadura_colidida:
             jogador.armadura = True
             jogador.atualizar_imagem()
             armadura_colidida.kill()
-            print("Jogador ganha armadura: ", armadura_colidida)
         obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(self.__grupo_jogador)
         if obstaculo_colidido:
             if direcao_jogador.x == -1:
@@ -59,7 +71,6 @@ class ControladorMovimentos:
         jogador = self.__grupo_jogador.sprite
         x_jogador = jogador.get_centerx()
         y_jogador = jogador.get_centery()
-        #print(jogador.coordenada_tile)
 
         for inimigo in self.__grupo_inimigos.sprites():
             print(inimigo.get_coordenadas())

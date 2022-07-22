@@ -39,7 +39,6 @@ class Jogo():
             if self.__state in STATES:
                 tela = STATES[self.__state](self.__window, self.transition_to)
                 tela.renderizar()
-                print('oi')
             else:
                 tela.transicionar("MenuState")
                 tela = MenuState(self.__window, self.transition_to)

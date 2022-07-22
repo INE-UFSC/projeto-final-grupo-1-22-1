@@ -3,7 +3,9 @@ from pygame.sprite import Sprite, Group, GroupSingle, spritecollide, collide_rec
 import pygame
 from pygame import Rect
 from Models.Mapa.Tile import Tile
+from Models.Mapa.Portal import Portal
 from Models.Mapa.Armadura import Armadura
+from Models.Mapa.Bau import Bau
 from Models.Jogador import Jogador
 from Models.Configuracoes import Configuracoes
 from Models.GerenciadorColisao import GerenciadorColisao
@@ -26,6 +28,8 @@ class Mapa:
     def preparar_mapa(self, layout_mapa: list) -> None:
         self.__tiles = Group()
         self.__grupo_armaduras = Group()
+        self.__grupo_baus = Group()
+        self.__grupo_portais = Group()
         self.__grupo_jogador = GroupSingle()
         self.__grupo_inimigo = Group()
         for indice_linha,linha in enumerate(layout_mapa):
@@ -47,8 +51,12 @@ class Mapa:
                     armadura = Armadura((x,y))
                     self.__grupo_armaduras.add(armadura)
                     # TODO: Ativar e desativar armaduras de tempos em tempos
-    
-        self.__controlador_movimentos = ControladorMovimentos(self.__grupo_jogador, self.__grupo_inimigo, self.__tiles, self.__grupo_armaduras)
+                elif coluna == 'bau':
+                    bau = Bau((x,y))
+                    self.__grupo_baus.add(bau)
+                elif coluna == 'portal':
+                    portal = Portal((x,y), self.__tamanho_tile)
+                    self.__grupo_portais.add(portal)
 
     @property
     def tiles(self) -> list:
@@ -57,6 +65,26 @@ class Mapa:
     @property
     def grupo_jogador(self) -> GroupSingle:
         return self.__grupo_jogador
+    
+    @property
+    def grupo_armaduras(self) -> Group:
+        return self.__grupo_armaduras    
+    
+    @property
+    def grupo_baus(self) -> Group:
+        return self.__grupo_baus
+
+    @property
+    def grupo_portais(self) -> Group:
+        return self.__grupo_portais
+
+    @property
+    def grupo_inimigo(self) -> Group:
+        return self.__grupo_inimigo
+
+    @property
+    def tiles(self) -> Group:
+        return self.__tiles
 
     @property
     def jogador(self) -> Jogador:
@@ -107,23 +135,29 @@ class Mapa:
     #     print('deslocado-y', self.__deslocado_y)
 
 
-    def run(self) -> None:
+    def run(self, controlador_movimentos) -> None:
         #Mapa
         self.__tiles.update(self.__deslocamento_x, self.__deslocamento_y)
         self.__tiles.draw(self.__surface_janela)
         #Armadura
         self.__grupo_armaduras.update(self.__deslocamento_x, self.__deslocamento_y)
         self.__grupo_armaduras.draw(self.__surface_janela)
+        #Bau
+        self.__grupo_baus.update(self.__deslocamento_x, self.__deslocamento_y)
+        self.__grupo_baus.draw(self.__surface_janela)
+        #Portal
+        self.__grupo_portais.update(self.__deslocamento_x, self.__deslocamento_y)
+        self.__grupo_portais.draw(self.__surface_janela)
         self.scroll_x()
         
 
         #Jogador
-        self.__controlador_movimentos.mover_jogador()
+        controlador_movimentos.mover_jogador()
         self.__grupo_jogador.draw(self.__surface_janela)
         self.__grupo_jogador.update(self.__deslocamento_x, self.__deslocamento_y)
         # self.horizontal_mov_col()
         
         #Inimigo
-        #self.__controlador_movimentos.mover_inimigo(self.__surface_janela)
+        #controlador_movimentos.mover_inimigo(self.__surface_janela)
         self.__grupo_inimigo.draw(self.__surface_janela)
         self.__grupo_inimigo.update(self.__deslocamento_x, self.__deslocamento_y)
