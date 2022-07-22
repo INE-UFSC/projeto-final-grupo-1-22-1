@@ -16,7 +16,7 @@ class Controlador():
   def __init__(self, jogador, grupo_obstaculos, inimigo: Inimigo, grupo_inimigos):
     self.__jogador = jogador
     self.__inimigo = inimigo
-    self.__gerenciador_colisao = GerenciadorColisao(mapa.tiles, mapa.grupo_jogador, grupo_inimigos)
+    self.__gerenciador_colisao = GerenciadorColisao(Mapa.tiles, Mapa.grupo_jogador, grupo_inimigos)
     self.__leitor_eventos = LeitorEventos()
     self.__vida = Vida()
     self.__coordenada_inimigo = (0,0)
@@ -32,7 +32,7 @@ class Controlador():
       self.__jogador.diminuir_vida()
     
     if (self.__jogador.vida == 0):
-      self.__jogo_dao.add(Pontuacao(self.__jogador.vida, 10))
+      self.__jogo_dao.add(Pontuacao(self.__jogador.vida))
       pg.quit()
       sys.exit()
 
