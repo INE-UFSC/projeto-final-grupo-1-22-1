@@ -3,12 +3,13 @@ from Models.Placar import Placar
 from Models.Mapa.GerenciadorMapas import GerenciadorMapas
 from pygame import Surface
 from Models.Configuracoes import Configuracoes
+import os
 
 class ControladorJogo:
   #TODO: inserir um controlador de mapa (cria um mapa a partir de um csv)
   def __init__(self, window_surface: Surface) -> None:
     self.__configuracoes = Configuracoes()
-    self.__gerenciador_mapas = GerenciadorMapas(window_surface, self.__configuracoes)
+    self.__gerenciador_mapas = GerenciadorMapas(window_surface, self.__configuracoes, 'csv')
     self.__mapa = self.__gerenciador_mapas.gerar_mapa(0)
     self.__placar = Placar(window_surface, self.__configuracoes.fonte) 
 
