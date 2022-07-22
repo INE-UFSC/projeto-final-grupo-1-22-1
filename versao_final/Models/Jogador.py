@@ -9,6 +9,7 @@ class Jogador(Personagem):
     self.__vida = 3
     self.__coordenada_tile = self.rect.center
     self.__armadura = None
+    self.__baus = 0
 
   @property
   def coordenada_tile(self):
@@ -27,6 +28,10 @@ class Jogador(Personagem):
   def armadura(self):
     return self.__armadura
   
+  @property
+  def baus(self):
+    return self.__baus
+  
   def update(self, deslocamento_x, deslocamento_y):
     self.__coordenada_tile = (self.__coordenada_tile[0] + deslocamento_x, self.__coordenada_tile[1] + deslocamento_y)
 
@@ -34,6 +39,10 @@ class Jogador(Personagem):
   def armadura(self, novo_estado):
     self.__armadura = novo_estado
     
+  @baus.setter
+  def baus(self, novo_estado):
+    self.__baus = novo_estado
+
   def atualizar_imagem(self):
     super().girar_imagem('cima')
     self.image = load(f'Images/{"ArmaduraOn" if self.__armadura else "Sombra"}.png')
