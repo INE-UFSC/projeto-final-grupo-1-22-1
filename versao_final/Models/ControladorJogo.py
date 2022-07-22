@@ -1,8 +1,9 @@
-from Models.Mapa.Mapa import Mapa
 from Models.Placar import Placar
 from Models.Mapa.GerenciadorMapas import GerenciadorMapas
 from pygame import Surface
 from Models.Configuracoes import Configuracoes
+
+
 
 class ControladorJogo:
   #TODO: inserir um controlador de mapa (cria um mapa a partir de um csv)
@@ -21,5 +22,10 @@ class ControladorJogo:
     if jogador.vida == 0:
       return True
 
-
-  
+  # def paused_screen(self, status):
+  #   print("chagando no controlador")
+    
+  #   if status == False:
+  #     return True
+  #   else:
+  #     return False  

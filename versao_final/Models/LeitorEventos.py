@@ -2,6 +2,7 @@ import pygame as pg
 from pygame import event
 from pygame.locals import QUIT, KEYUP, K_SPACE, K_ESCAPE, MOUSEBUTTONDOWN
 
+
 class LeitorEventos():
   def __init__(self):
     pass
@@ -21,6 +22,11 @@ class LeitorEventos():
         print('clique')
         return ('CLIQUE')
 
+      if evento.type == pg.KEYUP:
+        if evento.key == pg.K_p:
+          #print(ControladorJogo.paused_screen())
+          print("i'm paused")
+
     keys = pg.key.get_pressed()
     if keys[pg.K_LEFT]:
       return('ESQUERDA')
@@ -30,6 +36,9 @@ class LeitorEventos():
       return('CIMA')
     elif keys[pg.K_DOWN]:
       return('BAIXO')
+    # elif keys[pg.K_p]:
+    #   #print("pauseee")
+
 
   def posicao_mouse(self):
     return pg.mouse.get_pos()

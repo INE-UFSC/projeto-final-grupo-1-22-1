@@ -1,7 +1,6 @@
 from Models.Jogador import Jogador
 from Models.Inimigo import Inimigo
 from Models.GerenciadorColisao import GerenciadorColisao
-from Models.Mapa.Mapa import Mapa
 from Models.Persistencia.JogoDAO import JogoDAO
 from Models.LeitorEventos import LeitorEventos
 from Models.Persistencia.Pontuacao import Pontuacao

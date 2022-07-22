@@ -10,7 +10,7 @@ class GerenciadorMapas:
                           'X              I          IX',
                           'X   P                       ',
                           'X X    XXX            X    X',
-                          'X X         I              X',
+                          'X X I       I              X',
                           'X XXX         XX         XXX',
                           'X XXX       XX             X',
                           'X X    X  XXXX    XX  XX   X',

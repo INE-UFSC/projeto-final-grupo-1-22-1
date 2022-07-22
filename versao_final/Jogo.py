@@ -1,3 +1,4 @@
+#from signal import pause
 import pygame as pg
 from pygame.locals import *
 
@@ -9,6 +10,7 @@ from Models.States.CreditosState import CreditosState
 from Models.States.OptionsState import OptionsState
 from Models.States.RankingState import RankingState
 from Models.States.GameOverState import GameOverState
+from Models.Paused import Paused
 
 STATES = {
     "MenuState": MenuState,
@@ -16,13 +18,14 @@ STATES = {
     "CreditosState": CreditosState,
     "OptionsState": OptionsState,
     "RankingState": RankingState,
-    "GameOverState": GameOverState
+    "GameOverState": GameOverState,
 }
 class Jogo():
     def __init__(self):
         self.__configuracoes = Configuracoes()
         self.__window = Window((self.__configuracoes.largura_tela,
                                self.__configuracoes.altura_tela), "Cooper Temple - Alfa")
+        self.__game_paused = True
         pg.init()
         self.__state = "MenuState"
 
@@ -39,7 +42,7 @@ class Jogo():
             if self.__state in STATES:
                 tela = STATES[self.__state](self.__window, self.transition_to)
                 tela.renderizar()
-                print('oi')
+                #print('oi')
             else:
                 tela.transicionar("MenuState")
                 tela = MenuState(self.__window, self.transition_to)
