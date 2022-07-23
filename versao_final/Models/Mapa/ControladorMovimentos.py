@@ -49,7 +49,25 @@ class ControladorMovimentos:
             else:
                 jogador.parar()
 
-    def mover_inimigo(self, janela):
+    def mover_inimigo(self):
+        inimigos = self.__grupo_inimigos.sprites
+    
+        for inimigo in inimigos:
+            obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(inimigo)
+            if obstaculo_colidido:
+                if inimigo.sentido == 'baixo':
+                    inimigo.mover_inim(-1)
+                    inimigo.sentido = 'cima'
+                else:
+                    inimigo.mover_inim(1)
+                    inimigo.sentido = 'baixo'
+            else:
+                if inimigo.sentido == 'baixo':
+                    inimigo.mover_inim(1)
+                else:
+                    inimigo.mover_inim(-1)
+
+        """
         jogador = self.__grupo_jogador.sprite
         x_jogador = jogador.get_centerx()
         y_jogador = jogador.get_centery()
@@ -64,6 +82,7 @@ class ControladorMovimentos:
                 inimigo.seguir_jogador(jogador.get_coordenadas(), janela)
             else:
                 inimigo.pegar_tesouro((128,128))
+        """
 
     def atualizar_vida_jogador(self):
         jogador = self.__grupo_jogador.sprite

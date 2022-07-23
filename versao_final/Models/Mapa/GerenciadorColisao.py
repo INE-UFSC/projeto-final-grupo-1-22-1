@@ -10,7 +10,7 @@ class GerenciadorColisao:
         self.__grupo_inimigos = grupo_inimigos
         self.__grupo_obstaculos = grupo_obstaculos
 
-    def checar_colisao_obstaculo(self, personagem: GroupSingle) -> Tile:
+    def checar_colisao_obstaculo(self, personagem) -> Tile:
         # jogador = self.__grupo_jogador.sprite()
         for obstaculo in self.__grupo_obstaculos:
             if obstaculo.rect.colliderect(personagem.sprite.rect):

@@ -11,16 +11,25 @@ class Inimigo(Personagem):
     self.__rotacao = 0
     self.__angulo = 0
     self.__precisa_rotar = 0
+    self.__sentido = 'baixo'
     self.__lanterna = Lanterna(self.get_coordenadas(), 50)
     self.imagem = pg.transform.rotate(self.image, self.__rotacao%360) 
     
+  @property
+  def sentido(self):
+    return self.__sentido
+
+  @sentido.setter
+  def sentido(self, sentido):
+    self.__sentido = sentido
+
   def draw(self, window):
     window.blit(self.imagem, self.get_coordenadas())
     #TODO: Arrumar posicao lanterna 
     #window.blit(self.__lanterna.image, self.get_coordenadas())
 
   def update(self, deslocamento_x, deslocamento_y):
-    self.rect.x += deslocamento_x
+    #self.rect.x += deslocamento_x
     self.rect.y += deslocamento_y
 
   def __girar_imagem(self, c_p, c_i, janela) -> None:
@@ -91,7 +100,11 @@ class Inimigo(Personagem):
         self.imagem = pg.transform.rotate(self.image, self.__rotacao)
         #TODO : Substituir método por self.draw()
         janela.blit(self.imagem, (self.get_coordenadas()[0] - int(self.imagem.get_width()) / 2, self.get_coordenadas()[1] - int(self.imagem.get_height()) / 2))  
-  
+
+  def mover_inim(self, sentido):
+    self.rect.y += sentido
+
+  """
   def mover_inim(self, c_p, c_i, x, y, janela) -> None:
         if 0 <= self.__precisa_rotar - (self.__rotacao % 360) <= 3 :                                                                              
             self.rect.x += x
@@ -103,7 +116,7 @@ class Inimigo(Personagem):
     y_atual = self.rect.y
     x_player = coordenada[0]                                                                                       
     y_player = coordenada[1]
-
+  
     if y_player < y_atual:
       #Segundo Quadrante
       if x_player < x_atual:                                      #-1, -1
@@ -126,6 +139,6 @@ class Inimigo(Personagem):
         self.mover_inim((x_player, y_player), (x_atual, y_atual), self.velocidade, 0, janela)
       else:                                                       #1, 0
         self.mover_inim((x_player, y_player), (x_atual, y_atual), -self.velocidade, 0, janela)
-  
+    """
   def pegar_tesouro(self, coordenada):
     pass
