@@ -6,7 +6,7 @@ class JogoDAO(DAO):
         super().__init__('jogo.pkl')
 
     def add(self, jogo_pontuacao: Pontuacao):
-        if isinstance(jogo_pontuacao.pontos, int) and isinstance(jogo_pontuacao.data, str):
+        if isinstance(jogo_pontuacao.tempo, int) and isinstance(jogo_pontuacao.data, str) and isinstance(jogo_pontuacao.tempo, int):
             super().add(jogo_pontuacao)
         else:
             print('Não foi')

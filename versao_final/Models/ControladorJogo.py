@@ -38,5 +38,5 @@ class ControladorJogo:
   def game_over(self):
     jogador = self.__mapa.grupo_jogador.sprite
     if jogador.vida == 0:
-      self.__jogo_dao.add(Pontuacao(jogador.vida))
+      self.__jogo_dao.add(Pontuacao(self.__placar.baus_coletados, self.__relogio.execucao_do_jogo))
       return True
