@@ -24,7 +24,7 @@ class ControladorMovimentos:
         evento = self.__leitor_eventos.ler_evento()
         jogador = self.__grupo_jogador.sprite
         direcao_jogador = jogador.get_dir()
-        obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(self.__grupo_jogador)
+        obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(jogador)
         if obstaculo_colidido:
             if direcao_jogador.x == -1:
                 jogador.set_rect_left(obstaculo_colidido.get_rect_right()) 
@@ -50,9 +50,10 @@ class ControladorMovimentos:
                 jogador.parar()
 
     def mover_inimigo(self):
-        inimigos = self.__grupo_inimigos.sprites
-    
+        inimigos = self.__grupo_inimigos.sprites()
+
         for inimigo in inimigos:
+            
             obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(inimigo)
             if obstaculo_colidido:
                 if inimigo.sentido == 'baixo':

@@ -29,7 +29,7 @@ class Inimigo(Personagem):
     #window.blit(self.__lanterna.image, self.get_coordenadas())
 
   def update(self, deslocamento_x, deslocamento_y):
-    #self.rect.x += deslocamento_x
+    self.rect.x += deslocamento_x
     self.rect.y += deslocamento_y
 
   def __girar_imagem(self, c_p, c_i, janela) -> None:
@@ -103,6 +103,7 @@ class Inimigo(Personagem):
 
   def mover_inim(self, sentido):
     self.rect.y += sentido
+    #self.rect.x = self.get_coordenadas()[0]
 
   """
   def mover_inim(self, c_p, c_i, x, y, janela) -> None:

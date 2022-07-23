@@ -7,8 +7,8 @@ class GerenciadorMapas:
     self.__window_surface = window_surface
     #TODO: criar propriedade com a lista de file_paths de cada mapa
     self.__layout_mapa = ['XXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-                          'X              I          IX',
-                          'X   P                       ',
+                          'X                          X',
+                          'X   P           I       I   ',
                           'X X    XXX            X    X',
                           'X X         I              X',
                           'X XXX         XX         XXX',
