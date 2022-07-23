@@ -8,7 +8,7 @@ class GerenciadorMapas:
   def __init__(self, window_surface: Surface, configuracoes: Configuracoes, diretorio_mapas: str) -> None:
     self.__diretorio_mapas = diretorio_mapas
     self.__window_surface = window_surface
-    self.__configuracoes =configuracoes
+    self.__configuracoes = configuracoes
     #TODO : pegar lista de mapas de uma pasta e alimentar a lista de layouts a partir disso
     #os.listdir()
     # self.__layouts_mapa = ['csv/mapa01.csv']

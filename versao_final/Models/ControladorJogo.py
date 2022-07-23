@@ -4,7 +4,8 @@ from Models.Mapa.GerenciadorMapas import GerenciadorMapas
 from Models.Mapa.ControladorMovimentos import ControladorMovimentos
 from pygame import Surface
 from Models.Configuracoes import Configuracoes
-import os
+from Models.Persistencia.Pontuacao import Pontuacao
+from Models.Persistencia.JogoDAO import JogoDAO
 from Models.Relogio import Relogio
 
 
@@ -14,6 +15,7 @@ class ControladorJogo:
     self.__gerenciador_mapas = GerenciadorMapas(window_surface, self.__configuracoes, 'csv')
     self.__mapa = self.__gerenciador_mapas.gerar_mapa(0)
     self.__placar = Placar(window_surface, self.__configuracoes.fonte) 
+    self.__jogo_dao = JogoDAO()
     self.__controlador_movimentos = ControladorMovimentos(self.__mapa, self.adicionar_baus_no_placar, self.incrementar_mortes_inimigo_no_placar)
     self.__relogio = Relogio()
 
@@ -36,7 +38,5 @@ class ControladorJogo:
   def game_over(self):
     jogador = self.__mapa.grupo_jogador.sprite
     if jogador.vida == 0:
+      self.__jogo_dao.add(Pontuacao(jogador.vida))
       return True
-
-
-  

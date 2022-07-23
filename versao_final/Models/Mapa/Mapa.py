@@ -44,7 +44,6 @@ class Mapa:
                     self.__grupo_jogador.add(self.__jogador)
                     # self.__tiles.add(self.__jogador)
                 elif coluna == 'inimigo':
-                    print(x, y)
                     self.__inimigo = Inimigo(self.__configuracoes.velocidade_inimigo, (x, y))
                     self.__grupo_inimigo.add(self.__inimigo)
                 elif coluna == 'armadura':
@@ -158,6 +157,6 @@ class Mapa:
         # self.horizontal_mov_col()
         
         #Inimigo
-        #controlador_movimentos.mover_inimigo(self.__surface_janela)
+        controlador_movimentos.mover_inimigo()
         self.__grupo_inimigo.draw(self.__surface_janela)
         self.__grupo_inimigo.update(self.__deslocamento_x, self.__deslocamento_y)

@@ -1,18 +1,13 @@
 from datetime import datetime as dt
 
 class Pontuacao:
-    def __init__(self, pontos: int, tempo: int):
-        self.__pontos = pontos
-        self.__tempo = tempo
+    def __init__(self, pontos: int):
         self.__data = f'{dt.now().hour}:{dt.now().minute} - {dt.now().day}/{dt.now().month}/{dt.now().year}'
+        self.__pontos = pontos
 
     @property
     def pontos(self):
         return self.__pontos
-
-    @property
-    def tempo(self):
-        return self.__tempo
 
     @property
     def data(self):

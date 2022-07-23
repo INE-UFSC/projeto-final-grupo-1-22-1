@@ -26,6 +26,7 @@ class ControladorMovimentos:
         evento = self.__leitor_eventos.ler_evento()
         jogador = self.__grupo_jogador.sprite
         direcao_jogador = jogador.get_dir()
+        obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(jogador)
         self.__gerenciador_colisao.checar_colisao_inimigo(self.__incrementar_mortes_inimigo_no_placar)
         portal_colidido = self.__gerenciador_colisao.checar_colisao_portal()
         if portal_colidido and jogador.baus > 0:
@@ -42,7 +43,7 @@ class ControladorMovimentos:
             jogador.armadura = True
             jogador.atualizar_imagem()
             armadura_colidida.kill()
-        obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(self.__grupo_jogador)
+        obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(self.__grupo_jogador.sprite)
         if obstaculo_colidido:
             if direcao_jogador.x == -1:
                 jogador.set_rect_left(obstaculo_colidido.get_rect_right()) 
@@ -67,7 +68,26 @@ class ControladorMovimentos:
             else:
                 jogador.parar()
 
-    def mover_inimigo(self, janela):
+    def mover_inimigo(self):
+        inimigos = self.__grupo_inimigos.sprites()
+
+        for inimigo in inimigos:
+            
+            obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(inimigo)
+            if obstaculo_colidido:
+                if inimigo.sentido == 'baixo':
+                    inimigo.mover_inim(-1)
+                    inimigo.sentido = 'cima'
+                else:
+                    inimigo.mover_inim(1)
+                    inimigo.sentido = 'baixo'
+            else:
+                if inimigo.sentido == 'baixo':
+                    inimigo.mover_inim(1)
+                else:
+                    inimigo.mover_inim(-1)
+
+        """
         jogador = self.__grupo_jogador.sprite
         x_jogador = jogador.get_centerx()
         y_jogador = jogador.get_centery()
@@ -81,4 +101,5 @@ class ControladorMovimentos:
                 inimigo.seguir_jogador(jogador.get_coordenadas(), janela)
             else:
                 inimigo.pegar_tesouro((128,128))
+        """
 

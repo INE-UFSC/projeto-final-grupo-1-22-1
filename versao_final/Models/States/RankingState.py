@@ -1,7 +1,9 @@
+from cgitb import text
 import pygame as pg
 from Models.States.State import State
 from Models.button import Button
 from Models.Configuracoes import Configuracoes
+from Models.Persistencia.JogoDAO import JogoDAO
 
 
 class RankingState(State):
@@ -14,6 +16,7 @@ class RankingState(State):
         self.__surface = self.__window.surface
         self.__credits_bg_img = pg.transform.scale(
             pg.image.load("Images/RankingBG.png"), (self.__largura_tela, self.__altura_tela))
+        self.__pg_font = pg.font.SysFont('arial',  30)
         
         back_off_img = pg.image.load("Images/BackRankingOff.png").convert_alpha()
         back_on_img = pg.image.load("Images/BackRankingOn.png").convert_alpha()
@@ -24,6 +27,8 @@ class RankingState(State):
         self.__back_button = Button(
             SPACE_LEFT, SPACE_BEFORE, back_off_img, back_on_img, BUTTONS_SCALE)
 
+        self.__jogo_dao = JogoDAO()
+
     def checar_eventos(self):
         self.__back_button.read_events()
 
@@ -32,6 +37,13 @@ class RankingState(State):
 
     def renderizar(self):
         self.__surface.blit(self.__credits_bg_img, (0, 0))
-
+        texto_pricipal = self.__pg_font.render(f'Pontos                                Data', False, (255, 255, 255))
+        self.__surface.blit(texto_pricipal, (60, 15))
+        arq_pickle = self.__jogo_dao.get_all()
+        tam = 40
+        for i in arq_pickle[:10]:
+            linha = self.__pg_font.render(f'{i.pontos}                        {i.data}', False, (255, 255, 255))
+            self.__surface.blit(linha, (90, tam))
+            tam += 50
         self.checar_eventos()
         self.__back_button.draw(self.__surface)
