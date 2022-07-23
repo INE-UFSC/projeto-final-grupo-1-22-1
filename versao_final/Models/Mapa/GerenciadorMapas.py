@@ -6,12 +6,10 @@ import os
 
 class GerenciadorMapas:
   def __init__(self, window_surface: Surface, configuracoes: Configuracoes, diretorio_mapas: str) -> None:
-    self.__diretorio_mapas = diretorio_mapas
     self.__window_surface = window_surface
     self.__configuracoes = configuracoes
     #TODO : pegar lista de mapas de uma pasta e alimentar a lista de layouts a partir disso
     #os.listdir()
-    # self.__layouts_mapa = ['csv/mapa01.csv']
     self.__layouts_mapa = self.__pegar_arquivos_mapa(diretorio_mapas)
 
   def __pegar_arquivos_mapa(self, path):
@@ -21,9 +19,6 @@ class GerenciadorMapas:
       complete_path = f'{path}/{nome_mapa}'
       lista_paths.append(complete_path)
     return lista_paths
-
-    
-    return lista_mapas
 
   def get_mapa(self, mapa_index):
     mapa = self.__mapas[mapa_index]

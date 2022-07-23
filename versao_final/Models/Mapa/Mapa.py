@@ -1,15 +1,10 @@
-from typing import List
-from pygame.sprite import Sprite, Group, GroupSingle, spritecollide, collide_rect
-import pygame
-from pygame import Rect
+from pygame.sprite import Group, GroupSingle, spritecollide, collide_rect
 from Models.Mapa.Tile import Tile
 from Models.Mapa.Portal import Portal
 from Models.Mapa.Armadura import Armadura
 from Models.Mapa.Bau import Bau
 from Models.Jogador import Jogador
 from Models.Configuracoes import Configuracoes
-from Models.GerenciadorColisao import GerenciadorColisao
-from Models.Mapa.ControladorMovimentos import ControladorMovimentos
 from Models.Mapa.Inimigo import Inimigo
 
 class Mapa:
@@ -98,8 +93,6 @@ class Mapa:
         y_jogador = jogador.get_centery()
         altura_tela = self.__configuracoes.altura_tela
         
-        # if direcao_x != 0:
-        ####print('andando em x')
         if x_jogador < (largura_tela / 4) and direcao_x < 0 and self.__deslocado_x < 0:
             self.__deslocamento_x = 3
             self.__deslocado_x += 3
@@ -111,27 +104,6 @@ class Mapa:
         else:
             self.__deslocamento_x = 0
             jogador.velocidade = self.__configuracoes.velocidade_jogador
-        # elif direcao_y != 0:
-        #     print('andando em y')
-        #     if y_jogador < (altura_tela / 4) and direcao_y < 0 and self.__deslocado_y < 0:
-        #         self.__deslocamento_y += 3
-        #         self.__deslocado_y += 3
-        #         jogador.velocidade = 0
-        #     elif y_jogador > altura_tela - (altura_tela / 4) and direcao_y > 0 and -(self.__deslocado_y) < self.__configuracoes.altura_mapa - altura_tela:
-        #         self.__deslocamento_y = -(3)
-        #         self.__deslocado_y -= 3
-        #         jogador.velocidade = 0
-        #     else:
-        #         self.__deslocamento_y = 0
-        #         jogador.velocidade = self.__configuracoes.velocidade_jogador
-
-        ####print('deslocado', self.__deslocado_x)
-    
-    # def scroll_y(self):
-    #     jogador = self.__jogador
-        
-        
-    #     print('deslocado-y', self.__deslocado_y)
 
 
     def run(self, controlador_movimentos) -> None:

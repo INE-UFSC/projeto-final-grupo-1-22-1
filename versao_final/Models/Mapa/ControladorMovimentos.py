@@ -1,14 +1,11 @@
 import pygame as pg
 import sys
-from sys import exit
-from pygame.sprite import Group, GroupSingle
 from Models.LeitorEventos import LeitorEventos
 from Models.Mapa.GerenciadorColisao import GerenciadorColisao
 
 
 class ControladorMovimentos:
     def __init__(self, mapa, adicionar_baus_no_placar, incrementar_mortes_inimigo_no_placar) -> None: 
-        self.__mapa = mapa
         self.__adicionar_baus_no_placar = adicionar_baus_no_placar
         self.__incrementar_mortes_inimigo_no_placar = incrementar_mortes_inimigo_no_placar
         self.__leitor_eventos = LeitorEventos()
@@ -86,20 +83,3 @@ class ControladorMovimentos:
                     inimigo.mover_inim(1)
                 else:
                     inimigo.mover_inim(-1)
-
-        """
-        jogador = self.__grupo_jogador.sprite
-        x_jogador = jogador.get_centerx()
-        y_jogador = jogador.get_centery()
-
-        for inimigo in self.__grupo_inimigos.sprites():
-            print(inimigo.get_coordenadas())
-            dif_x = x_jogador - inimigo.get_centerx()
-            dif_y = y_jogador - inimigo.get_centery() 
-            distancia = (dif_x**2 + dif_y**2)**(1/2)
-            if distancia <= 150:
-                inimigo.seguir_jogador(jogador.get_coordenadas(), janela)
-            else:
-                inimigo.pegar_tesouro((128,128))
-        """
-
