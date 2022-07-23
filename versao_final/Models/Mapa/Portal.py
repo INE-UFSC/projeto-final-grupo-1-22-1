@@ -2,6 +2,7 @@ import pygame as pg
 from pygame import Surface
 from pygame.sprite import Sprite
 
+# TODO: criar sprite e herdar classe de Desenhavel
 class Portal(Sprite):
   def __init__(self, position, size):
     super().__init__()
