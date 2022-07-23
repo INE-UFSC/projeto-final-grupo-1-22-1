@@ -41,3 +41,12 @@ class Placar:
     )
     
     self.__window.blit(self.__texto_mortes_inimigo, (10,33))
+
+  def atualizar_tempo(self, tempo) -> None:
+    self.__texto_tempo = self.__fonte.render(
+      f'Tempo: {tempo}s',
+      True,
+      (255,255,255)
+    )
+    
+    self.__window.blit(self.__texto_tempo, (10,48))
