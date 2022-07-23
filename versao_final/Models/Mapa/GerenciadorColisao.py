@@ -24,6 +24,7 @@ class GerenciadorColisao:
                 jogador.atualizar_imagem()
                 inimigos_colididos[0].kill()
             else:
+                jogador.baus = 0
                 jogador.renascer(jogador.posicao_inicial)
                 jogador.diminuir_vida()
             return True
