@@ -1,9 +1,10 @@
 import pygame as pg
+import time
 from pygame.sprite import GroupSingle
 from Models.States.State import State
 from Models.Configuracoes import Configuracoes
 from Models.Mapa.Mapa import Mapa
-from Models.Inimigo import Inimigo
+from Models.Mapa.Inimigo import Inimigo
 from Models.ControladorJogo import ControladorJogo
 
 
