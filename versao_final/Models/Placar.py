@@ -50,3 +50,7 @@ class Placar:
     )
     
     self.__window.blit(self.__texto_tempo, (10,48))
+
+  @property
+  def baus_coletados(self):
+    return self.__baus_coletados

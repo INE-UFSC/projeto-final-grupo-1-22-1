@@ -37,13 +37,22 @@ class RankingState(State):
 
     def renderizar(self):
         self.__surface.blit(self.__credits_bg_img, (0, 0))
-        texto_pricipal = self.__pg_font.render(f'Pontos                                Data', False, (255, 255, 255))
+        texto_pricipal = self.__pg_font.render(f'Pontos        Tempo             Data', False, (255, 255, 255))
+
         self.__surface.blit(texto_pricipal, (60, 15))
         arq_pickle = self.__jogo_dao.get_all()
-        tam = 40
-        for i in arq_pickle[:10]:
-            linha = self.__pg_font.render(f'{i.pontos}                        {i.data}', False, (255, 255, 255))
+        tam = 50
+        lista = []
+        for i in arq_pickle:
+            lista.append([i.baus, i.tempo, i.data])
+        
+        lista.reverse()
+        for i in lista[:10]:
+            linha = self.__pg_font.render(f'{i[0]}                {i[1]}        {i[2]}', False, (255, 255, 255))
             self.__surface.blit(linha, (90, tam))
+            linha = self.__pg_font.render("---------------------------------------------------------------", False, (255, 255, 255))
+            self.__surface.blit(linha, (30, tam+20))
             tam += 50
+
         self.checar_eventos()
         self.__back_button.draw(self.__surface)
