@@ -22,7 +22,6 @@ class ControladorJogo:
 
   def iniciar(self):
     self.__relogio.atualizar_tempo_execucao_jogo()
-    print(self.__relogio.execucao_do_jogo)
     self.__mapa.run(self.__controlador_movimentos)
     self.__placar.atualizar_vida(self.__mapa.grupo_jogador)
     self.__placar.atualizar_baus()

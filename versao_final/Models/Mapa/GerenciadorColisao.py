@@ -1,8 +1,4 @@
-from pygame import Vector2
-from pygame.sprite import GroupSingle, groupcollide, collide_circle, spritecollide
-from Models.Mapa.Tile import Tile
-from Models.Personagem import Personagem
-
+from pygame.sprite import collide_circle, spritecollide
 
 class GerenciadorColisao:
     def __init__(self, grupo_jogador, grupo_inimigos, grupo_obstaculos, grupo_armaduras, grupo_baus, grupo_portais) -> None:
@@ -14,7 +10,6 @@ class GerenciadorColisao:
         self.__grupo_portais = grupo_portais
 
     def checar_colisao_obstaculo(self, personagem):
-        # jogador = self.__grupo_jogador.sprite()
         for obstaculo in self.__grupo_obstaculos:
             if obstaculo.rect.colliderect(personagem.rect):
                 return obstaculo
