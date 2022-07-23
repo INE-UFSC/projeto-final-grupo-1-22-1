@@ -1,4 +1,5 @@
 import pygame as pg
+import time
 from pygame.sprite import GroupSingle
 from Models.States.State import State
 from Models.Configuracoes import Configuracoes
