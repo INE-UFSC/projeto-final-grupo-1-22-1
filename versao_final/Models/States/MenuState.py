@@ -1,6 +1,6 @@
 from Models.States.State import State
 import pygame as pg
-from Models.button import Button
+from Models.Button import Button
 from Models.Configuracoes import Configuracoes
 
 

@@ -1,7 +1,7 @@
 from cgitb import text
 import pygame as pg
 from Models.States.State import State
-from Models.button import Button
+from Models.Button import Button
 from Models.Configuracoes import Configuracoes
 from Models.Persistencia.JogoDAO import JogoDAO
 
