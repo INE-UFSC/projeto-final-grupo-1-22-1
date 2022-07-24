@@ -21,6 +21,10 @@ class LeitorEventos():
         print('clique')
         return ('CLIQUE')
 
+      if evento.type == pg.KEYUP:
+          if evento.key == pg.K_p:
+            print('Pausado')
+
     keys = pg.key.get_pressed()
     if keys[pg.K_LEFT]:
       return('ESQUERDA')
