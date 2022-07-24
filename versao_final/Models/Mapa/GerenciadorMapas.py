@@ -11,6 +11,11 @@ class GerenciadorMapas:
     #TODO : pegar lista de mapas de uma pasta e alimentar a lista de layouts a partir disso
     #os.listdir()
     self.__layouts_mapa = self.__pegar_arquivos_mapa(diretorio_mapas)
+    self.__quantidade_mapas = len(self.__layouts_mapa)
+
+  @property
+  def quantidade_mapas(self):
+    return self.__quantidade_mapas
 
   def __pegar_arquivos_mapa(self, path):
     lista_mapas = os.listdir(path)

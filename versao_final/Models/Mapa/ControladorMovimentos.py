@@ -5,11 +5,12 @@ from Models.Mapa.GerenciadorColisao import GerenciadorColisao
 
 
 class ControladorMovimentos:
-    def __init__(self, mapa, adicionar_baus_no_placar, incrementar_mortes_inimigo_no_placar) -> None: 
-        self.__adicionar_baus_no_placar = adicionar_baus_no_placar
-        self.__incrementar_mortes_inimigo_no_placar = incrementar_mortes_inimigo_no_placar
+    #adicionar_baus_no_placar, incrementar_mortes_inimigo_no_placar
+    def __init__(self, mapa) -> None: 
+        # self.__adicionar_baus_no_placar = adicionar_baus_no_placar
+        # self.__incrementar_mortes_inimigo_no_placar = incrementar_mortes_inimigo_no_placar
         self.__leitor_eventos = LeitorEventos()
-        self.__gerenciador_colisao = GerenciadorColisao(mapa.grupo_jogador, mapa.grupo_inimigo, mapa.tiles, mapa.grupo_armaduras, mapa.grupo_baus, mapa.grupo_portais)
+        self.__gerenciador_colisao = GerenciadorColisao(mapa.grupo_jogador, mapa.grupo_inimigo, mapa.grupo_obstaculos, mapa.grupo_armaduras, mapa.grupo_baus, mapa.grupo_portais)
         self.__grupo_jogador = mapa.grupo_jogador
         self.__grupo_inimigos = mapa.grupo_inimigo
         # self.__grupo_obstaculos = grupo_obstaculos
@@ -24,14 +25,27 @@ class ControladorMovimentos:
         jogador = self.__grupo_jogador.sprite
         direcao_jogador = jogador.get_dir()
         obstaculo_colidido = self.__gerenciador_colisao.checar_colisao_obstaculo(jogador)
-        self.__gerenciador_colisao.checar_colisao_inimigo(self.__incrementar_mortes_inimigo_no_placar)
+        inimigos_colididos = self.__gerenciador_colisao.checar_colisao_inimigo()
         portal_colidido = self.__gerenciador_colisao.checar_colisao_portal()
+        if inimigos_colididos:
+            if jogador.armadura:
+                jogador.armadura = None
+                # incrementar_mortes_inimigo_no_placar()
+                inimigos_colididos[0].kill()
+                jogador.atualizar_imagem()
+            else:
+                jogador.baus = 0
+                jogador.renascer(jogador.posicao_inicial)
+                jogador.diminuir_vida()
+                return True
         if portal_colidido and jogador.baus > 0:
-            self.__adicionar_baus_no_placar(jogador.baus)
+            print('colidiu com o portal')
+            # self.__adicionar_baus_no_placar(jogador.baus)
             jogador.baus = 0
             # TODO: Atualizar a imagem
         bau_colidido = self.__gerenciador_colisao.checar_colisao_bau()
         if bau_colidido:
+            print('colidiu com o bau')
             jogador.baus += 1
             # TODO: Atualizar a imagem
             bau_colidido.kill()
