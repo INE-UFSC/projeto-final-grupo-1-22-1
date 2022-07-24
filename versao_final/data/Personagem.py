@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Models.Desenhavel import Desenhavel 
+from data.Desenhavel import Desenhavel 
 import pygame as pg
 from pygame.math import Vector2
  

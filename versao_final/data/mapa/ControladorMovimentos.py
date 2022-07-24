@@ -1,7 +1,7 @@
 import pygame as pg
 import sys
-from Models.LeitorEventos import LeitorEventos
-from Models.Mapa.GerenciadorColisao import GerenciadorColisao
+from data.LeitorEventos import LeitorEventos
+from data.mapa.GerenciadorColisao import GerenciadorColisao
 
 
 class ControladorMovimentos:

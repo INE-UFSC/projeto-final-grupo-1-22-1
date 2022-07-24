@@ -1,9 +1,9 @@
 from cgitb import text
 import pygame as pg
-from Models.States.State import State
-from Models.Button import Button
-from Models.Configuracoes import Configuracoes
-from Models.Persistencia.JogoDAO import JogoDAO
+from data.states.State import State
+from data.Button import Button
+from data.Configuracoes import Configuracoes
+from data.persistencia.JogoDAO import JogoDAO
 
 
 class RankingState(State):
@@ -15,11 +15,11 @@ class RankingState(State):
         self.__altura_tela = self.__configuracoes.altura_tela
         self.__surface = self.__window.surface
         self.__credits_bg_img = pg.transform.scale(
-            pg.image.load("Images/RankingBG.png"), (self.__largura_tela, self.__altura_tela))
+            pg.image.load("resources/images/RankingBG.png"), (self.__largura_tela, self.__altura_tela))
         self.__pg_font = pg.font.SysFont('arial',  30)
         
-        back_off_img = pg.image.load("Images/BackRankingOff.png").convert_alpha()
-        back_on_img = pg.image.load("Images/BackRankingOn.png").convert_alpha()
+        back_off_img = pg.image.load("resources/images/BackRankingOff.png").convert_alpha()
+        back_on_img = pg.image.load("resources/images/BackRankingOn.png").convert_alpha()
 
         BUTTONS_SCALE = 1
         SPACE_BEFORE = 20

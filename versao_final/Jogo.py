@@ -1,15 +1,15 @@
 import pygame as pg
 from pygame.locals import *
 
-from Models.Window import Window
-from Models.Configuracoes import Configuracoes
-from Models.States.JogoState import JogoState
-from Models.States.MenuState import MenuState
-from Models.States.CreditosState import CreditosState
-from Models.States.OptionsState import OptionsState
-from Models.States.RankingState import RankingState
-from Models.States.GameOverState import GameOverState
-from Models.States.StateMachine import StateMachine
+from data.Window import Window
+from data.Configuracoes import Configuracoes
+from data.states.JogoState import JogoState
+from data.states.MenuState import MenuState
+from data.states.CreditosState import CreditosState
+from data.states.OptionsState import OptionsState
+from data.states.RankingState import RankingState
+from data.states.GameOverState import GameOverState
+from data.states.StateMachine import StateMachine
 
 
 class Jogo():

@@ -1,7 +1,7 @@
-from Models.States.State import State
+from data.states.State import State
 import pygame as pg
-from Models.Button import Button
-from Models.Configuracoes import Configuracoes
+from data.Button import Button
+from data.Configuracoes import Configuracoes
 
 
 class MenuState(State):
@@ -13,21 +13,21 @@ class MenuState(State):
         self.__altura_tela = self.__configuracoes.altura_tela
         self.__surface = self.__window.surface
         self.__menu_bg_img = pg.transform.scale(
-            pg.image.load("Images/MainMenu.png"), (self.__largura_tela, self.__altura_tela))
+            pg.image.load("resources/images/MainMenu.png"), (self.__largura_tela, self.__altura_tela))
         self.__title = pg.transform.scale(pg.image.load(
-            "Images/Titulo.png"), (self.__largura_tela / 2, self.__altura_tela / 2))
+            "resources/images/Titulo.png"), (self.__largura_tela / 2, self.__altura_tela / 2))
 
-        play_off_img = pg.image.load("Images/PlayOff.png").convert_alpha()
-        play_on_img = pg.image.load("Images/PlayOn.png").convert_alpha()
+        play_off_img = pg.image.load("resources/images/PlayOff.png").convert_alpha()
+        play_on_img = pg.image.load("resources/images/PlayOn.png").convert_alpha()
         ranking_off_img = pg.image.load(
-            "Images/RankingOff.png").convert_alpha()
-        ranking_on_img = pg.image.load("Images/RankingOn.png").convert_alpha()
+            "resources/images/RankingOff.png").convert_alpha()
+        ranking_on_img = pg.image.load("resources/images/RankingOn.png").convert_alpha()
         options_off_img = pg.image.load(
-            "Images/OptionsOff.png").convert_alpha()
-        options_on_img = pg.image.load("Images/OptionsOn.png").convert_alpha()
+            "resources/images/OptionsOff.png").convert_alpha()
+        options_on_img = pg.image.load("resources/images/OptionsOn.png").convert_alpha()
         credits_off_img = pg.image.load(
-            "Images/CreditsOff.png").convert_alpha()
-        credits_on_img = pg.image.load("Images/CreditsOn.png").convert_alpha()
+            "resources/images/CreditsOff.png").convert_alpha()
+        credits_on_img = pg.image.load("resources/images/CreditsOn.png").convert_alpha()
 
         BUTTONS_SCALE = 1.25
         SPACE_BEFORE = 35

@@ -9,7 +9,7 @@ class Portal(Sprite):
     self.__image = Surface((size, size))
     self.__image.fill('black')
     # self.__image = pg.transform.scale(
-    #         pg.image.load("Images/Tijolo.png"), (size, size))
+    #         pg.image.load("resources/images/Tijolo.png"), (size, size))
     self.__rect = self.__image.get_rect(topleft = position)
 
   @property

@@ -1,18 +1,18 @@
-from Models.Mapa.Mapa import Mapa
-from Models.Placar import Placar
-from Models.Mapa.GerenciadorMapas import GerenciadorMapas
-from Models.Mapa.ControladorMovimentos import ControladorMovimentos
+from data.mapa.Mapa import Mapa
+from data.Placar import Placar
+from data.mapa.GerenciadorMapas import GerenciadorMapas
+from data.mapa.ControladorMovimentos import ControladorMovimentos
 from pygame import Surface
-from Models.Configuracoes import Configuracoes
-from Models.Persistencia.Pontuacao import Pontuacao
-from Models.Persistencia.JogoDAO import JogoDAO
-from Models.Relogio import Relogio
+from data.Configuracoes import Configuracoes
+from data.persistencia.Pontuacao import Pontuacao
+from data.persistencia.JogoDAO import JogoDAO
+from data.Relogio import Relogio
 
 
 class ControladorJogo:
   def __init__(self, window_surface: Surface) -> None:
     self.__configuracoes = Configuracoes()
-    self.__gerenciador_mapas = GerenciadorMapas(window_surface, self.__configuracoes, 'csv')
+    self.__gerenciador_mapas = GerenciadorMapas(window_surface, self.__configuracoes, 'resources/csv')
     self.__mapa = self.__gerenciador_mapas.gerar_mapa(0)
     self.__placar = Placar(window_surface, self.__configuracoes.fonte) 
     self.__jogo_dao = JogoDAO()

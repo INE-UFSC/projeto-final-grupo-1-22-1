@@ -1,10 +1,10 @@
-from Models.Personagem import Personagem
+from data.Personagem import Personagem
 import pygame as pg
 from pygame.image import load
 
 class Jogador(Personagem):
   def __init__(self, velocidade : int, position: tuple = (0,0) ) -> None:
-    super().__init__('Images/Sombra.png', velocidade, position)
+    super().__init__('resources/images/Sombra.png', velocidade, position)
     self.__posicao_inicial = position
     self.__vida = 3
     self.__coordenada_tile = self.rect.center
@@ -45,7 +45,7 @@ class Jogador(Personagem):
 
   def atualizar_imagem(self):
     super().girar_imagem('cima')
-    self.image = load(f'Images/{"ArmaduraOn" if self.__armadura else "Sombra"}.png')
+    self.image = load(f'resources/images/{"ArmaduraOn" if self.__armadura else "Sombra"}.png')
 
   def diminuir_vida(self):
     if self.__vida > 0:

@@ -1,9 +1,9 @@
 import pygame as pg
-from Models.Personagem import Personagem
+from data.Personagem import Personagem
 
 class Inimigo(Personagem):
   def __init__(self, velocidade, posicao):
-    super().__init__('Images/Cientista.png', velocidade, posicao)
+    super().__init__('resources/images/Cientista.png', velocidade, posicao)
     self.__rotacao = 0
     self.__sentido = 'baixo'
     self.imagem = pg.transform.rotate(self.image, self.__rotacao%360) 

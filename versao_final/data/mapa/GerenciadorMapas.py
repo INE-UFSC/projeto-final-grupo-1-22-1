@@ -1,6 +1,6 @@
-from Models.Mapa.Mapa import Mapa
+from data.mapa.Mapa import Mapa
 from pygame import Surface
-from Models.Configuracoes import Configuracoes
+from data.Configuracoes import Configuracoes
 from csv import reader
 import os
 

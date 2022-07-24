@@ -1,6 +1,6 @@
 from pygame import font
 
-from Models.Singleton import Singleton
+from data.Singleton import Singleton
 
 
 class Configuracoes(Singleton):

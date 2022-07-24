@@ -1,5 +1,5 @@
-from Models.Persistencia.DAO import DAO
-from Models.Persistencia.Pontuacao import Pontuacao
+from data.persistencia.DAO import DAO
+from data.persistencia.Pontuacao import Pontuacao
 
 class JogoDAO(DAO):
     def __init__(self):

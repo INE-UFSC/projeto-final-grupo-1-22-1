@@ -1,11 +1,11 @@
 from pygame.sprite import Group, GroupSingle, spritecollide, collide_rect
-from Models.Mapa.Tile import Tile
-from Models.Mapa.Portal import Portal
-from Models.Mapa.Armadura import Armadura
-from Models.Mapa.Bau import Bau
-from Models.Jogador import Jogador
-from Models.Configuracoes import Configuracoes
-from Models.Mapa.Inimigo import Inimigo
+from data.mapa.Tile import Tile
+from data.mapa.Portal import Portal
+from data.mapa.Armadura import Armadura
+from data.mapa.Bau import Bau
+from data.Jogador import Jogador
+from data.Configuracoes import Configuracoes
+from data.mapa.Inimigo import Inimigo
 
 class Mapa:
     def __init__(self, layout_mapa: list, surface, largura_mapa, altura_mapa, tamanho_tile) -> None:
