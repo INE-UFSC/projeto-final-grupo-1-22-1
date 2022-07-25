@@ -15,7 +15,6 @@ class Jogador(Personagem):
   def coordenada_tile(self):
     return self.__coordenada_tile
 
-    
   @property
   def vida(self):
     return self.__vida
@@ -31,9 +30,6 @@ class Jogador(Personagem):
   @property
   def baus(self):
     return self.__baus
-  
-  def update(self, deslocamento_x, deslocamento_y):
-    self.__coordenada_tile = (self.__coordenada_tile[0] + deslocamento_x, self.__coordenada_tile[1] + deslocamento_y)
 
   @armadura.setter
   def armadura(self, novo_estado):

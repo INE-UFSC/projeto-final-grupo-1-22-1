@@ -59,6 +59,5 @@ class Desenhavel(Sprite, ABC):
     def get_rect_bottom(self):
         return self.__rect.bottom
 
-    def update(self, deslocamento_x, deslocamento_y):
+    def update(self, deslocamento_x):
         self.__rect.x += deslocamento_x
-        self.__rect.y += deslocamento_y

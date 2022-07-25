@@ -16,7 +16,7 @@ class JogoState(State):
         self.__window_surface = self.__window.surface
         self.__timer = pg.time.Clock()
         self.__controlador_jogo = ControladorJogo(self.__window_surface)
-        
+
 
     def renderizar(self):
         controlador_jogo = self.__controlador_jogo

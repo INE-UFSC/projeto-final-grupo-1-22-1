@@ -1,3 +1,4 @@
+import traceback
 class StateMachine():
     def __init__(self, states_dict, initial_state):
         self.__states_dict = states_dict
@@ -17,9 +18,10 @@ class StateMachine():
         try:
             current_state_instance = self.__states_dict[self.__state](
                 window, self.__transition_to)
-        except:
+        except Exception as e:
             current_state_instance = self.__states_dict[self.__initial_state](
                 window, self.__transition_to)
+            print(traceback.format_exc())
         finally:
             current_state_instance.renderizar()
             return current_state_instance

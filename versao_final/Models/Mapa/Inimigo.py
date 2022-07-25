@@ -19,9 +19,8 @@ class Inimigo(Personagem):
   def draw(self, window):
     window.blit(self.imagem, self.get_coordenadas())
 
-  def update(self, deslocamento_x, deslocamento_y):
+  def update(self, deslocamento_x):
     self.rect.x += deslocamento_x
-    self.rect.y += deslocamento_y
 
   def mover_inim(self, sentido):
     self.rect.y += sentido

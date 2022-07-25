@@ -14,22 +14,13 @@ class GerenciadorColisao:
             if obstaculo.rect.colliderect(personagem.rect):
                 return obstaculo
 
-    def checar_colisao_inimigo(self, incrementar_mortes_inimigo_no_placar):
+    #incrementar_mortes_inimigo_no_placar
+    def checar_colisao_inimigo(self, ):
         jogador = self.__grupo_jogador.sprite
         inimigos_colididos = spritecollide(jogador, self.__grupo_inimigos, False, collide_circle)
         if inimigos_colididos:
-            if jogador.armadura:
-                jogador.armadura = None
-                incrementar_mortes_inimigo_no_placar()
-                jogador.atualizar_imagem()
-                inimigos_colididos[0].kill()
-            else:
-                jogador.baus = 0
-                jogador.renascer(jogador.posicao_inicial)
-                jogador.diminuir_vida()
-            return True
-
-
+            return inimigos_colididos
+    
     def checar_colisao_armadura(self):
         sprite_jogador = self.__grupo_jogador.sprite
         for armadura in self.__grupo_armaduras:
