@@ -7,6 +7,7 @@ from Models.Mapa.Mapa import Mapa
 from Models.Mapa.Inimigo import Inimigo
 from Models.ControladorJogo import ControladorJogo
 from Models.Pause import Pause
+from Models.LeitorPause import LeitorPause
 
 
 class JogoState(State):
@@ -17,14 +18,18 @@ class JogoState(State):
         self.__window_surface = self.__window.surface
         self.__timer = pg.time.Clock()
         self.__controlador_jogo = ControladorJogo(self.__window_surface)
-        self.__pause = False
+        self.pause_state = False
+        self.__pause = Pause(self.__window)
+        self.__leitor_pause = LeitorPause()
         
 
     def renderizar(self):
         controlador_jogo = self.__controlador_jogo
         while True:
-            if not self.__pause:
-                self.__timer.tick(60)
+            self.__timer.tick(60)
+            self.pause_state = self.__leitor_pause.paused(self.pause_state)
+            if not self.pause_state:
+                
 
                 self.__window_surface.fill((54, 107, 95))
 
@@ -34,7 +39,7 @@ class JogoState(State):
                     self.transicionar("GameOverState")
                     break
             else:
-                Pause.renderizar()
+                self.__pause.renderizar()
 
             pg.display.update()
             pg.display.flip()

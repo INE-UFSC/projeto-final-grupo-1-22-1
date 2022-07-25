@@ -10,7 +10,7 @@ class Pause():
         self.__altura_tela = self.__configuracoes.altura_tela
         self.__surface = self.__window.surface
         self.__pause_bg_img = pg.transform.scale(
-            pg.image.load("Images/RankingBG.png"), (self.__largura_tela, self.__altura_tela))
+            pg.image.load("Images/Pause.png"), (self.__largura_tela, self.__altura_tela))
 
     def pausar(self, signal: bool) -> bool:
         return not signal
