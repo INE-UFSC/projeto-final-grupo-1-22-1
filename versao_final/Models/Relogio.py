@@ -13,3 +13,5 @@ class Relogio():
     @property
     def execucao_do_jogo(self):
         return (self.__execucao_do_jogo)
+
+    

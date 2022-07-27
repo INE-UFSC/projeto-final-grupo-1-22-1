@@ -27,10 +27,24 @@ class JogoState(State):
         controlador_jogo = self.__controlador_jogo
         while True:
             self.__timer.tick(60)
-            self.pause_state = self.__leitor_pause.paused(self.pause_state)
-            if not self.pause_state:
+            # self.pause_state = self.__leitor_pause.paused(self.pause_state)
+
+            for event in pg.event.get():
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_p:
+                        print('loopin get')
+                        self.pause_state = not self.pause_state
+            
+            # self.pause_state = self.__leitor_pause.paused()
+
+            # while self.pause_state:
+            #     self.__pause.renderizar()
+            #     self.pause_state = self.__leitor_pause.paused(self.pause_state)
+            #     pg.display.update()
+            #     pg.display.flip()
                 
 
+            if not self.pause_state:
                 self.__window_surface.fill((54, 107, 95))
 
                 controlador_jogo.iniciar()

@@ -4,6 +4,7 @@ from sys import exit
 from pygame.sprite import Group, GroupSingle
 from Models.LeitorEventos import LeitorEventos
 from Models.Mapa.GerenciadorColisao import GerenciadorColisao
+from Models.LeitorPause import LeitorPause
 
 
 class ControladorMovimentos:
@@ -64,8 +65,12 @@ class ControladorMovimentos:
                 jogador.mover_cima()
             elif evento == 'BAIXO':
                 jogador.mover_baixo()
+            elif evento == 'Paused':
+                print('olha nois aqui no leitor')
+                LeitorPause.detect()
             else:
                 jogador.parar()
+            
 
     def mover_inimigo(self, janela):
         jogador = self.__grupo_jogador.sprite
