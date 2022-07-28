@@ -13,3 +13,10 @@ class Relogio():
     @property
     def execucao_do_jogo(self):
         return self.__execucao_do_jogo
+
+    @execucao_do_jogo.setter
+    def execucao_do_jogo(self, tempo):
+        self.__execucao_do_jogo = tempo
+
+    def settar_comeco_jogo(self):
+        self.__comeco_do_jogo = pg.time.get_ticks()

@@ -6,6 +6,7 @@ class Fase:
   def __init__(self, mapa: Mapa) -> None:
     self.__mapa = mapa
     self.__controlador_movimentos = ControladorMovimentos(self.__mapa)
+    self.__concluida = False
   
   @property
   def mapa(self):
@@ -15,22 +16,29 @@ class Fase:
   def controlador_movimentos(self):
     return self.__controlador_movimentos
     
+  @property
+  def concluida(self):
+    return self.__concluida
+
   def aumentar_dificuldade(self):
     pass
 
-  def __checar_vitoria(self):
-    jogador = self.__mapa.grupo_jogador.sprite
-    numero_baus = len(self.__mapa.grupo_baus)
-    numero_armaduras = len(self.__mapa.grupo_armaduras)
-    if numero_baus == 0 and numero_armaduras == 0 and jogador.baus == 0:
+  def checar_vitoria(self, placar):
+      if placar.baus_coletados == self.__mapa.quantidade_baus:
+        self.__concluida = True
         return True
 
-  def iniciar(self):
+  def rodar(self):
     self.__mapa.run(self.__controlador_movimentos)
-    if self.__checar_vitoria():
-      print('ganhou')
 
-  def game_over(self):
+  def checar_derrota(self):
     jogador = self.__mapa.grupo_jogador.sprite
     if jogador.vida == 0:
+      self.__concluida = False
       return True
+
+  def aumentar_dificuldade(self, relogio):
+    inimigos = self.mapa.grupo_inimigo.sprites()
+    for inimigo in inimigos:
+      inimigo.velocidade = (relogio.execucao_do_jogo // 5) + 1
+  

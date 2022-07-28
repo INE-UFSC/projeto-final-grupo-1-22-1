@@ -1,0 +1,10 @@
+parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede
+parede,,,,,,,,,,,,armadura,,,,,,,,,,,,,parede
+parede,,jogador,,,,,bau,,,,,,obstaculo,,,,,,,obstaculo,,,,,parede
+parede,,,inimigo,,,,,,,,,,,,,inimigo,,obstaculo,,,,armadura,,,parede
+parede,portal,,,obstaculo,,,,,obstaculo,,,,,,,bau,,,,,,,,,parede
+parede,portal,,obstaculo,obstaculo,,,,,,,,,,,,,,,,,,,obstaculo,,parede
+parede,,,,,,,,,,,obstaculo,,,,obstaculo,,,,,,,,,,parede
+parede,,armadura,,,,,,,,,,,,,,,,,,inimigo,,,,,parede
+parede,,,,,,,,,,bau,,,bau,,bau,,,,,,bau,,,,parede
+parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede,parede

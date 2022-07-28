@@ -11,6 +11,7 @@ class Configuracoes(Singleton):
         self.__altura_tela = 540
         self.__velocidade_jogador = 3
         self.__velocidade_inimigo = 1
+        self.__cor_fundo = (54, 107, 95)
 
     @property
     def fonte(self):
@@ -31,6 +32,10 @@ class Configuracoes(Singleton):
     @property
     def velocidade_inimigo(self):
         return self.__velocidade_inimigo
+
+    @property
+    def cor_fundo(self):
+        return self.__cor_fundo
 
     @velocidade_inimigo.setter
     def velocidade_inimigo(self, velocidade_inimigo):

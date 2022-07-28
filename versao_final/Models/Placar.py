@@ -17,6 +17,13 @@ class Placar:
   def mortes_inimigo(self):
     return self.__baus_coletados
 
+  @property
+  def baus_coletados(self):
+    return self.__baus_coletados
+
+  @baus_coletados.setter
+  def baus_coletados(self, quant_bau):
+    self.__baus_coletados = quant_bau
   
   def atualizar_vida(self, grupo_jogador: Group) -> None:
     jogador = grupo_jogador.sprite
@@ -30,7 +37,7 @@ class Placar:
     
 
   def adicionar_baus(self, novos_baus):
-    self.__baus_coletados = novos_baus
+    self.__baus_coletados += novos_baus
         
 
   def atualizar_baus(self) -> None:
