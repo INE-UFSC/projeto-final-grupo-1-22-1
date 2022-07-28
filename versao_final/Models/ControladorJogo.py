@@ -24,15 +24,25 @@ class ControladorJogo:
     self.__fase.iniciar()
     self.__relogio.atualizar_tempo_execucao_jogo()
     self.__placar.atualizar_vida(self.__fase.mapa.grupo_jogador)
+    self.__placar.adicionar_baus(self.__fase.controlador_movimentos.adicionar_baus_no_placar)
     self.__placar.atualizar_baus()
+    self.__placar.incrementar_mortes_inimigo(self.__fase.controlador_movimentos.incrementar_mortes_inimigo_no_placar)
     self.__placar.atualizar_mortes_inimigo()
     self.__placar.atualizar_tempo(self.__relogio.execucao_do_jogo)
+    
+    inimigos = self.__fase.controlador_movimentos.grupo_inimigos.sprites()
+    for inimigo in inimigos:
+      inimigo.velocidade = (self.__relogio.execucao_do_jogo // 5) + 1
 
-  def adicionar_baus_no_placar(self, novos_baus):
+  def adicionar_baus_no_placar(self, novos_baus): 
     self.__placar.adicionar_baus(novos_baus)
     
   def incrementar_mortes_inimigo_no_placar(self):
     self.__placar.incrementar_mortes_inimigo()
+
+  def proxima_fase(self):
+    if self.__placar.baus_coletados == 10:
+      pass
 
   def game_over(self):
     if self.__fase.game_over():

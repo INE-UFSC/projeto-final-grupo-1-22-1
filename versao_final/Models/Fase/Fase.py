@@ -11,6 +11,10 @@ class Fase:
   def mapa(self):
     return self.__mapa
 
+  @property
+  def controlador_movimentos(self):
+    return self.__controlador_movimentos
+    
   def aumentar_dificuldade(self):
     pass
 
@@ -18,7 +22,7 @@ class Fase:
     jogador = self.__mapa.grupo_jogador.sprite
     numero_baus = len(self.__mapa.grupo_baus)
     numero_armaduras = len(self.__mapa.grupo_armaduras)
-    if  numero_baus == 0 and numero_armaduras == 0 and jogador.baus == 0:
+    if numero_baus == 0 and numero_armaduras == 0 and jogador.baus == 0:
         return True
 
   def iniciar(self):

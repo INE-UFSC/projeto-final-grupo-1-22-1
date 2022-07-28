@@ -31,3 +31,7 @@ class Configuracoes(Singleton):
     @property
     def velocidade_inimigo(self):
         return self.__velocidade_inimigo
+
+    @velocidade_inimigo.setter
+    def velocidade_inimigo(self, velocidade_inimigo):
+        self.__velocidade_inimigo = velocidade_inimigo
