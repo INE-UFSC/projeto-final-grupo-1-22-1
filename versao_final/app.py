@@ -1,3 +1,3 @@
-from Jogo import Jogo
+from classes.jogo.Jogo import Jogo
 
 Jogo().run()
