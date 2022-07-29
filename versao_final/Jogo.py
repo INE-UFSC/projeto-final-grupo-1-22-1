@@ -1,5 +1,6 @@
 import pygame as pg
 from pygame.locals import *
+from Models.States.VitoriaState import VitoriaState
 
 from Models.Window import Window
 from Models.Configuracoes import Configuracoes
@@ -10,6 +11,7 @@ from Models.States.OptionsState import OptionsState
 from Models.States.RankingState import RankingState
 from Models.States.GameOverState import GameOverState
 from Models.States.StateMachine import StateMachine
+from Models.Musica import Musica
 
 
 class Jogo():
@@ -24,10 +26,14 @@ class Jogo():
             "CreditosState": CreditosState,
             "OptionsState": OptionsState,
             "RankingState": RankingState,
-            "GameOverState": GameOverState
+            "GameOverState": GameOverState,
+            "VitoriaState": VitoriaState
         }
         INITIAL_STATE = "MenuState"
         self.__state_machine = StateMachine(STATES_DICT, INITIAL_STATE)
+        Musica.musica_menu()
+        Musica.tocar_musica()
+
 
     def run(self):
         run = True
@@ -39,6 +45,7 @@ class Jogo():
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_ESCAPE:
                         tela.transicionar(self.__state_machine.initial_state)
+                        # tela.transicionar("VitoriaState")
                 if event.type == pg.QUIT:
                     run = False
 

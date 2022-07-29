@@ -2,6 +2,7 @@ import pygame as pg
 from Models.States.State import State
 from Models.Button import Button
 from Models.Configuracoes import Configuracoes
+from Models.Musica import Musica
 
 
 class OptionsState(State):
@@ -52,7 +53,6 @@ class OptionsState(State):
 
         if self.__sound_button.clicked:
             self.__volume += 1
-            print('aoba')
             if self.__volume > 3:
                 self.__volume = 0
             self.__configuracoes.vol_control = self.__volume #<-------------------------------------------set_volume
@@ -62,6 +62,7 @@ class OptionsState(State):
             if self.__musica > 1:
                 self.__musica = 0
             self.__configuracoes.music_control = self.__musica
+            Musica.parar_musica(self.__configuracoes.music_control)
 
         if self.__difficult_button.clicked:
             self.__dificuldade += 1
