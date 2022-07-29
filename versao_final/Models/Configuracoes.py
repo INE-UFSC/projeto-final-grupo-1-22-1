@@ -11,6 +11,9 @@ class Configuracoes(Singleton):
         self.__altura_tela = 540
         self.__velocidade_jogador = 3
         self.__velocidade_inimigo = 1
+        self.__vol_control = 2
+        self.__dif_control = 0
+        self.__music_control = 0
 
     @property
     def fonte(self):
@@ -31,3 +34,27 @@ class Configuracoes(Singleton):
     @property
     def velocidade_inimigo(self):
         return self.__velocidade_inimigo
+
+    @property
+    def vol_control(self):
+        return self.__vol_control
+
+    @property
+    def music_control(self):
+        return self.__music_control
+
+    @property
+    def dif_control(self):
+        return self.__dif_control
+
+    @vol_control.setter
+    def vol_control(self, new_volum):
+        self.__vol_control = new_volum
+
+    @music_control.setter
+    def music_control(self, new_music):
+        self.__music_control = new_music
+
+    @dif_control.setter
+    def dif_control(self, new_dif):
+        self.__dif_control = new_dif

@@ -20,15 +20,18 @@ class OptionsState(State):
         self.__sound_on_img = pg.image.load("Images/SoundIconOn.png").convert_alpha()
         self.__difficulty_off_img = pg.image.load("Images/DifficultyOff.png").convert_alpha()
         self.__difficulty_on_img = pg.image.load("Images/DifficultyOn.png").convert_alpha()
+
+
+        self.__volume = self.__configuracoes.vol_control #<------------------------------------------------------get_volume
+        self.__musica = self.__configuracoes.music_control
+        self.__dificuldade = self.__configuracoes.dif_control
         
         back_off_img = pg.image.load("Images/BackOff.png").convert_alpha()
         back_on_img = pg.image.load("Images/BackOn.png").convert_alpha()
         self.vol = [pg.image.load("Images/Volume.png"),pg.image.load("Images/Volume (1).png"),pg.image.load("Images/Volume (2).png"),pg.image.load("Images/Volume (3).png")]
         self.dificulty_img = [pg.image.load("Images/Difficulty1.png"), pg.image.load("Images/Difficulty2.png"), pg.image.load("Images/Difficulty3.png")]
-        self.music_img = [pg.image.load("Images/MusicOff.png"), pg.image.load("Images/MusicOn.png")]
-        self.vol_control = 0
-        self.dif_control = 0
-        self.music_control = 0
+        self.music_img = [pg.image.load("Images/MusicOn.png"), pg.image.load("Images/MusicOff.png")]
+        
 
         BUTTONS_SCALE = 1
         SPACE_BEFORE = 20
@@ -48,22 +51,37 @@ class OptionsState(State):
             self.transicionar("MenuState")
 
         if self.__sound_button.clicked:
-            self.vol_control += 1
-            print(self.vol_control)
-            if self.vol_control == 1:
-                self.vol_control = 0
-                print('ta dando bom')
+            self.__volume += 1
+            print('aoba')
+            if self.__volume > 3:
+                self.__volume = 0
+            self.__configuracoes.vol_control = self.__volume #<-------------------------------------------set_volume
+        
+        if self.__music_button.clicked:
+            self.__musica += 1
+            if self.__musica > 1:
+                self.__musica = 0
+            self.__configuracoes.music_control = self.__musica
+
+        if self.__difficult_button.clicked:
+            self.__dificuldade += 1
+            if self.__dificuldade > 2:
+                self.__dificuldade = 0
+            self.__configuracoes.dif_control = self.__dificuldade
+            
 
         
 
     def renderizar(self):
-        self.__surface.blit(self.__credits_bg_img, (0, 0))
-        self.__surface.blit(self.vol[self.vol_control],(260, 240))
-        self.__surface.blit(self.dificulty_img[self.dif_control],(260, 310))
-        self.__surface.blit(self.music_img[self.music_control], (260, 150))
-
         self.checar_eventos()
+        self.__surface.blit(self.__credits_bg_img, (0, 0))
+        self.__surface.blit(self.vol[self.__volume],(260, 240))
+        self.__surface.blit(self.dificulty_img[self.__dificuldade],(260, 310))
+        self.__surface.blit(self.music_img[self.__musica], (260, 150))
+
+        
         self.__back_button.draw(self.__surface)
         self.__sound_button.draw(self.__surface)
         self.__music_button.draw(self.__surface)
         self.__difficult_button.draw(self.__surface)
+        

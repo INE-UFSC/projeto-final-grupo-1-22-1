@@ -1,5 +1,5 @@
 import pygame as pg
-from pygame import event
+from pygame import MOUSEBUTTONUP, event
 from pygame.locals import QUIT, KEYUP, K_SPACE, K_ESCAPE, MOUSEBUTTONDOWN
 
 class LeitorEventos():
@@ -19,6 +19,10 @@ class LeitorEventos():
     
       if evento.type == MOUSEBUTTONDOWN:
         print('clique')
+        return ('CLIQUE')
+
+      if evento.type == MOUSEBUTTONUP:
+        print('Up')
         return ('CLIQUE')
 
     keys = pg.key.get_pressed()
