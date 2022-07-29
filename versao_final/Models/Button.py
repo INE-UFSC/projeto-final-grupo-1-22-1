@@ -1,4 +1,6 @@
 import pygame as pg
+from pygame import MOUSEBUTTONUP, event
+import time
 
 
 class Button():
@@ -28,6 +30,7 @@ class Button():
             self.hovered = True
             if pg.mouse.get_pressed()[0] == 1 and self.clicked == False:
                 self.clicked = True
+                time.sleep(0.2)
         else:
             self.hovered = False
 
