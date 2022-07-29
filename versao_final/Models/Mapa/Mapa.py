@@ -15,6 +15,7 @@ class Mapa:
         self.__altura_mapa = altura_mapa
         self.__tamanho_tile = tamanho_tile
         self.__configuracoes = Configuracoes()
+        self.__quantidade_baus = 0
         self.preparar_mapa(layout_mapa)
         self.__deslocamento_x = 0
         self.__deslocado_x = 0
@@ -48,6 +49,7 @@ class Mapa:
                 elif coluna == 'bau':
                     bau = Bau((x,y))
                     self.__grupo_baus.add(bau)
+                    self.__quantidade_baus += 1
                 elif coluna == 'portal':
                     portal = Portal((x,y), self.__tamanho_tile)
                     self.__grupo_portais.add(portal)
@@ -83,6 +85,10 @@ class Mapa:
     @property
     def jogador(self) -> Jogador:
         return self.__jogador
+
+    @property
+    def quantidade_baus(self):
+        return self.__quantidade_baus
 
     def scroll_x(self):
         jogador = self.__jogador

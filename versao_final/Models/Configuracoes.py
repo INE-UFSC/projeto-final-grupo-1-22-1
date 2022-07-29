@@ -2,7 +2,6 @@ from pygame import font
 
 from Models.Singleton import Singleton
 
-
 class Configuracoes(Singleton):
     def init(self):
         font.init()
@@ -11,6 +10,7 @@ class Configuracoes(Singleton):
         self.__altura_tela = 540
         self.__velocidade_jogador = 3
         self.__velocidade_inimigo = 1
+        self.__cor_fundo = (54, 107, 95)
         self.__vol_control = 1
         self.__dif_control = 0
         self.__music_control = 0
@@ -36,6 +36,13 @@ class Configuracoes(Singleton):
         return self.__velocidade_inimigo
 
     @property
+
+    def cor_fundo(self):
+        return self.__cor_fundo
+
+    @velocidade_inimigo.setter
+    def velocidade_inimigo(self, velocidade_inimigo):
+        self.__velocidade_inimigo = velocidade_inimigo
     def vol_control(self):
         return self.__vol_control
 

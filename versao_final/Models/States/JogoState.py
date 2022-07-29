@@ -22,13 +22,17 @@ class JogoState(State):
         controlador_jogo = self.__controlador_jogo
         while True:
             self.__timer.tick(60)
-
-            self.__window_surface.fill((54, 107, 95))
+            
+            self.__window_surface.fill(self.__configuracoes.cor_fundo)
 
             controlador_jogo.iniciar()
 
-            if controlador_jogo.game_over():
+            if controlador_jogo.checar_derrota_jogo():
                 self.transicionar("GameOverState")
+                break
+            
+            if controlador_jogo.checar_vitoria_jogo():
+                self.transicionar("VitoriaState")
                 break
 
             pg.display.update()

@@ -12,6 +12,10 @@ class GerenciadorMapas:
     #os.listdir()
     self.__layouts_mapa = self.__pegar_arquivos_mapa(diretorio_mapas)
     self.__quantidade_mapas = len(self.__layouts_mapa)
+  
+  @property
+  def layouts_mapa(self):
+    return self.__layouts_mapa
 
   @property
   def quantidade_mapas(self):
@@ -30,6 +34,7 @@ class GerenciadorMapas:
     return mapa
 
   def __importar_csv(self, layout_index):
+    #print(layout_index)
     with open(self.__layouts_mapa[layout_index]) as mapa_csv:
       layout_mapa = reader(mapa_csv, delimiter=',')
       layout_list = list(layout_mapa)
@@ -39,6 +44,7 @@ class GerenciadorMapas:
     return layout_list
   
   def gerar_mapa(self, layout_index):
+    print(f'Layout Index -> {layout_index}')
     layout_mapa = self.__importar_csv(layout_index)
     mapa = Mapa(layout_mapa, self.__window_surface, self.__largura_mapa, self.__altura_mapa, self.__tamanho_tile)
     return mapa
