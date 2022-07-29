@@ -39,6 +39,10 @@ class Jogador(Personagem):
   def baus(self, novo_estado):
     self.__baus = novo_estado
 
+  @vida.setter
+  def vida(self, vida):
+    self.__vida = vida
+
   def atualizar_imagem(self):
     super().girar_imagem('cima')
     self.image = load(f'Images/{"ArmaduraOn" if self.__armadura else "Sombra"}.png')

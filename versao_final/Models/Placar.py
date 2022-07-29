@@ -12,11 +12,6 @@ class Placar:
   def mortes_inimigo(self):
     return self.__mortes_inimigo
 
-
-  @property
-  def mortes_inimigo(self):
-    return self.__baus_coletados
-
   @property
   def baus_coletados(self):
     return self.__baus_coletados
@@ -37,12 +32,12 @@ class Placar:
     
 
   def adicionar_baus(self, novos_baus):
-    self.__baus_coletados += novos_baus
+    self.__baus_coletados = novos_baus
         
 
-  def atualizar_baus(self) -> None:
+  def atualizar_baus(self, baus) -> None:
     self.__texto_baus = self.__fonte.render(
-      f'Baus coletados: {self.__baus_coletados}',
+      f'Baus coletados: {self.__baus_coletados + baus}',
       True,
       (255,255,255)
     )

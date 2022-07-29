@@ -1,14 +1,14 @@
 from datetime import datetime as dt
 
 class Pontuacao:
-    def __init__(self, baus: int, tempo:int):
+    def __init__(self, baus: int, mortes:int):
         self.__data = f'{dt.now().hour}:{dt.now().minute} - {dt.now().day}/{dt.now().month}/{dt.now().year}'
         self.__baus = baus
-        self.__tempo = tempo
+        self.__mortes = mortes
 
     @property
-    def tempo(self):
-        return self.__tempo
+    def mortes(self):
+        return self.__mortes
 
     @property
     def baus(self):

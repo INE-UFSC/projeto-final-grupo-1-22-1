@@ -27,12 +27,12 @@ class JogoState(State):
 
             controlador_jogo.iniciar()
 
-            if controlador_jogo.checar_derrota():
+            if controlador_jogo.checar_derrota_jogo():
                 self.transicionar("GameOverState")
                 break
             
-            if controlador_jogo.proxima_fase():
-                self.transicionar("JogoState")
+            if controlador_jogo.checar_vitoria_jogo():
+                self.transicionar("VitoriaState")
                 break
 
             pg.display.update()

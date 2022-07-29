@@ -20,13 +20,10 @@ class Fase:
   def concluida(self):
     return self.__concluida
 
-  def aumentar_dificuldade(self):
-    pass
-
-  def checar_vitoria(self, placar):
-      if placar.baus_coletados == self.__mapa.quantidade_baus:
-        self.__concluida = True
-        return True
+  def checar_vitoria(self):
+    if self.__mapa.jogador.baus == 0 and len(self.__mapa.grupo_baus) == 0:
+      self.__concluida = True
+      return True
 
   def rodar(self):
     self.__mapa.run(self.__controlador_movimentos)

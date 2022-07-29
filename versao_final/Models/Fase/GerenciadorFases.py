@@ -37,6 +37,7 @@ class GerenciadorFases:
     print(f'Fase -> {self.__numero_fase} - Quantidade -> {self.__quantidade_fases}')
     self.__numero_fase += 1
     return self.__fase
+      
 
   def mostrar_tela_fase(self):
     self.__window.fill((54, 107, 95))

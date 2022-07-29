@@ -30,6 +30,8 @@ class ControladorMovimentos:
     @property
     def incrementar_mortes_inimigo_no_placar(self):
         return self.__incrementar_mortes_inimigo_no_placar
+    
+    
 
     def mover_jogador(self):
         '''checa a colisão com obstáculos e 
