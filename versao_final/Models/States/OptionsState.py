@@ -2,6 +2,7 @@ import pygame as pg
 from Models.States.State import State
 from Models.Button import Button
 from Models.Configuracoes import Configuracoes
+from Models.Musica import Musica
 
 
 class OptionsState(State):
@@ -28,7 +29,7 @@ class OptionsState(State):
         
         back_off_img = pg.image.load("Images/BackOff.png").convert_alpha()
         back_on_img = pg.image.load("Images/BackOn.png").convert_alpha()
-        self.vol = [pg.image.load("Images/Volume.png"),pg.image.load("Images/Volume (1).png"),pg.image.load("Images/Volume (2).png"),pg.image.load("Images/Volume (3).png")]
+        self.vol = [pg.image.load("Images/Volume (1).png"),pg.image.load("Images/Volume (2).png"),pg.image.load("Images/Volume (3).png")]
         self.dificulty_img = [pg.image.load("Images/Difficulty1.png"), pg.image.load("Images/Difficulty2.png"), pg.image.load("Images/Difficulty3.png")]
         self.music_img = [pg.image.load("Images/MusicOn.png"), pg.image.load("Images/MusicOff.png")]
         
@@ -52,16 +53,24 @@ class OptionsState(State):
 
         if self.__sound_button.clicked:
             self.__volume += 1
-            print('aoba')
-            if self.__volume > 3:
+            if self.__volume > 2:
                 self.__volume = 0
-            self.__configuracoes.vol_control = self.__volume #<-------------------------------------------set_volume
-        
+            self.__configuracoes.vol_control = self.__volume
+            if self.__volume == 0:
+                Musica.alterar_volume(0.1)
+            elif self.__volume == 1:
+                Musica.alterar_volume(0.5)
+            elif self.__volume == 2:
+                Musica.alterar_volume(1)
+
+
+
         if self.__music_button.clicked:
             self.__musica += 1
             if self.__musica > 1:
                 self.__musica = 0
             self.__configuracoes.music_control = self.__musica
+            Musica.parar_musica(self.__configuracoes.music_control)
 
         if self.__difficult_button.clicked:
             self.__dificuldade += 1

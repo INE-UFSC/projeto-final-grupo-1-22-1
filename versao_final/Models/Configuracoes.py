@@ -11,7 +11,7 @@ class Configuracoes(Singleton):
         self.__altura_tela = 540
         self.__velocidade_jogador = 3
         self.__velocidade_inimigo = 1
-        self.__vol_control = 2
+        self.__vol_control = 1
         self.__dif_control = 0
         self.__music_control = 0
 
