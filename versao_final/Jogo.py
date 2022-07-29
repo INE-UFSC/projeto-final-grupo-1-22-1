@@ -31,7 +31,7 @@ class Jogo():
         }
         INITIAL_STATE = "MenuState"
         self.__state_machine = StateMachine(STATES_DICT, INITIAL_STATE)
-        Musica.musica_menu()
+        Musica.musica_jogo()
         Musica.tocar_musica()
 
 
