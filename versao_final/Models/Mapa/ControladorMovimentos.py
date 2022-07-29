@@ -52,18 +52,20 @@ class ControladorMovimentos:
                 jogador.baus = 0
                 jogador.renascer(jogador.posicao_inicial)
                 jogador.diminuir_vida()
+                jogador.atualizar_imagem()
                 return True
         portal_colidido = self.__gerenciador_colisao.checar_colisao_portal()
         if portal_colidido and jogador.baus > 0:
             print('colidiu com o portal')
             self.__adicionar_baus_no_placar += jogador.baus
             jogador.baus = 0
-
+            jogador.atualizar_imagem()
         bau_colidido = self.__gerenciador_colisao.checar_colisao_bau()
         if bau_colidido:
             print('colidiu com o bau')
             jogador.baus += 1
             # TODO: Atualizar a imagem
+            jogador.atualizar_imagem()
             bau_colidido.kill()
         armadura_colidida = self.__gerenciador_colisao.checar_colisao_armadura()
         if armadura_colidida:

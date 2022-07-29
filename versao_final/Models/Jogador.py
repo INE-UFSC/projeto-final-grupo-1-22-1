@@ -44,9 +44,19 @@ class Jogador(Personagem):
     self.__vida = vida
 
   def atualizar_imagem(self):
+    imagem = "Sombra"
+    if self.__baus > 0:
+      if self.__armadura:
+        imagem = "ArmaduraTesouro"
+    else:
+      if self.__armadura:
+        imagem = "ArmaduraOn"
+      else:
+        imagem = "Sombra"
     super().girar_imagem('cima')
-    self.image = load(f'Images/{"ArmaduraOn" if self.__armadura else "Sombra"}.png')
+    self.image = load(f'Images/{imagem}.png')
 
+    
   def diminuir_vida(self):
     if self.__vida > 0:
       self.__vida -= 1

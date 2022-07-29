@@ -3,10 +3,11 @@ from Models.Mapa.Mapa import Mapa
 
 
 class Fase:
-  def __init__(self, mapa: Mapa) -> None:
+  def __init__(self, mapa: Mapa, dificuldade) -> None:
     self.__mapa = mapa
     self.__controlador_movimentos = ControladorMovimentos(self.__mapa)
     self.__concluida = False
+    self.__dificuldade = dificuldade
   
   @property
   def mapa(self):
@@ -19,8 +20,12 @@ class Fase:
   @property
   def concluida(self):
     return self.__concluida
+  
+  @property
+  def dificuldade(self):
+    return self.__dificuldade
 
-  def checar_vitoria(self):
+  def checar_vitoria(self, baus_totais, placar):
     if self.__mapa.jogador.baus == 0 and len(self.__mapa.grupo_baus) == 0:
       self.__concluida = True
       return True
@@ -37,5 +42,4 @@ class Fase:
   def aumentar_dificuldade(self, relogio):
     inimigos = self.mapa.grupo_inimigo.sprites()
     for inimigo in inimigos:
-      inimigo.velocidade = (relogio.execucao_do_jogo // 5) + 1
-  
+      inimigo.velocidade = (relogio.execucao_do_jogo // self.__dificuldade["acres_velo"]) + self.__dificuldade["velocidade"]

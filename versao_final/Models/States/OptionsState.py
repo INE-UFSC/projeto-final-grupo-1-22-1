@@ -25,7 +25,7 @@ class OptionsState(State):
 
         self.__volume = self.__configuracoes.vol_control #<------------------------------------------------------get_volume
         self.__musica = self.__configuracoes.music_control
-        self.__dificuldade = self.__configuracoes.dif_control
+        self.__dificuldade = self.__configuracoes.dificuldade
         
         back_off_img = pg.image.load("Images/BackOff.png").convert_alpha()
         back_on_img = pg.image.load("Images/BackOn.png").convert_alpha()
@@ -76,7 +76,7 @@ class OptionsState(State):
             self.__dificuldade += 1
             if self.__dificuldade > 2:
                 self.__dificuldade = 0
-            self.__configuracoes.dif_control = self.__dificuldade
+            self.__configuracoes.dificuldade = self.__dificuldade
             
 
         
