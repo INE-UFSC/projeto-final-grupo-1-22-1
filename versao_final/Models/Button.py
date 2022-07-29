@@ -1,4 +1,6 @@
 import pygame as pg
+from pygame import MOUSEBUTTONUP, event
+import time
 
 
 class Button():
@@ -26,8 +28,11 @@ class Button():
 
         if self.rect.collidepoint(pos):
             self.hovered = True
+            # print(self.clicked)  
             if pg.mouse.get_pressed()[0] == 1 and self.clicked == False:
                 self.clicked = True
+                print(self.clicked)
+                time.sleep(0.2)
         else:
             self.hovered = False
 
