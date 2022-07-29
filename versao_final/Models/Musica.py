@@ -23,10 +23,10 @@ class Musica:
     def tocar_musica():
         mixer.music.play()
 
-    def alterar_volume():
-        mixer.music.set_volume(0)
+    def alterar_volume(volume: float):
+        mixer.music.set_volume(volume)
 
-    def parar_musica(music_state):
+    def parar_musica(music_state: int):
         if music_state == 1:
             mixer.music.pause()
         else:
