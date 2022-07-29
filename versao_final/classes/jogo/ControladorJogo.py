@@ -46,6 +46,7 @@ class ControladorJogo:
 
       if self.__fase.checar_derrota():
         self.__salvar_infos_fase()
+        self.__salvar_pontuacao()
         break
       
       pg.display.update()
