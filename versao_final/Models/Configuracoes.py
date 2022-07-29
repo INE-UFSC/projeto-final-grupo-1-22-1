@@ -6,14 +6,21 @@ class Configuracoes(Singleton):
     def init(self):
         font.init()
         self.__fonte = font.SysFont('comicsans', 20)
+        self.__fonte_titulo = font.SysFont('comicsans', 60)
         self.__largura_tela = 720
         self.__altura_tela = 540
         self.__velocidade_jogador = 3
         self.__velocidade_inimigo = 1
         self.__cor_fundo = (54, 107, 95)
         self.__vol_control = 1
-        self.__dif_control = 0
+        self.__dificuldade = 1
         self.__music_control = 0
+        self.__dificuldades = {
+                               1: {"velocidade": 1, "acres_velo": 10, "baus_nesc": 3}, 
+                               2: {"velocidade": 2, "acres_velo": 5, "baus_nesc": 5}, 
+                               3: {"velocidade": 3, "acres_velo": 7, "baus_nesc": 7}
+                               }
+
 
     @property
     def fonte(self):
@@ -36,13 +43,18 @@ class Configuracoes(Singleton):
         return self.__velocidade_inimigo
 
     @property
-
     def cor_fundo(self):
         return self.__cor_fundo
+
+    @property
+    def fonte_titulo(self):
+        return self.__fonte_titulo
 
     @velocidade_inimigo.setter
     def velocidade_inimigo(self, velocidade_inimigo):
         self.__velocidade_inimigo = velocidade_inimigo
+
+    @property
     def vol_control(self):
         return self.__vol_control
 
@@ -51,8 +63,8 @@ class Configuracoes(Singleton):
         return self.__music_control
 
     @property
-    def dif_control(self):
-        return self.__dif_control
+    def dificuldade(self):
+        return self.__dificuldade
 
     @vol_control.setter
     def vol_control(self, new_volum):
@@ -62,6 +74,9 @@ class Configuracoes(Singleton):
     def music_control(self, new_music):
         self.__music_control = new_music
 
-    @dif_control.setter
-    def dif_control(self, new_dif):
-        self.__dif_control = new_dif
+    @dificuldade.setter
+    def dificuldade(self, new_dif):
+        self.__dificuldade = new_dif
+
+    def gerar_dados(self):
+        return self.__dificuldades[self.__dificuldade]

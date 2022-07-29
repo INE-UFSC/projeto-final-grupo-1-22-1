@@ -22,14 +22,14 @@ class ControladorJogo:
     self.__baus_totais = 0
     self.__mortes_total = 0
     self.__vidas_total = self.__fase.mapa.grupo_jogador.sprite.vida
-    self.__vitoria_jogador = False
+    self.__finalizou_mapas = False
 
   def iniciar(self):
     self.__fase.mapa.grupo_jogador.sprite.vida = self.__vidas_total
     self.__gerenciador_fases.mostrar_tela_fase()
     pg.time.wait(2000)
 
-    while not self.__fase.checar_vitoria():
+    while not self.__fase.checar_vitoria(self.__baus_totais, self.__placar):
       self.__timer.tick(60)
 
       self.__window.fill(self.__configuracoes.cor_fundo)
@@ -43,9 +43,9 @@ class ControladorJogo:
       self.__placar.atualizar_mortes_inimigo()
       self.__placar.atualizar_tempo(self.__tempo_total + self.__relogio.execucao_do_jogo - 2)
       self.__fase.aumentar_dificuldade(self.__relogio)
+
       if self.__fase.checar_derrota():
         self.__salvar_infos_fase()
-        self.__salvar_pontuacao()
         break
       
       pg.display.update()
@@ -53,11 +53,21 @@ class ControladorJogo:
 
     if self.__fase.concluida:
       self.__passar_de_fase()
-      
-  def checar_vitoria_jogo(self):
-    if self.__vitoria_jogador:
-      self.__salvar_pontuacao()
+  
+  def __checar_baus_necessario(self):
+    if self.__fase.dificuldade["baus_nesc"] > self.__baus_totais:
+      self.__fase.mapa.grupo_jogador.sprite.vida = 0
       return True
+
+  def checar_vitoria_jogo(self):
+    if self.__finalizou_mapas:
+      self.__salvar_pontuacao()
+      if self.__checar_baus_necessario():
+        return False
+      else:
+          return True
+    else:
+      return False
 
   def checar_derrota_jogo(self):
     return self.__fase.checar_derrota()
@@ -81,7 +91,7 @@ class ControladorJogo:
       self.__fase = self.__gerenciador_fases.gerar_fase()
       self.iniciar()
     except IndexError:
-      self.__vitoria_jogador = True
+      self.__finalizou_mapas = True
 
   def __salvar_infos_fase(self):
     self.__mortes_total += self.__placar.mortes_inimigo

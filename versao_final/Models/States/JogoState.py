@@ -26,14 +26,15 @@ class JogoState(State):
             self.__window_surface.fill(self.__configuracoes.cor_fundo)
 
             controlador_jogo.iniciar()
-
-            if controlador_jogo.checar_derrota_jogo():
-                self.transicionar("GameOverState")
-                break
             
             if controlador_jogo.checar_vitoria_jogo():
                 self.transicionar("VitoriaState")
                 break
 
+            if controlador_jogo.checar_derrota_jogo():
+                self.transicionar("GameOverState")
+                break
+            
+            
             pg.display.update()
             pg.display.flip()

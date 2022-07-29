@@ -12,8 +12,8 @@ class GerenciadorFases:
     self.__quantidade_fases = self.__gerenciador_mapas.quantidade_mapas
     self.__numero_fase = 0
     self.__fase = None
-    self.text_surf = self.__configuracoes.fonte.render('Nível 1', True, 'White')
-    self.text_rect = self.text_surf.get_rect(center = (1280 / 2, 720 / 2))
+    self.__game_over_bg_img = pg.transform.scale(
+            pg.image.load("Images/Mapa.png"), (self.__configuracoes.largura_tela, self.__configuracoes.altura_tela))
 
   @property
   def gerenciador_mapas(self):
@@ -32,15 +32,17 @@ class GerenciadorFases:
 
   def gerar_fase(self):
     mapa = self.__gerenciador_mapas.gerar_mapa(self.__numero_fase)
-    fase = Fase(mapa)
+    fase = Fase(mapa, self.__configuracoes.gerar_dados())
     self.__fase = fase
-    print(f'Fase -> {self.__numero_fase} - Quantidade -> {self.__quantidade_fases}')
     self.__numero_fase += 1
     return self.__fase
       
 
   def mostrar_tela_fase(self):
-    self.__window.fill((54, 107, 95))
-    self.__window.blit(self.text_surf, self.text_rect)
+    text_surf = self.__configuracoes.fonte_titulo.render(f'Nível {self.__numero_fase}', True, 'White')
+    text_rect = text_surf.get_rect(center = (self.__configuracoes.largura_tela / 2, self.__configuracoes.altura_tela / 2))
+
+    self.__window.blit(self.__game_over_bg_img, (0,0))
+    self.__window.blit(text_surf, text_rect)
     
     pg.display.flip()
