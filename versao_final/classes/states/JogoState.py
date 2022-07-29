@@ -9,21 +9,19 @@ from classes.jogo.ControladorJogo import ControladorJogo
 
 
 class JogoState(State):
-    def __init__(self, window, transition_to):
-        super().__init__(transition_to)
-        self.__configuracoes = Configuracoes()
-        self.__window = window
-        self.__window_surface = self.__window.surface
+    def __init__(self, window, transition_to) -> None:
+        super().__init__(window, transition_to)
+        self.__window_surface = self.window.surface
         self.__timer = pg.time.Clock()
         self.__controlador_jogo = ControladorJogo(self.__window_surface)
 
 
-    def renderizar(self):
+    def renderizar(self) -> None:
         controlador_jogo = self.__controlador_jogo
         while True:
             self.__timer.tick(60)
             
-            self.__window_surface.fill(self.__configuracoes.cor_fundo)
+            self.__window_surface.fill(self.configuracoes.cor_fundo)
 
             controlador_jogo.iniciar()
             
@@ -36,5 +34,5 @@ class JogoState(State):
                 break
             
             
-            pg.display.update()
-            pg.display.flip()
+            self.window.update()
+            self.window.flip()

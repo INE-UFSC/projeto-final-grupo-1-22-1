@@ -127,13 +127,10 @@ class Mapa:
         self.__grupo_portais.update(self.__deslocamento_x)
         self.__grupo_portais.draw(self.__surface_janela)
         self.scroll_x()
-        
-
         #Jogador
         controlador_movimentos.mover_jogador()
         self.__grupo_jogador.draw(self.__surface_janela)
         # self.horizontal_mov_col()
-        
         #Inimigo
         controlador_movimentos.mover_inimigo()
         self.__grupo_inimigo.draw(self.__surface_janela)

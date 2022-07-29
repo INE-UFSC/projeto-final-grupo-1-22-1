@@ -29,7 +29,7 @@ class ControladorJogo:
     self.__gerenciador_fases.mostrar_tela_fase()
     pg.time.wait(2000)
 
-    while not self.__fase.checar_vitoria(self.__baus_totais, self.__placar):
+    while not self.__fase.checar_vitoria():
       self.__timer.tick(60)
 
       self.__window.fill(self.__configuracoes.cor_fundo)
