@@ -9,7 +9,7 @@ class CreditosState(State):
         super().__init__(window, transition_to)
         self.__largura_tela = self.configuracoes.largura_tela
         self.__altura_tela = self.configuracoes.altura_tela
-        self.__surface = self.__window.surface
+        self.__surface = self.window.surface
         self.__credits_bg_img = pg.transform.scale(
             pg.image.load("recursos/imagens/CreditsBG.png"), (self.__largura_tela, self.__altura_tela))
         

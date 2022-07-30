@@ -7,7 +7,7 @@ class LeitorEventos():
     pass
 
   def ler_evento(self):
-    for evento in event.get(): #Retorna uma lista de events
+    for evento in event.get():
       if evento.type ==  QUIT:
         return ("FECHAR")
 
@@ -18,11 +18,9 @@ class LeitorEventos():
           return ('ESCAPE')
     
       if evento.type == MOUSEBUTTONDOWN:
-        print('clique')
         return ('CLIQUE')
 
       if evento.type == MOUSEBUTTONUP:
-        print('Up')
         return ('CLIQUE')
 
     keys = pg.key.get_pressed()

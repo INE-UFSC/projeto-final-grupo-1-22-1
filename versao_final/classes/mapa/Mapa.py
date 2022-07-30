@@ -39,14 +39,12 @@ class Mapa:
                 elif coluna == 'jogador':
                     self.__jogador = Jogador(configs.vidas_jogador, configs.velocidade_jogador, (x,y), )
                     self.__grupo_jogador.add(self.__jogador)
-                    # self.__tiles.add(self.__jogador)
                 elif coluna == 'inimigo':
                     self.__inimigo = Inimigo(configs.velocidade_inimigo, (x, y))
                     self.__grupo_inimigo.add(self.__inimigo)
                 elif coluna == 'armadura':
                     armadura = Armadura((x,y))
                     self.__grupo_armaduras.add(armadura)
-                    # TODO: Ativar e desativar armaduras de tempos em tempos
                 elif coluna == 'bau':
                     bau = Bau((x,y))
                     self.__grupo_baus.add(bau)
@@ -114,24 +112,22 @@ class Mapa:
 
 
     def run(self, controlador_movimentos) -> None:
-        #Mapa
         self.__grupo_obstaculos.update(self.__deslocamento_x)
         self.__grupo_obstaculos.draw(self.__surface_janela)
-        #Armadura
+
         self.__grupo_armaduras.update(self.__deslocamento_x)
         self.__grupo_armaduras.draw(self.__surface_janela)
-        #Bau
+
         self.__grupo_baus.update(self.__deslocamento_x)
         self.__grupo_baus.draw(self.__surface_janela)
-        #Portal
+
         self.__grupo_portais.update(self.__deslocamento_x)
         self.__grupo_portais.draw(self.__surface_janela)
         self.scroll_x()
-        #Jogador
+
         controlador_movimentos.mover_jogador()
         self.__grupo_jogador.draw(self.__surface_janela)
-        # self.horizontal_mov_col()
-        #Inimigo
+
         controlador_movimentos.mover_inimigo()
         self.__grupo_inimigo.draw(self.__surface_janela)
         self.__grupo_inimigo.update(self.__deslocamento_x)

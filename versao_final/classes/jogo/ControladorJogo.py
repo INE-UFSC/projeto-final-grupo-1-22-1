@@ -80,7 +80,6 @@ class ControladorJogo:
     self.__placar.incrementar_mortes_inimigo()
 
   def __salvar_pontuacao(self):
-    print('baus',self.__baus_totais)
     self.__jogo_dao.add(Pontuacao(self.__baus_totais, self.__mortes_total))
 
   def __passar_de_fase(self):

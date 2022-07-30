@@ -19,7 +19,7 @@ class OptionsState(State):
         self.__sound_on_img = pg.image.load("recursos/imagens/SoundIconOn.png").convert_alpha()
         self.__difficulty_off_img = pg.image.load("recursos/imagens/DifficultyOff.png").convert_alpha()
         self.__difficulty_on_img = pg.image.load("recursos/imagens/DifficultyOn.png").convert_alpha()
-        self.__volume = self.configuracoes.vol_control #<------------------------------------------------------get_volume
+        self.__volume = self.configuracoes.vol_control
         self.__musica = self.configuracoes.music_control
         self.__dificuldade = self.configuracoes.dificuldade
         back_off_img = pg.image.load("recursos/imagens/BackOff.png").convert_alpha()

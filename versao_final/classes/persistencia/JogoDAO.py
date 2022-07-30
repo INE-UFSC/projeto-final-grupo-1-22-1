@@ -9,4 +9,4 @@ class JogoDAO(DAO):
         if isinstance(jogo_pontuacao.baus, int) and isinstance(jogo_pontuacao.data, str) and isinstance(jogo_pontuacao.mortes, int):
             super().add(jogo_pontuacao)
         else:
-            print('Não foi')
+            raise TypeError()

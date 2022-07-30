@@ -15,7 +15,6 @@ class GerenciadorColisao:
             if obstaculo.rect.colliderect(personagem.rect):
                 return obstaculo
 
-    #incrementar_mortes_inimigo_no_placar
     def checar_colisao_inimigo(self):
         jogador = self.__grupo_jogador.sprite
         inimigos_colididos = spritecollide(jogador, self.__grupo_inimigos, False, collide_circle)

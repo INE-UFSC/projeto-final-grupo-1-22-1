@@ -5,7 +5,6 @@ from classes.mapa.GerenciadorColisao import GerenciadorColisao
 
 
 class ControladorMovimentos:
-    #adicionar_baus_no_placar, incrementar_mortes_inimigo_no_placar
     def __init__(self, mapa) -> None: 
         self.__adicionar_baus_no_placar = 0
         self.__incrementar_mortes_inimigo_no_placar = 0
@@ -39,7 +38,6 @@ class ControladorMovimentos:
             if jogador.armadura:
                 jogador.armadura = None
                 self.__incrementar_mortes_inimigo_no_placar += 1
-                # incrementar_mortes_inimigo_no_placar()
                 inimigos_colididos[0].kill()
                 jogador.atualizar_imagem()
             else:
