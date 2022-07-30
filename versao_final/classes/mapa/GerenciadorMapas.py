@@ -9,6 +9,7 @@ class GerenciadorMapas:
     self.__window_surface = window_surface
     self.__configuracoes = configuracoes
     self.__layouts_mapa = self.__pegar_arquivos_mapa(diretorio_mapas)
+    self.__layouts_mapa.sort()
     self.__quantidade_mapas = len(self.__layouts_mapa)
   
   @property
