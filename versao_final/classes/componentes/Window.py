@@ -4,7 +4,7 @@ import sys
 
 #Classe que usa as funcionalidades do pygame
 class Window:
-  def __init__(self, size: tuple, caption: str, flags: int = 0, depth: int = 0, display: int = 0, vsync: int = 0):
+  def __init__(self, size: tuple, caption: str, flags: int = 0, depth: int = 0, display: int = 0, vsync: int = 0) -> None:
     self.__surface = pg.display.set_mode(size=size,
                                          flags=0,
                                          depth=0,
@@ -16,19 +16,12 @@ class Window:
     pg.display.set_caption(caption)
 
   @property
-  def size(self):
+  def size(self) -> tuple:
     return self.__size
 
   @property
   def surface(self):
     return self.__surface
-  
-  @property
-  def window(self):
-    return self.__window
-
-  def set_caption(self, caption):
-    pg.display.set_caption(caption)
 
   def fechar(self):
     pg.quit()
@@ -36,5 +29,8 @@ class Window:
 
   def update(self):
     pg.display.update()
+
+  def flip(self):
+    pg.display.flip()
 
   

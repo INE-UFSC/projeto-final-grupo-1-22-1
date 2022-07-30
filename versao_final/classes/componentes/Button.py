@@ -4,7 +4,7 @@ import time
 
 
 class Button():
-    def __init__(self, x, y, default_image, hover_image, scale):
+    def __init__(self, x: int, y: int, default_image, hover_image, scale: int) -> None:
         self.default_image = default_image
         self.hover_image = hover_image
         self.scale = scale
@@ -14,16 +14,16 @@ class Button():
         self.clicked = False
         self.hovered = False
 
-    def scale_image(self, image):
+    def scale_image(self, image) -> None:
         return pg.transform.scale(
             image, (int(image.get_width() * self.scale), int(image.get_height() * self.scale)))
 
-    def draw(self, surface):
+    def draw(self, surface) -> None:
         self.image = self.scale_image(
             self.hover_image if self.hovered else self.default_image)
         surface.blit(self.image, (self.rect.x, self.rect.y))
 
-    def read_events(self):
+    def read_events(self) -> None:
         pos = pg.mouse.get_pos()
 
         if self.rect.collidepoint(pos):

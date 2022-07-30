@@ -12,7 +12,6 @@ class Desenhavel(Sprite, ABC):
         self.__image = pg.transform.scale(
             loaded_image, (size, size)) if size else loaded_image
         self.__rect = self.__image.get_rect(topleft=position)
-        self.__mask = pg.mask.from_surface(self.image)
         self.__position = position
 
     @property
@@ -34,10 +33,6 @@ class Desenhavel(Sprite, ABC):
     @property
     def position(self):
         return self.__position
-
-    @property
-    def mask(self):
-        return self.__mask
 
     def set_rect_left(self, valor): self.__rect.left = valor
 

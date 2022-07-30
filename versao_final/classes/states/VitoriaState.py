@@ -5,12 +5,10 @@ from classes.configuracoes.Configuracoes import Configuracoes
 
 class VitoriaState(State):
     def __init__(self, window, transition_to) -> None:
-        super().__init__(transition_to)
-        self.__window = window
-        self.__configuracoes = Configuracoes()
-        self.__largura_tela = self.__configuracoes.largura_tela
-        self.__altura_tela = self.__configuracoes.altura_tela
-        self.__surface = self.__window.surface
+        super().__init__(window, transition_to)
+        self.__largura_tela = self.configuracoes.largura_tela
+        self.__altura_tela = self.configuracoes.altura_tela
+        self.__surface = self.window.surface
         self.__game_over_bg_img = pg.transform.scale(
             pg.image.load("recursos/imagens/CreditsBG.png"), (self.__largura_tela, self.__altura_tela))
         self.__ganhou = pg.image.load("recursos/imagens/Victory.png")

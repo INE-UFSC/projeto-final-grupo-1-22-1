@@ -7,13 +7,11 @@ from classes.persistencia.JogoDAO import JogoDAO
 
 
 class RankingState(State):
-    def __init__(self, window, transition_to):
-        super().__init__(transition_to)
-        self.__window = window
-        self.__configuracoes = Configuracoes()
-        self.__largura_tela = self.__configuracoes.largura_tela
-        self.__altura_tela = self.__configuracoes.altura_tela
-        self.__surface = self.__window.surface
+    def __init__(self, window, transition_to) -> None:
+        super().__init__(window, transition_to)
+        self.__largura_tela = self.configuracoes.largura_tela
+        self.__altura_tela = self.configuracoes.altura_tela
+        self.__surface = self.window.surface
         self.__credits_bg_img = pg.transform.scale(
             pg.image.load("recursos/imagens/RankingBG.png"), (self.__largura_tela, self.__altura_tela))
         self.__pg_font = pg.font.SysFont('arial',  30)
@@ -29,13 +27,13 @@ class RankingState(State):
 
         self.__jogo_dao = JogoDAO()
 
-    def checar_eventos(self):
+    def checar_eventos(self) -> None:
         self.__back_button.read_events()
 
         if self.__back_button.clicked:
             self.transicionar("MenuState")
 
-    def renderizar(self):
+    def renderizar(self) -> None:
         self.__surface.blit(self.__credits_bg_img, (0, 0))
         texto_pricipal = self.__pg_font.render(f'Pontos      Inimigos Mortos       Data', False, (255, 255, 255))
 

@@ -6,12 +6,10 @@ from classes.configuracoes.Configuracoes import Configuracoes
 
 class MenuState(State):
     def __init__(self, window, transition_to):
-        super().__init__(transition_to)
-        self.__window = window
-        self.__configuracoes = Configuracoes()
-        self.__largura_tela = self.__configuracoes.largura_tela
-        self.__altura_tela = self.__configuracoes.altura_tela
-        self.__surface = self.__window.surface
+        super().__init__(window, transition_to)
+        self.__largura_tela = self.configuracoes.largura_tela
+        self.__altura_tela = self.configuracoes.altura_tela
+        self.__surface = self.window.surface
         self.__menu_bg_img = pg.transform.scale(
             pg.image.load("recursos/imagens/MainMenu.png"), (self.__largura_tela, self.__altura_tela))
         self.__title = pg.transform.scale(pg.image.load(

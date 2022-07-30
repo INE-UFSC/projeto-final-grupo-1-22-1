@@ -25,7 +25,7 @@ class Fase:
   def dificuldade(self):
     return self.__dificuldade
 
-  def checar_vitoria(self, baus_totais, placar):
+  def checar_vitoria(self):
     if self.__mapa.jogador.baus == 0 and len(self.__mapa.grupo_baus) == 0:
       self.__concluida = True
       return True

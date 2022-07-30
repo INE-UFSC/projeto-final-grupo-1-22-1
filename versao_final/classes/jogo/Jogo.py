@@ -1,7 +1,6 @@
 import pygame as pg
 from pygame.locals import *
 from classes.states.VitoriaState import VitoriaState
-
 from classes.componentes.Window import Window
 from classes.configuracoes.Configuracoes import Configuracoes
 from classes.states.JogoState import JogoState
@@ -15,7 +14,7 @@ from classes.componentes.Musica import Musica
 
 
 class Jogo():
-    def __init__(self):
+    def __init__(self) -> None:
         self.__configuracoes = Configuracoes()
         self.__window = Window((self.__configuracoes.largura_tela,
                                self.__configuracoes.altura_tela), "Copper Temple - Alfa")
@@ -31,11 +30,10 @@ class Jogo():
         }
         INITIAL_STATE = "MenuState"
         self.__state_machine = StateMachine(STATES_DICT, INITIAL_STATE)
+
+    def run(self) -> None:
         Musica.musica_jogo()
         Musica.tocar_musica()
-
-
-    def run(self):
         run = True
 
         while run:
